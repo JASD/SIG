@@ -2,12 +2,12 @@
 <zk>
     <panel width="100%">
         <panelchildren>
-        <image id="image" src="/WEB-INF/img/logo-cek.jpg" />
+        <image id="image" src="/images/logo-cek.jpg" />
         <menubar id="menubar" width="100%">
                 <menuitem label="HOME" onClick="alert(self.label)" />
                 <menu label="Reportes Tácticos">
                     <menupopup>
-                        <menuitem label="Undo" onClick="alert(self.label)" />
+                        <menuitem label="Undo" onClick="alert(self.label)"  />
                         <menuitem label="Redo" disabled="true"/>
                         <menuseparator></menuseparator>
                     </menupopup>

@@ -9,5 +9,4 @@ and open the template in the editor.
     <system-config>
         <ui-factory-class>org.zkoss.zk.ui.http.SerializableUiFactory</ui-factory-class>
     </system-config>
-    
 </zk>
