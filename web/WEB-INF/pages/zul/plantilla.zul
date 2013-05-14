@@ -1,0 +1,34 @@
+<zk>
+    <panel width="100%">
+        <panelchildren>
+<menubar id="menubar" width="100%">
+                <menuitem label="HOME" onClick="alert(self.label)" />
+                <menu label="Reportes Tácticos">
+                    <menupopup>
+                        <menuitem label="Undo" onClick="alert(self.label)" />
+                        <menuitem label="Redo" disabled="true"/>
+                        <menuseparator></menuseparator>
+                    </menupopup>
+                </menu>
+                <menu label="Reportes Estratégicos">
+                    <menupopup>
+                        <menuitem label="Undo" onClick="alert(self.label)" />
+                        <menuitem label="Redo" disabled="true"/>
+                        <menuseparator></menuseparator>
+                    </menupopup>
+                </menu>
+            </menubar>
+            <borderlayout width="100%" height="330px">
+                <west width="200px" collapsible="true" title="Menú de navegación">
+                    <div self="@{insert(right)}" sclass="logo"></div>
+                </west>
+                <center>
+                    <div self="@{insert(left)}" sclass="content"></div>
+                </center>
+            </borderlayout>
+            <div sclass="footer" style="text-align:center">
+                Cek Centroamérica Copyright © 2013.
+            </div>
+        </panelchildren>
+    </panel>
+</zk>
