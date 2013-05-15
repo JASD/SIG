@@ -7,15 +7,23 @@
                 <menuitem label="HOME" onClick="alert(self.label)" />
                 <menu label="Reportes Tácticos">
                     <menupopup>
-                        <menuitem label="Undo" onClick="alert(self.label)"  />
-                        <menuitem label="Redo" disabled="true"/>
+                        <menuitem label="Ventas por categoría" />
+                        <menuitem label="Ventas por vendedor" />
+                        <menuitem label="Cuentas nuevas mensuales por vendedor" />
+                        <menuitem label="Kilogramos vendidos por categoría" />
+                        <menuitem label="Productos vendidos por categoría" />
+                        <menuitem label="Cuentas mensuales recuperadas por vendedor" />
+                        <menuitem label="Cuentas mensuales perdidas por vendedor" />
                         <menuseparator></menuseparator>
                     </menupopup>
                 </menu>
                 <menu label="Reportes Estratégicos">
                     <menupopup>
-                        <menuitem label="Undo" onClick="alert(self.label)" />
-                        <menuitem label="Redo" disabled="true"/>
+                        <menuitem label="Cumplimiento de ventas vs presupuesto por categoría" />
+                        <menuitem label="Cumplimiento de ventas por vendedor"/>
+                        <menuitem label="Utilidad por categoría"/>
+                        <menuitem label="Índice de penetración por vendedor"/>
+                        <menuitem label="Índice de cobertura por vendedor"/>
                         <menuseparator></menuseparator>
                     </menupopup>
                 </menu>

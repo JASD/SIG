@@ -1,0 +1,40 @@
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul"?>
+<zk>
+    <!-- Product  -->
+    <window self="@{define(left)}" title="HOME" border="normal" width="100%">
+        <tabbox id="tb" height="300px">
+            <tabs id="tabs">
+                <tab label="Cumplimiento de ventas vs presupuesto por categoría" />
+                        <tab label="Cumplimiento de ventas por vendedor"/>
+                        <tab label="Utilidad por categoría"/>
+                        <tab label="Índice de penetración por vendedor"/>
+                        <tab label="Índice de cobertura por vendedor"/>
+            </tabs>
+            <tabpanels>
+                <tabpanel>This is panel A</tabpanel>
+                <tabpanel>This is panel B</tabpanel>
+                <tabpanel>This is panel C</tabpanel>
+                <tabpanel>This is panel D</tabpanel>
+                <tabpanel>This is panel E</tabpanel>
+            </tabpanels>
+        </tabbox>
+    </window>
+
+    <!-- menu de navegación -->
+        <div self="@{define(right)}" width="100%" xmlns:n="native">
+        <n:ul>
+                <n:li>
+                    <a href="http://www.zkoss.org/product/zk">Product Detail</a>
+                </n:li>
+                <n:li>
+                    <a href="http://www.zkoss.org/download/zk">Download</a>
+                </n:li>
+                <n:li>
+                    <a href="http://www.zkoss.org/whyzk/TopReasons">Why ZK</a>
+                </n:li>
+                <n:li>
+                    <a href="http://books.zkoss.org/">Docs</a>
+                </n:li>
+            </n:ul>
+        </div>
+</zk>
