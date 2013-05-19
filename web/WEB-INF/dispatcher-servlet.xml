@@ -31,8 +31,8 @@
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/pages/zul/"
-          p:suffix=".zul" />    
+          p:prefix="/WEB-INF/pages/jsp/"
+          p:suffix=".jsp" />    
 
     <!--
     The index controller.
