@@ -1,4 +1,3 @@
-<?init class="org.zkoss.zk.ui.util.Composition" arg0="/widgets/composite/template_composition/template.zul"?>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.zkoss.org/jsp/zul" prefix="z" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -17,8 +16,10 @@
         <title>Welcome to Spring Web MVC project</title>
     </head>
 
-    <body>               
-            <z:page>
+    <body> 
+
+        <z:page>
+            <z:window self="@{define(left)}" title="HOME">
                 <z:tabbox id="tb" height="300px"> 
                     <z:tabs id="tabs">
                         <z:tab id="A" label="Tab A" />
@@ -36,7 +37,10 @@
                     </z:tabpanels>
                 </z:tabbox>
                 <img src="http://www.cwv.com.ve/wp-content/uploads/2013/01/java.jpg">
-            </z:page>
-            Holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa k ase xD
+            </z:window>
+            <z:div self="@{define(right)}" width="100%">
+                Holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa k ase xD
+            </z:div> 
+        </z:page>
     </body>
 </html>
