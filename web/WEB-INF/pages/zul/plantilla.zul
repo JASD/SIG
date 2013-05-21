@@ -4,16 +4,16 @@
         <panelchildren>
         <image id="image" src="/images/logo-cek.jpg" />
         <menubar id="menubar" width="100%">
-                <menuitem label="HOME" onClick="alert(self.label)" />
+                <menuitem label="HOME" href="/index.htm" />
                 <menu label="Reportes Tácticos">
                     <menupopup>
-                        <menuitem label="Ventas por categoría" />
-                        <menuitem label="Ventas por vendedor" />
-                        <menuitem label="Cuentas nuevas mensuales por vendedor" />
-                        <menuitem label="Kilogramos vendidos por categoría" />
-                        <menuitem label="Productos vendidos por categoría" />
-                        <menuitem label="Cuentas mensuales recuperadas por vendedor" />
-                        <menuitem label="Cuentas mensuales perdidas por vendedor" />
+                        <menuitem label="Ventas por categoría" href="/VentasCategoria.htm" />
+                        <menuitem label="Ventas por vendedor" href="ventasVendedor.htm"/>
+                        <menuitem label="Cuentas nuevas mensuales por vendedor" href="cuentasNuevasVendedor.htm" />
+                        <menuitem label="Kilogramos vendidos por categoría" href="kilogramosVendidosCategoria.htm" />
+                        <menuitem label="Productos vendidos por categoría" href="productosVendidosCategoria.htm" />
+                        <menuitem label="Cuentas mensuales recuperadas por vendedor" href="cuentasRecuperadasVendedor.htm" />
+                        <menuitem label="Cuentas mensuales perdidas por vendedor" href="cuentasPerdidasVendedor.htm" />
                         <menuseparator></menuseparator>
                     </menupopup>
                 </menu>

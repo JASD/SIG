@@ -37,7 +37,7 @@
                 <img src="http://www.cwv.com.ve/wp-content/uploads/2013/01/java.jpg">
             </z:window>
             <z:div self="@{define(right)}" width="100%">
-                Holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa k ase xD
+                
             </z:div> 
         </z:page>
     </body>
