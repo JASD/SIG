@@ -37,13 +37,13 @@ import org.zkoss.zul.ext.Selectable;
 @Controller
 public class CuentasPerdidasVendedor extends SelectorComposer<Component>{
     
-     @RequestMapping(value = "/CuentasPerdidasVendedor")
+     @RequestMapping(value = "/cuentasPerdidasVendedor")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         //logger.info("Returning hello view");
         //PurchaseData pd = new PurchaseData();
-        ModelAndView mv = new ModelAndView("reportesTacticos/CuentasPerdidasVendedor");
+        ModelAndView mv = new ModelAndView("reportesTacticos/cuentasPerdidasVendedor");
         //mv.addObject("purchases", pd.getAllPurchases());
 
         return mv;
