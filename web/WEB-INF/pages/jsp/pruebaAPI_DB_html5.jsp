@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <script type="text/javascript">
+        <script type="text/javascript">          
             try{
                 if(window.openDatabase){
                     db=openDatabase("BD_SIG_Cek_navegador","1.0", "Ejemplo uso de la bad",200000);
@@ -17,28 +17,29 @@
             }catch(err){
                 db=null;
                 alert("no se ha podido abrir la bd 2");
-            }
-            
+            }   
+                        
             function initBD(){
                 db.transaction(function(tx){
-                    tx.executeSql("SELECT COUNT(*) FROM tabla",[],function(result){
-                        cargarDatos();
-                    },function(tx,error){
-                        tx.executeSql("CREATE TABLE tabla(id REAL UNIQUE, campo1 TEXT)",[],function(result){
-                            cargarDatos();
-                        });
+                    tx.executeSql("CREATE TABLE tabla(id REAL UNIQUE, campo1 TEXT)",[],function(result){
+                    },function(tx,errores){
+                        alert("ocurrio un error 1")
                     });
+                },function(tx,errores){
+                    alert("ocurrio un error 2")
                 });
             }
             function cargarDatos(){
                 db.transaction(function(tx){
                     tx.executeSql("SELECT id,campo1 FROM tabla", [], function(tx, result) {
+                        var cad="";
                         for(var i=0;i<result.rows.length;i++){
                             var row=result.rows.item(i);
-                            var actual=new Tabla();
-                            alert(row['id']);
-                            alert(campo1=row['campo1']);
+                            cad+=row['id']+",";
+                            cad+=row['campo1']+"<br>";
                         }
+                        //CARGA LOS DATOS ALMACENADOS EN LA BD EN UN DIV 
+                        document.getElementById("inf").innerHTML=cad;
                         if (!result.rows.length){
                             alert("no hay notas");
                         }
@@ -50,36 +51,29 @@
             }
             
             function crear(){
-                initBD();
-                alert("crear");
                 db.transaction(function (tx) 
                 {
-                    tx.executeSql("INSERT INTO tabla (id, campo1) VALUES (?, ?)", [2.0, "prueba"]);
+                    tx.executeSql("INSERT INTO tabla (id, campo1) VALUES (?, ?)", [document.getElementById("id").value, document.getElementById("campo1").value]);
                 });
-                alert("correcto");
+                cargarDatos();
             }
-            crear();
-            
-            function Tabla(){}
-            Tabla.prototype={
-                set id(e){
-                    this._id=e;
-                },
-                get id(){
-                    return this._id;
-                },
-                set campo1(e){
-                    this._campo1=e;
-                },
-                get campo1(){
-                    return this._campo1;
-                }
-            }
-            
-            
+            initBD();
+            cargarDatos();
         </script>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+    <form>
+        <input type="button" value="crear" onclick="crear()">
+        Numero de registro: 
+        <input type="text" id="id">
+        <br>
+        Cadena a guardar: 
+        <input type="text" id="campo1">
+        <br>
+        <div id="inf">
+
+        </div>
+    </form>
+</head>
+<body>
+    <h1>Hello World!</h1>
+</body>
 </html>
