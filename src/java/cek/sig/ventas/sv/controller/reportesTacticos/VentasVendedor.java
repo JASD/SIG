@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cek.sig.ventas.sv.controller;
+package cek.sig.ventas.sv.controller.reportesTacticos;
 
+import cek.sig.ventas.sv.controller.reportesEstrategicos.*;
+import cek.sig.ventas.sv.controller.*;
 import cek.sig.ventas.sv.model.Car;
 import cek.sig.ventas.sv.model.CarService;
 import cek.sig.ventas.sv.model.CarServiceImpl;
@@ -33,15 +35,15 @@ import org.zkoss.zul.ext.Selectable;
  * @author antonio
  */
 @Controller
-public class VentasCategoriaController extends SelectorComposer<Component>{
+public class VentasVendedor extends SelectorComposer<Component>{
     
-     @RequestMapping(value = "/VentasCategoria")
+     @RequestMapping(value = "/ventasVendedor")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         //logger.info("Returning hello view");
         //PurchaseData pd = new PurchaseData();
-        ModelAndView mv = new ModelAndView("VentasCategoria");
+        ModelAndView mv = new ModelAndView("reportesTacticos/ventasVendedor");
         //mv.addObject("purchases", pd.getAllPurchases());
 
         return mv;
