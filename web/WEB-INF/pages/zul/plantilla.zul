@@ -1,9 +1,14 @@
-
 <zk>
-    <panel width="100%">
+    <panel>
         <panelchildren>
-        <image id="image" src="/images/logo-cek.jpg" />
-        <menubar id="menubar" width="100%">
+        <div style="text-align:center;margin:20px">
+            <image id="image" src="/images/LOGO_CEK.gif" />
+            <label style="font-size: xx-large" value="CEK DE CENTROAMERICA EL SALVADOR" />
+            <label style="text-align:right;display:block;" value="Usuario: casimiro erevinio" />
+            <a style="float:right">cerrar sesion</a>
+            <label style="text-align:center;display:block;font-size: large" value="Sistema de informacion gerencial departamento de ventas CEK de C.A" />
+        </div>
+        <menubar style="width:100%;margin-bottom:10px" id="menubar">
                 <menuitem label="HOME" href="/index.htm" />
                 <menu label="Reportes Tácticos">
                     <menupopup>
