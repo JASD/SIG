@@ -42,7 +42,7 @@
                                      colspan="4" label="Reporte de ventas por vendedor"/>
                     </z:auxhead>
                     <z:columns>
-                        <z:column hflex="20">categoría</z:column>
+                        <z:column hflex="20">Vendedor</z:column>
                         <z:column hflex="6">mes 1</z:column>
                         <z:column hflex="6">mes 2</z:column>
                         <z:column hflex="6">mes 4</z:column>
@@ -51,7 +51,7 @@
                     </z:columns>
                     <z:rows>
                         <z:row>
-                            <z:label value="Limpieza" />
+                            <z:label value="Venito Camelas" />
                             <z:label value="$91123.10" />
                             <z:label value="$29120.01" />
                             <z:label value="$20849.97" />
