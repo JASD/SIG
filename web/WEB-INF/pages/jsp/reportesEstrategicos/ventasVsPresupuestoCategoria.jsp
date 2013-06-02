@@ -13,31 +13,62 @@
         <%
             request.setAttribute(org.zkoss.zk.ui.sys.Attributes.NO_CACHE, Boolean.TRUE);
         %>
-        <title>SIG para control de ventas Cek centroamérica, El Salvador</title>
+        <title>Reporte de Ventas contra presupuesto</title>
     </head>
     <body> 
         <z:page>
-            <z:window self="@{define(left)}" title="HOME">
-                <z:tabbox id="tb" height="300px"> 
-                    <z:tabs id="tabs">
-                        <z:tab id="A" label="Tab A" />
-                        <z:tab id="B" label="Tab B" />
-                        <z:tab id="C" label="Tab C" />
-                        <z:tab id="D" label="Tab D" />
-                        <z:tab id="E" label="Tab E" />
-                    </z:tabs>
-                    <z:tabpanels>
-                        <z:tabpanel>This is panel A</z:tabpanel>
-                        <z:tabpanel>This is panel B</z:tabpanel>
-                        <z:tabpanel>This is panel C</z:tabpanel>
-                        <z:tabpanel>This is panel D</z:tabpanel>
-                        <z:tabpanel>This is panel E</z:tabpanel>
-                    </z:tabpanels>
-                </z:tabbox>
-                <img src="http://www.cwv.com.ve/wp-content/uploads/2013/01/java.jpg">
+            <z:window self="@{define(left)}" title="Reporte de Ventas contra Presupuesto">
+
+                <z:label style="margin:20px 20px 10px 10px" 
+                         value="Período: "/>
+                <z:datebox id="createdDatebox1" value="${win$composer.inventoryItem.createdDate}"
+                           format="dd/MM/yyyy" constraint="no empty" />
+                <z:label style="margin:20px 20px 10px 10px" 
+                         value="- "/>
+                <z:datebox id="createdDatebox2" value="${win$composer.inventoryItem.createdDate}"
+                           format="dd/MM/yyyy" constraint="no empty" />
+
+
+                <img style="cursor: help" 
+                     alt="ayuda"
+                     src="images/botonAyuda.gif"
+                     title="Es el período de meses anteriores a incluir en el reporte">
+
+                <z:button style="margin:20px 20px 10px 10px;clear:left;float:right"
+                          label="Generar Reporte"/>
+                <z:grid style="clear:right;float:left; margin:10px">
+
+                    <z:auxhead>
+                        <z:auxheader style="text-align:center" 
+                                     colspan="10"  label="VENTAS CONTRA PRESUPUESTO"/>
+                    </z:auxhead>                     
+
+                    <z:columns>
+                        <z:column hflex="15">Categoria</z:column>
+                        <z:column hflex="6">ventas</z:column>
+                        <z:column hflex="6">Presupuesto</z:column>
+                        <z:column hflex="4">Variacion %</z:column>
+                        <z:column hflex="6">Ventas Acumuladas</z:column>
+                        <z:column hflex="6">Presupuesto Acumulado</z:column>
+                        <z:column hflex="4">Variacion Acumulada %</z:column>
+
+                    </z:columns>
+                    <z:rows>
+                        <z:row>
+                            <z:label value="Limpieza" />
+                            <z:label value="100" />
+                            <z:label value="100" />
+                            <z:label value="0.0" />
+                            <z:label value="20" />
+                            <z:label value="20" />
+                            <z:label value="10" />
+                            <z:label value="0.0" />                                                       
+                        </z:row>
+                    </z:rows>
+                </z:grid>
             </z:window>
             <z:div self="@{define(right)}" width="100%">
-                
+
             </z:div> 
         </z:page>
     </body>
