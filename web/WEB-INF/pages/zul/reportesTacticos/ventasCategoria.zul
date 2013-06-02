@@ -1,40 +1,27 @@
 <zk>
-            <window title="Search" width="600px" border="normal"
-                      apply="cek.sig.ventas.sv.controller.SearchController">
-                <hbox align="center">
-                    Keyword:
-                    <textbox id="keywordBox" />
-                    <button id="searchButton" label="Search" image="/widgets/getting_started/img/search.png" />
-                </hbox>
-                <listbox id="carListbox" emptyMessage="No car found in the result" height="160px" style="margin-top:10px">
-                    <listhead>
-                        <listheader label="Model" />
-                        <listheader label="Make" />
-                        <listheader label="Price" width="20%"/>
-                    </listhead>
-                    <template name="model">
-                        <listitem>
-                            <listcell label="${each.model}"></listcell>
-                            <listcell label="${each.make}"></listcell>
-                            <listcell>$<label value="${each.price}" /></listcell>
-                        </listitem>
-                    </template>
-                </listbox>
-                <hbox style="margin-top:20px" id="detailBox" visible="false">
-                    <image id="previewImage" style="padding:10px" />
-                    <vbox>
-                        <hlayout>
-                            Model : <label id="modelLabel" style="font-weight:bold"/>
-                        </hlayout>
-                        <hlayout>
-                            Make : <label id="makeLabel" style="font-weight:bold"/>
-                        </hlayout>
-                        <hlayout>
-                            Price : 
-                            <span>$<label id="priceLabel" style="font-weight:bold"/></span>
-                        </hlayout>
-                        <label id="descriptionLabel" />
-                    </vbox>
-                </hbox>
-            </window>
+            <grid>
+                    <auxhead>
+                        <auxheader colspan="4" label="Reporte de ventas por categoría" style="text-align:center" />
+                    </auxhead>
+
+                    <columns>
+                        <column hflex="20">categoría</column>
+                        <column hflex="6">mes 1</column>
+                        <column hflex="6">mes 2</column>
+                        <column hflex="6">mes 4</column>
+                        <column hflex="6">mes 5</column>
+                        <column hflex="6">mes 6</column>
+                    </columns>
+                    
+                    <rows>
+                        <row>
+                            <label value="Limpieza" />
+                            <label value="$91123.10" />
+                            <label value="$29120.01" />
+                            <label value="$20849.97" />
+                            <label value="$91123.10" />
+                            <label value="$29120.01" />
+                        </row>                    
+                    </rows>
+                </grid>
         </zk>

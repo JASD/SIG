@@ -4,6 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <script type="text/javascript" src="js/MD5Enc.js"></script>
         <script type="text/javascript">          
             try{
                 if(window.openDatabase){
@@ -17,7 +18,7 @@
             }catch(err){
                 db=null;
                 alert("no se ha podido abrir la bd 2");
-            }   
+            }
                         
             function initBD(){
                 db.transaction(function(tx){
@@ -35,6 +36,7 @@
                         var cad="";
                         for(var i=0;i<result.rows.length;i++){
                             var row=result.rows.item(i);
+                            cad+=md5(row['campo1'])+",";
                             cad+=row['id']+",";
                             cad+=row['campo1']+"<br>";
                         }
@@ -57,11 +59,14 @@
                 });
                 cargarDatos();
             }
+            
+            
             initBD();
             cargarDatos();
         </script>
     <form>
         <input type="button" value="crear" onclick="crear()">
+        <br>
         Numero de registro: 
         <input type="text" id="id">
         <br>
@@ -69,7 +74,6 @@
         <input type="text" id="campo1">
         <br>
         <div id="inf">
-
         </div>
     </form>
 </head>
