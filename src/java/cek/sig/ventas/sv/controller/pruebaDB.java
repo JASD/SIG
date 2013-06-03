@@ -35,7 +35,7 @@ import org.zkoss.zul.ext.Selectable;
  * @author antonio
  */
 @Controller
-public class pruebaAPI_DB extends SelectorComposer<Component>{
+public class pruebaDB extends SelectorComposer<Component>{
     
      @RequestMapping(value = "/pruebaDB")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
