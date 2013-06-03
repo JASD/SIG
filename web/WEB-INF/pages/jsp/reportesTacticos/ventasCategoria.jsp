@@ -18,21 +18,6 @@
     <body> 
         <z:page>
             <z:window self="@{define(left)}" title="Ventas por categoría">
-                <z:label style="margin:20px 20px 10px 10px" 
-                         value="Período a analizar: "/>
-                <z:combobox style="margin:20px">
-                    <z:comboitem label="1 mes"/>
-                    <z:comboitem label="2 meses"/>
-                    <z:comboitem label="3 meses"/>
-                    <z:comboitem label="4 meses"/>
-                    <z:comboitem label="5 meses"/>
-                    <z:comboitem label="6 meses"/>
-                </z:combobox>
-
-                <img style="cursor: help" 
-                     alt="ayuda"
-                     src="images/botonAyuda.gif"
-                     title="Es el período de meses anteriores a incluir en el reporte">
 
                 <z:button style="margin:20px 20px 10px 10px;clear:left;float:right"
                           label="Generar Reporte"/>
