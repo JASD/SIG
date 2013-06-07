@@ -1,17 +1,24 @@
-<%-- 
-    Document   : home
-    Created on : 06-06-2013, 10:20:22 PM
-    Author     : Antonio
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib uri="http://www.zkoss.org/jsp/zul" prefix="z" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+
 <html>
     <head>
+        <z:init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="-1" />
+        <%
+            request.setAttribute(org.zkoss.zk.ui.sys.Attributes.NO_CACHE, Boolean.TRUE);
+        %>
+        <title>Reporte de cuentas nuevas por vendedor</title>
     </head>
-    <body>
-        <h1>Hello World!</h1>
+    <body> 
+        <z:page>
+           
+        </z:page>
     </body>
 </html>
