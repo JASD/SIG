@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cek.sig.ventas.sv.controller;
+package cek.sig.ventas.sv.controladores;
 
 import cek.sig.ventas.sv.model.Purchase;
 import cek.sig.ventas.sv.model.PurchaseData;

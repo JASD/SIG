@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns:security="http://www.springframework.org/schema/security"
+         xmlns:b="http://www.springframework.org/schema/beans" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <!--
+            [security:http]: Elemento para configurar la seguridad de la
+            aplicación web por medio del protocolo http. Tiene los siguientes
+            atributos: [realm]: Atributo opcional que especifica el nombre del
+            alcance que será usado para todas las caracteristicas de seguridad que
+            requieren un nombre de alcance(por ejemplo autenticación BASIC y
+            DIGEST). [auto-config]: Automáticamente registra un formulario de
+            registro, autenticaciòn BASIC, autenticación anónima, servicios de
+            cierre de sesion, opción de recordación de usuario, si es colocado a
+            'true' todas estas caracteristicas serán configuradas, pero cualquier
+            caracteristica puede sobreescribirse especificando mediante XML dichos
+            elementos.
+    -->
+    <security:http auto-config="true">
+
+        <!--
+                Especifica el patrón URL y el tipo de acceso de cada interceptor
+                Posibles valores para los tipos de acceso si no se a especificado un
+                perfil de autenticación:
+                org.springframework.security.access.vote.AuthenticatedVoter.IS_AUTHENTICATED_FULLY
+                org.springframework.security.access.vote.AuthenticatedVoter.IS_AUTHENTICATED_REMEMBERED
+                org.springframework.security.access.vote.AuthenticatedVoter.IS_AUTHENTICATED_ANONYMOUSLY
+        -->
+        <security:intercept-url pattern="/index.htm" 
+                                access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/home.htm" 
+                                access="IS_AUTHENTICATED_FULLY" />
+
+        <!--
+                Especifica el proceso de autenticación mediante un formulario:
+                [login-page]: URL del formulario de autenticación.
+                [authentication-failure-url]: URL de la página en caso la autenticación falle. 
+                [login-processing-url]: URL hacia el cual la autenticación será procesada. 
+                [default-target-url]: URL hacia el cual se redirigirá el control luego de un login exitoso              
+        -->
+        <security:form-login 
+            login-page="/index.htm" always-use-default-target="true"
+            default-target-url="/home.htm" 
+            authentication-failure-url="/index.htm?error=1" />
+
+        <!--  Especifica el tipo de autenticación:-->
+        <security:http-basic />
+
+        <!--
+                Especifica el tratamiento para los fines de sesión o logouts:
+                [invalidate-session]: Si el proceso de logout debe de terminar la sesión(default=true) 
+                [logout-url]: URL que determina el fin de sesión. 
+                [logout-success-url]: URL del recurso que será mostrado una vez terminada la sesión.
+        -->
+        <security:logout 
+            invalidate-session="true"
+            logout-success-url="/index.htm"  />
+        <security:remember-me/>
+    </security:http>
+
+    <!-- Gestión de usuarios mediante un proveedor de servicios de usuarios: -->
+    <security:authentication-manager alias="autenticationManagerUserService">
+        <security:authentication-provider user-service-ref="usuarioService">
+            <security:password-encoder hash="sha-256"/>
+        </security:authentication-provider>
+    </security:authentication-manager>  
+
+    <!-- Log de Eventos de Seguridad -->
+    <b:bean id="loggerListener" class="org.springframework.security.authentication.event.LoggerListener" />
+</b:beans>

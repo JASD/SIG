@@ -10,9 +10,9 @@
 
     
     <!-- Scans the classpath of this application for @Components to deploy as beans -->
-    <context:component-scan base-package="cek.sig.ventas.sv.controller" />
-    <context:component-scan base-package="cek.sig.ventas.sv.controller.reportesEstrategicos" />
-    <context:component-scan base-package="cek.sig.ventas.sv.controller.reportesTacticos" />
+    <context:component-scan base-package="cek.sig.ventas.sv.controladores" />
+    <context:component-scan base-package="cek.sig.ventas.sv.controladores.reportesEstrategicos" />
+    <context:component-scan base-package="cek.sig.ventas.sv.controladores.reportesTacticos" />
     <!-- Configures the @Controller programming model -->
     <mvc:annotation-driven/>
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>

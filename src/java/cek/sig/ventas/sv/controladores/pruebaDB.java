@@ -2,9 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cek.sig.ventas.sv.controller.reportesEstrategicos;
+package cek.sig.ventas.sv.controladores;
 
-import cek.sig.ventas.sv.controller.*;
 import cek.sig.ventas.sv.model.Car;
 import cek.sig.ventas.sv.model.CarService;
 import cek.sig.ventas.sv.model.CarServiceImpl;
@@ -34,15 +33,15 @@ import org.zkoss.zul.ext.Selectable;
  * @author antonio
  */
 @Controller
-public class CumplimientoVentasVendedor extends SelectorComposer<Component>{
+public class pruebaDB extends SelectorComposer<Component>{
     
-     @RequestMapping(value = "/cumplimientoVentasVendedor")
+     @RequestMapping(value = "/pruebaDB")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         //logger.info("Returning hello view");
         //PurchaseData pd = new PurchaseData();
-        ModelAndView mv = new ModelAndView("reportesEstrategicos/cumplimientoVentasVendedor");
+        ModelAndView mv = new ModelAndView("pruebaAPI_DB_html5");
         //mv.addObject("purchases", pd.getAllPurchases());
 
         return mv;

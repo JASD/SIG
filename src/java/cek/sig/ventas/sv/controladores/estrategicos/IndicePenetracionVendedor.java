@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cek.sig.ventas.sv.controller.reportesTacticos;
+package cek.sig.ventas.sv.controladores.estrategicos;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -19,15 +19,15 @@ import org.zkoss.zk.ui.select.SelectorComposer;
  * @author antonio
  */
 @Controller
-public class VentasCategoria extends SelectorComposer<Component>{
+public class IndicePenetracionVendedor extends SelectorComposer<Component>{
     
-     @RequestMapping(value = "/ventasCategoria")
+     @RequestMapping(value = "/indicePenetracionVendedor")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         //logger.info("Returning hello view");
         //PurchaseData pd = new PurchaseData();
-        ModelAndView mv = new ModelAndView("reportesTacticos/ventasCategoria");
+        ModelAndView mv = new ModelAndView("reportesEstrategicos/indicePenetracionVendedor");
         //mv.addObject("purchases", pd.getAllPurchases());
 
         return mv;

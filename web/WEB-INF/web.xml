@@ -2,20 +2,31 @@
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/applicationContext.xml</param-value>
+        <param-value>
+            /WEB-INF/applicationContext.xml
+            /WEB-INF/applicationContext-security.xml
+        </param-value>
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+    
+    <!-- Spring Security -->
     <listener>
-        <description>ZK listener for cleanup when a session is destroyed</description>
-        <listener-class>org.zkoss.zk.ui.http.HttpSessionListener</listener-class>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
     <listener>
-        <description>ZK JSP Tags environment initiation </description>
-        <display-name>ZK JSP Initiator</display-name>
-        <listener-class>org.zkoss.jsp.spec.JspFactoryContextListener</listener-class>
+        <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
     </listener>
+    <filter><!-- the filter-name must be preserved,  do not change it! -->
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- Spring Security -->
     
     <servlet>
         <servlet-name>dispatcher</servlet-name>
@@ -34,6 +45,18 @@
     <welcome-file-list>
         <welcome-file>redirect.jsp</welcome-file>
     </welcome-file-list>
+    
+    
+    <!-- Configuracion ZK -->
+    <listener>
+        <description>ZK listener for cleanup when a session is destroyed</description>
+        <listener-class>org.zkoss.zk.ui.http.HttpSessionListener</listener-class>
+    </listener>
+    <listener>
+        <description>ZK JSP Tags environment initiation </description>
+        <display-name>ZK JSP Initiator</display-name>
+        <listener-class>org.zkoss.jsp.spec.JspFactoryContextListener</listener-class>
+    </listener>
     <servlet>
         <servlet-name>zkLoader</servlet-name>
         <servlet-class>
@@ -62,4 +85,5 @@
         <servlet-name>auEngine</servlet-name>
         <url-pattern>/zkau/*</url-pattern>
     </servlet-mapping>
+    <!-- Configuracion ZK -->
 </web-app>
