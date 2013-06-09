@@ -18,7 +18,7 @@
     <body> 
         <z:page>
             <z:window self="@{define(left)}" title="Reporte de Indice de Cobertura por Vendedor">
-                
+
                 <z:button style="margin:20px 20px 10px 10px;float:right"
                           label="Generar Reporte"/>
                 <z:combobox style="margin:20px 20px 10px 10px;float:right">
@@ -34,18 +34,7 @@
                         <z:auxheader style="text-align:center" 
                                      colspan="7"  label="INDICE DE COBERTURA POR VENDEDOR"/>
                     </z:auxhead>
-                    <z:auxhead>
-                        <z:auxheader style="text-align:left"
-                                     colspan="3" rowspan="2" label="Mes:"/>
-                    </z:auxhead>
-                    <z:auxhead>
-                        <z:auxheader style="text-align:left"
-                                     colspan="4" label="LINEA:"/>
-                    </z:auxhead>
-                    <z:auxhead>
-                        <z:auxheader style="text-align:left"
-                                     colspan="7" label="GRUPO:"/>
-                    </z:auxhead>
+
                     <z:columns>
                         <z:column hflex="20">Vendedor</z:column>
                         <z:column hflex="6">mes 1</z:column>
