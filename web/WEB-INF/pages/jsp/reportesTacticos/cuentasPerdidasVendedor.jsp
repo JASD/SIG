@@ -34,8 +34,16 @@
                      src="images/botonAyuda.gif"
                      title="Es el período de meses anteriores a incluir en el reporte">
 
-                <z:button style="margin:20px 20px 10px 10px;clear:left;float:right"
+                <z:button style="margin:20px 20px 10px 10px;float:right"
                           label="Generar Reporte"/>
+                <z:combobox style="margin:20px 20px 10px 10px;float:right">
+                    <z:comboitem label="Archivo de excel"/>
+                    <z:comboitem label="Archivo de word"/>
+                    <z:comboitem label="Archivo PDF"/>
+                    <z:comboitem label="Archivo de texto"/>
+                </z:combobox>
+                <z:label style="margin:20px 20px 10px 10px;clear:left;float:right"
+                         value="Tipo de reporte: "/>
 
                 <z:grid style="clear:right;float:left; margin:10px">
                     <z:auxhead>
