@@ -18,34 +18,77 @@
     <body> 
         <z:page>
             <z:window self="@{define(left)}" title="Reporte de Utilidades por Categoria">
-                <z:label style="margin:20px 20px 10px 10px" 
-                         value="Período a analizar: "/>
-                <z:combobox style="margin:20px">
-                    <z:comboitem label="1 mes"/>
-                    <z:comboitem label="2 meses"/>
-                    <z:comboitem label="3 meses"/>
-                    <z:comboitem label="4 meses"/>
-                    <z:comboitem label="5 meses"/>
-                    <z:comboitem label="6 meses"/>
-                </z:combobox>
 
-                <img style="cursor: help" 
-                     alt="ayuda"
-                     src="images/botonAyuda.gif"
-                     title="Es el período de meses anteriores a incluir en el reporte">
+                <table style="margin:20px 20px 10px 10px">
+                    <tr>
+                        <td>
+                            <z:label value="Mes: "/>
+                        </td>
+                        <td>
+                            <z:combobox>
+                                <z:comboitem label="1"/>
+                                <z:comboitem label="2"/>
+                                <z:comboitem label="3"/>
+                                <z:comboitem label="4"/>
+                                <z:comboitem label="5"/>
+                                <z:comboitem label="6"/>
+                                <z:comboitem label="7"/>
+                                <z:comboitem label="8"/>
+                                <z:comboitem label="9"/>
+                                <z:comboitem label="10"/>
+                                <z:comboitem label="11"/>
+                                <z:comboitem label="12"/>
+                            </z:combobox>
+                        </td>
+                        <td>
+                            <z:label value="Año: "/>
+                        </td>
+                        <td>
+                            <z:combobox>
+                                <z:comboitem label="2001"/>
+                                <z:comboitem label="2002"/>
+                                <z:comboitem label="2003"/>
+                                <z:comboitem label="2004"/>
+                                <z:comboitem label="2005"/>
+                                <z:comboitem label="2006"/>
+                                <z:comboitem label="2007"/>
+                                <z:comboitem label="2008"/>
+                                <z:comboitem label="2009"/>
+                                <z:comboitem label="2010"/>
+                                <z:comboitem label="2011"/>
+                                <z:comboitem label="2012"/>
+                                <z:comboitem label="2013"/>
+                            </z:combobox>    
+                        </td>
+                        <td>
+                            <img style="cursor: help" 
+                                 alt="ayuda"
+                                 src="images/botonAyuda.gif"
+                                 title="Es el período de meses anteriores a incluir en el reporte">
+                            <br>
+                        </td>
+                        <td style="width: 100%">
+                            <z:button style="margin:20px 20px 10px 10px;float:right"
+                                      label="Generar Reporte"/>
+                            <z:combobox style="margin:20px 20px 10px 10px;float:right">
+                                <z:comboitem label="Archivo de excel"/>
+                                <z:comboitem label="Archivo de word"/>
+                                <z:comboitem label="Archivo PDF"/>
+                                <z:comboitem label="Archivo de texto"/>
+                            </z:combobox>
+                            <z:label style="margin:20px 20px 10px 10px;clear:left;float:right"
+                                     value="Tipo de reporte: "/>
+                        </td>
+                    </tr>
+                </table>
 
-                <z:button style="margin:20px 20px 10px 10px;clear:left;float:right"
-                          label="Generar Reporte"/>
                 <z:grid style="clear:right;float:left; margin:10px">
 
                     <z:auxhead>
                         <z:auxheader style="text-align:center" 
                                      colspan="10"  label="UTILIDADES POR CATEGORIA"/>
                     </z:auxhead>
-                    <z:auxhead>
-                        <z:auxheader style="text-align:left"
-                                     colspan="10" label="Mes:"/>
-                    </z:auxhead>
+
                     <z:auxhead>
                         <z:auxheader style="text-align:center"  label=" " colspan="1" />
                         <z:auxheader style="text-align:center"  label="Ventas" colspan="3"/>
