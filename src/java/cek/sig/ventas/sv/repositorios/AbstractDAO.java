@@ -4,6 +4,8 @@
  */
 package cek.sig.ventas.sv.repositorios;
 
+import java.util.List;
+
 /**
  *
  * @author Antonio
@@ -23,4 +25,6 @@ public abstract class AbstractDAO<T> {
     public abstract void delete(T entity);
 
     public abstract T find(Object id);
+    
+    public abstract List<T> findAll();
 }

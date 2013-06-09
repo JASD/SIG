@@ -4,7 +4,7 @@
  */
 package cek.sig.ventas.sv.repositorios;
 
-import cek.sig.ventas.sv.entidades.CekUsuario;
+import cek.sig.ventas.sv.entidades.CekIndVendedor;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,38 +16,38 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Antonio
  */
 @Repository
-public class UsuarioDAO extends AbstractDAO<CekUsuario> {
+public class IndVendedorDAO extends AbstractDAO<CekIndVendedor> {
 
     @Autowired
     private SessionFactory sessionFactory;
 
-    public UsuarioDAO() {
-        super(CekUsuario.class);
+    public IndVendedorDAO() {
+        super(CekIndVendedor.class);
     }
 
     @Override
-    public void create(CekUsuario entity) {
+    public void create(CekIndVendedor entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void edit(CekUsuario entity) {
+    public void edit(CekIndVendedor entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(CekUsuario entity) {
+    public void delete(CekIndVendedor entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public CekIndVendedor find(Object id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Transactional(readOnly = true)
     @Override
-    public CekUsuario find(Object id) {
-        return (CekUsuario) sessionFactory.getCurrentSession().get(CekUsuario.class, (String) id);
-    }
-
-    @Override
-    public List<CekUsuario> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<CekIndVendedor> findAll() {
+        return (List<CekIndVendedor>) sessionFactory.getCurrentSession().getNamedQuery("CekIndVendedor.findAll").list();
     }
 }

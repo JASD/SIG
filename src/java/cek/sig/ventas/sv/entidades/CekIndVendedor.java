@@ -59,7 +59,7 @@ public class CekIndVendedor implements Serializable {
     @Column(name = "INDIV_TOT_PVENDIO")
     private Integer indivTotPvendio;
     @JoinColumn(name = "ID_VENDEDOR", referencedColumnName = "ID_VENDEDOR", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private CekVendedor cekVendedor;
     @JoinColumn(name = "ID_PERIODO", referencedColumnName = "ID_PERIODO", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
