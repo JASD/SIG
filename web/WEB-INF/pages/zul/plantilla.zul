@@ -18,7 +18,7 @@
                         <menuitem label="Ventas por vendedor" href="/ventasVendedor.htm"/>
                         <menuitem label="Cuentas nuevas mensuales por vendedor" href="/cuentasNuevasVendedor.htm" />
                         <menuitem label="Kilogramos vendidos por categoría" href="/kilogramosVendidosCategoria.htm" />
-                        <menuitem label="Productos vendidos por categoría" href="/kilogramoProductoVendido.htm" />
+                        <menuitem label="Kilogramos de productos vendidos por categoría" href="/kilogramoProductoVendido.htm" />
                         <menuitem label="Cuentas mensuales recuperadas por vendedor" href="/cuentasRecuperadasVendedor.htm" />
                         <menuitem label="Cuentas mensuales perdidas por vendedor" href="/cuentasPerdidasVendedor.htm" />
                         <menuseparator></menuseparator>
