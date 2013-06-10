@@ -7,6 +7,7 @@ package cek.sig.ventas.sv.servicios;
 import cek.sig.ventas.sv.entidades.reportes.CRVendedor;
 import cek.sig.ventas.sv.entidades.CekIndVendedor;
 import cek.sig.ventas.sv.entidades.CekPeriodo;
+import cek.sig.ventas.sv.entidades.reportes.CNVendedor;
 import cek.sig.ventas.sv.repositorios.IndVendedorDAO;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,7 +47,24 @@ public class IndVendedorService {
 
         return dtos;
     }
-    
+
+    public List<CNVendedor> getCuentasNuevas() {
+        records = indVendedorDAO.executeNamedQuery("CekIndVendedor.Ultimo");
+        List<CNVendedor> dtos = new ArrayList<CNVendedor>();
+
+        // Map records
+        for (CekIndVendedor ind : records) {
+            CNVendedor cne = new CNVendedor();
+            cne.setNombreVendedor(ind.getCekVendedor().getVendNombre());
+            cne.setProyectadoVendedor(ind.getIndivProyCnuevos().floatValue());
+            cne.setNuevasVendedor(ind.getIndivCliNuevos().floatValue());
+            cne.setCumplimientoVendedor(ind.getIndivCumpCnuevos().floatValue());
+            dtos.add(cne);
+        }
+
+        return dtos;
+    }
+
     public String getPeriodo() {
         if (!records.isEmpty()) {
             CekPeriodo periodo = records.get(0).getCekPeriodo();
@@ -72,7 +90,6 @@ public class IndVendedorService {
      * cre.setRecuperadoEmpleado(ind.getIndivCliRecu().toString());
      * cre.setCumplimientoEmpleado(ind.getIndivCumplCrecup().toString());
      * dtos.add(cre); } // Return wrapped collection return new
-     * JRBeanCollectionDataSource(dtos);
-    }*
+     * JRBeanCollectionDataSource(dtos); }*
      */
 }

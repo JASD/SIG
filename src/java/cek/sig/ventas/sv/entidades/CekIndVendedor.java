@@ -26,6 +26,10 @@ import javax.persistence.Table;
     @NamedQuery(name = "CekIndVendedor.cuentasRecuperadasUltimo",
             query = "SELECT c "
             + "FROM CekIndVendedor c "
+            + "WHERE c.cekIndVendedorPK.idPeriodo = (SELECT MAX(p.idPeriodo) FROM CekPeriodo p)"),
+    @NamedQuery(name = "CekIndVendedor.Ultimo",
+            query = "SELECT c "
+            + "FROM CekIndVendedor c "
             + "WHERE c.cekIndVendedorPK.idPeriodo = (SELECT MAX(p.idPeriodo) FROM CekPeriodo p)")})
 public class CekIndVendedor implements Serializable {
 

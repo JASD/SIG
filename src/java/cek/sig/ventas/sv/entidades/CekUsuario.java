@@ -24,7 +24,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 /**
  *
  * @author Antonio
- */
+*/ 
 @Entity
 @Table(name = "CEK_USUARIO")
 @NamedQueries({
