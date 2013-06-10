@@ -6,8 +6,12 @@ package cek.sig.ventas.sv.servicios;
 
 import cek.sig.ventas.sv.entidades.reportes.CRVendedor;
 import cek.sig.ventas.sv.entidades.CekIndVendedor;
+import cek.sig.ventas.sv.entidades.CekPeriodo;
 import cek.sig.ventas.sv.repositorios.IndVendedorDAO;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -24,9 +28,10 @@ public class IndVendedorService {
 
     @Autowired
     private IndVendedorDAO indVendedorDAO;
+    private List<CekIndVendedor> records;
 
     public List<CRVendedor> getCuentasRecuperadas() {
-        List<CekIndVendedor> records = indVendedorDAO.executeNamedQuery("CekIndVendedor.cuentasRecuperadasUltimo");
+        records = indVendedorDAO.executeNamedQuery("CekIndVendedor.cuentasRecuperadasUltimo");
         List<CRVendedor> dtos = new ArrayList<CRVendedor>();
 
         // Map records
@@ -40,6 +45,19 @@ public class IndVendedorService {
         }
 
         return dtos;
+    }
+    
+    public String getPeriodo() {
+        if (!records.isEmpty()) {
+            CekPeriodo periodo = records.get(0).getCekPeriodo();
+            Calendar c = new GregorianCalendar();
+            c.set(GregorianCalendar.MONTH, periodo.getPeriMes() - 1);
+            c.set(GregorianCalendar.YEAR, periodo.getPeriAnio());
+            c.set(GregorianCalendar.DAY_OF_MONTH, 1);
+            SimpleDateFormat bartDateFormat = new SimpleDateFormat("MMMM yyyy");
+            return bartDateFormat.format(c.getTime());
+        }
+        return null;
     }
     /**
      *

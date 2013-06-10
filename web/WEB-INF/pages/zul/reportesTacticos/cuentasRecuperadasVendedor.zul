@@ -4,7 +4,7 @@
         apply="cek.sig.ventas.sv.controladores.tacticos.CuentasRecuperadasVendedor">
     <label style="margin:20px 20px 10px 10px" 
            value="Período a analizar: "/>
-    <combobox style="margin:20px" id="periodo" >
+    <combobox style="margin:20px" id="periodos" >
         <comboitem label="1 mes"/>
         <comboitem label="2 meses"/>
         <comboitem label="3 meses"/>
@@ -12,9 +12,10 @@
         <comboitem label="5 meses"/>
         <comboitem label="6 meses"/>
     </combobox>
+     <label id="periodoSeleccionado"/>
     <button style="margin:20px 20px 10px 10px;float:right" id="downloadButton"
             label="Generar Reporte"/>
-    <combobox id="formato" readonly="true" autodrop="true"
+    <combobox id="formatos" readonly="true" autodrop="true"
               style="margin:20px 20px 10px 10px;float:right">
         <comboitem label="Archivo de Excel"/>
         <comboitem label="Archivo de Word"/>

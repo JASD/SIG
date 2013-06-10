@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cuentas Recuperadas por Vendedor" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="158721d0-b68c-4fc2-b720-bb5989ebcf24">
+	<property name="ireport.zoom" value="0.9090909090909097"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="periodo" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nombreVendedor" class="java.lang.String"/>
+	<field name="proyectadoVendedor" class="java.lang.Float"/>
+	<field name="recuperadoVendedor" class="java.lang.Float"/>
+	<field name="cumplimientoVendedor" class="java.lang.Float"/>
+	<variable name="proyectadoVendedor_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{proyectadoVendedor}]]></variableExpression>
+	</variable>
+	<variable name="recuperadoVendedor_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{recuperadoVendedor}]]></variableExpression>
+	</variable>
+	<variable name="cumplimientoTotal" class="java.lang.Float">
+		<variableExpression><![CDATA[$V{recuperadoVendedor_1}/$V{proyectadoVendedor_1}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="9fdea9f1-6abc-41de-98fd-1284058b42c9" x="188" y="0" width="370" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CEK DE CENTROAMERICA EL SALVADOR]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="86e1688b-5094-4aed-9cdd-b1b33645b726" x="2" y="0" width="91" height="46"/>
+				<imageExpression><![CDATA["..\\..\\images\\LOGO_CEK.gif"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="d8d77cd4-e232-4a8d-83b4-86d88931d5fe" x="199" y="26" width="337" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE CUENTAS RECUPERADAS POR VENDEDOR]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="e0814710-d247-4c99-9aa9-c53f80534570" x="568" y="6" width="184" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["PERIODO: " + $P{periodo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="80f20f5b-76bb-4269-94b2-bc6d1f2ce165" x="78" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[NOMBRE VENDEDOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="07361dc5-676a-4655-add1-39b479c0bece" x="650" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[CUMPLIMIENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5f9d2613-b6af-4421-a766-4b2a49305329" x="502" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[RECUPERADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9430389c-1975-4314-9d87-632e0321a5fe" x="336" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[PROYECTADO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="bf5d757e-c15b-490a-b3a6-c633ba3ecab2" x="2" y="0" width="297" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{nombreVendedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fd0a11c8-7b56-4860-b578-64e1ca41ab99" x="650" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[new DecimalFormat("0.00").format($F{cumplimientoVendedor})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1968b0b6-5e4f-4ddc-be4c-16c0485ceb32" x="502" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[new DecimalFormat("0").format($F{recuperadoVendedor})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f2807896-99aa-4f10-b0da-d60bc4ae536d" x="336" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[new DecimalFormat("0").format($F{proyectadoVendedor})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement uuid="8f72116a-3c10-4498-9aa4-06cec330549e" x="704" y="0" width="46" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6231b34b-a0d5-47e3-b1dc-73aaf80c97b0" x="579" y="0" width="125" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement uuid="011ea88d-c133-4df0-be0d-9227e967c804" x="336" y="1" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("0").format($V{proyectadoVendedor_1})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2fc89851-9a09-4ec9-88c2-c575674c890a" x="502" y="1" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("0").format($V{recuperadoVendedor_1})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="93fefd53-75fa-494e-ad75-a6a2dbb7f94f" x="650" y="1" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("0.00").format($V{cumplimientoTotal})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5e3224be-a804-4ddb-894a-f45349b307e2" x="199" y="1" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="6c76ba15-a860-49dc-82f5-5c244ed7e084" x="2" y="0" width="748" height="1"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
