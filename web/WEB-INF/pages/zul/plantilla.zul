@@ -5,10 +5,16 @@
         <panelchildren>
             <div style="text-align:center;margin:20px">
                 <image id="image" src="/images/LOGO_CEK.gif" />
-                <label style="font-size: xx-large" value="CEK DE CENTROAMERICA EL SALVADOR" />
-                <label style="text-align:right;display:block;" value="Usuario: " >${authentication.principal.username}</label>
-                <a href="/j_spring_security_logout" style="float:right">cerrar sesion</a>
-                <label style="text-align:center;display:block;font-size: large" value="Sistema de informacion gerencial departamento de ventas CEK de C.A" />
+                <label style="font-size: xx-large" 
+                       value="CEK DE CENTROAMERICA EL SALVADOR" />
+                <label style="text-align:right;display:block;" value="Usuario: " >
+                    ${authentication.principal.username}
+                </label>
+                <a href="/j_spring_security_logout" style="float:right">
+                    cerrar sesion
+                </a>
+                <label style="text-align:center;display:block;font-size: large" 
+                       value="Sistema de informacion gerencial departamento de ventas CEK de C.A" />
             </div>
             <menubar style="width:100%;margin-bottom:10px" id="menubar">
                 <menuitem label="HOME" href="/index.htm" />
@@ -35,14 +41,8 @@
                     </menupopup>
                 </menu>
             </menubar>
-            <borderlayout width="100%" height="330px">
-                <west width="200px" collapsible="true" title="Menú de navegación">
-                    <div self="@{insert(right)}" sclass="logo"></div>
-                </west>
-                <center>
-                    <div self="@{insert(left)}" sclass="content"></div>
-                </center>
-            </borderlayout>
+            <div self="@{insert(left)}" sclass="content"></div>
+               
             <div sclass="footer" style="text-align:center">
                 Cek Centroamérica Copyright © 2013.
             </div>

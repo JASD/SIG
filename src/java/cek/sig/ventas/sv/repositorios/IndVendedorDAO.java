@@ -50,4 +50,10 @@ public class IndVendedorDAO extends AbstractDAO<CekIndVendedor> {
     public List<CekIndVendedor> findAll() {
         return (List<CekIndVendedor>) sessionFactory.getCurrentSession().getNamedQuery("CekIndVendedor.findAll").list();
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<CekIndVendedor> executeNamedQuery(String NamedQuery) {
+        return (List<CekIndVendedor>) sessionFactory.getCurrentSession().getNamedQuery(NamedQuery).list();
+    }
 }

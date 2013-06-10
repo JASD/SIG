@@ -43,7 +43,7 @@
         <security:form-login 
             login-page="/index.htm" always-use-default-target="true"
             default-target-url="/home.htm" 
-            authentication-failure-url="/index.htm?error=1" />
+            authentication-failure-url="/index.htm?login_error=1" />
 
         <!--  Especifica el tipo de autenticación:-->
         <security:http-basic />

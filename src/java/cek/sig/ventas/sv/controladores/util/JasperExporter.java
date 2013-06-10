@@ -2,28 +2,27 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cek.sig.ventas.sv.servicios.reportes;
+package cek.sig.ventas.sv.controladores.util;
 
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.util.HashMap;
 
-import javax.servlet.http.HttpServletResponse;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.export.JRXlsAbstractExporterParameter;
 import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 
-import org.springframework.stereotype.Service;
-
 /**
  *
  * @author Antonio
  */
-@Service
-public class ExporterService {
+public class JasperExporter {
 
     public static final String MEDIA_TYPE_EXCEL = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     public static final String MEDIA_TYPE_PDF = "application/pdf";
@@ -32,72 +31,38 @@ public class ExporterService {
     public static final String EXTENSION_TYPE_PDF = ".pdf";
     public static final String EXTENSION_TYPE_WORD = ".docx";
 
-    public HttpServletResponse export(String type,
-            String fileName,
-            JasperPrint jp,
-            HttpServletResponse response,
-            ByteArrayOutputStream baos) {
+    public static void export(String jasperPath,
+            HashMap params,
+            JRBeanCollectionDataSource dataSource,
+            String type,
+            File file) {
 
+        JasperPrint jp;
+        try {
+            jp = JasperFillManager.fillReport(jasperPath, params, dataSource);
+        } catch (JRException ex) {
+            throw new RuntimeException(ex);
+        }
         if (type.equalsIgnoreCase(EXTENSION_TYPE_EXCEL)) {
-            // Export to output stream
-            exportXlsx(jp, baos);
-
-            // Set our response properties
-            // Here you can declare a custom filename
-            //String fileName = "UserReport.xls";
-            response.setHeader("Content-Disposition", "inline; filename=" + fileName + EXTENSION_TYPE_EXCEL);
-
-            // Set content type
-            response.setContentType(MEDIA_TYPE_EXCEL);
-            response.setContentLength(baos.size());
-
-            return response;
+            exportXlsx(jp, file);
         }
 
         if (type.equalsIgnoreCase(EXTENSION_TYPE_PDF)) {
-            // Export to output stream
-            exportPdf(jp, baos);
-
-            // Set our response properties
-            // Here you can declare a custom filename
-            //String fileName = "UserReport.pdf";
-            response.setHeader("Content-Disposition", "inline; filename=" + fileName + EXTENSION_TYPE_PDF);
-
-            // Set content type
-            response.setContentType(MEDIA_TYPE_PDF);
-            response.setContentLength(baos.size());
-
-            return response;
-
+            exportPdf(jp, file);
         }
 
         if (type.equalsIgnoreCase(EXTENSION_TYPE_WORD)) {
-            // Export to output stream
-            exportWord(jp, baos);
-
-            // Set our response properties
-            // Here you can declare a custom filename
-            //String fileName = "UserReport.pdf";
-            response.setHeader("Content-Disposition", "inline; filename=" + fileName + EXTENSION_TYPE_WORD);
-
-            // Set content type
-            response.setContentType(MEDIA_TYPE_WORD);
-            response.setContentLength(baos.size());
-
-            return response;
-
+            exportWord(jp, file);
         }
-
-        throw new RuntimeException("No type set for type " + type);
     }
 
-    private void exportXlsx(JasperPrint jp, ByteArrayOutputStream baos) {
+    private static void exportXlsx(JasperPrint jp, File file) {
         // Create a JRXlsExporter instance
         JRXlsxExporter exporter = new JRXlsxExporter();
 
         // Here we assign the parameters jp and baos to the exporter
         exporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
-        exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, baos);
+        exporter.setParameter(JRExporterParameter.OUTPUT_FILE, file);
 
         // Excel specific parameters
         exporter.setParameter(JRXlsAbstractExporterParameter.IS_ONE_PAGE_PER_SHEET, Boolean.FALSE);
@@ -113,13 +78,13 @@ public class ExporterService {
         }
     }
 
-    private void exportPdf(JasperPrint jp, ByteArrayOutputStream baos) {
+    private static void exportPdf(JasperPrint jp, File file) {
         // Create a JRPdfExporter instance
         JRPdfExporter exporter = new JRPdfExporter();
 
         // Here we assign the parameters jp and baos to the exporter
         exporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
-        exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, baos);
+        exporter.setParameter(JRExporterParameter.OUTPUT_FILE, file);
 
         try {
             exporter.exportReport();
@@ -129,13 +94,13 @@ public class ExporterService {
         }
     }
 
-    private void exportWord(JasperPrint jp, ByteArrayOutputStream baos) {
+    private static void exportWord(JasperPrint jp, File file) {
         // Create a JRDocxExporter instance
         JRDocxExporter exporter = new JRDocxExporter();
 
         // Here we assign the parameters jp and baos to the exporter
         exporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
-        exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, baos);
+        exporter.setParameter(JRExporterParameter.OUTPUT_FILE, file);
 
         try {
             exporter.exportReport();

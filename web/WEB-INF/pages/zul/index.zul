@@ -1,22 +1,32 @@
-
-<zk>
-    <!-- Product  -->
-    <window>
-        <tabbox id="tb" height="300px">
-            <tabs id="tabs">
-                <tab label="Tab A" />
-                <tab label="Tab B" />
-                <tab label="Tab C" />
-                <tab label="Tab D" />
-                <tab label="Tab E" />
-            </tabs>
-            <tabpanels>
-                <tabpanel>This is panel A</tabpanel>
-                <tabpanel>This is panel B</tabpanel>
-                <tabpanel>This is panel C</tabpanel>
-                <tabpanel>This is panel D</tabpanel>
-                <tabpanel>This is panel E</tabpanel>
-            </tabpanels>
-        </tabbox>
-    </window>    
-</zk>
+<?page id="index" title="CEK de Centroamérica"?>
+<window id="loginwin" title="CUSTOM ZK + SPRING SECURITY LOGIN" border="normal" width="500px">
+    <!-- this form-login-page form is also used as the
+    form-error-page to ask for a login again. -->
+    <html style="color:red" if="${not empty param.login_error}">
+      <![CDATA[
+        Your login attempt was not successful, try again.<br/><br/>
+        Reason: ${SPRING_SECURITY_LAST_EXCEPTION.message}
+       ]]>
+    </html>
+ 
+    <groupbox>
+        <caption>Login</caption>
+        <h:form id="f" name="f" action="j_spring_security_check" method="POST"
+            xmlns:h="native">
+            <grid>
+                <rows>
+                    <row>User: <textbox id="u" name="j_username"/></row>
+                    <row>Password: <textbox id="p" type="password" name="j_password"/></row>
+                    <row>
+                        <checkbox id="r" name="j_spring_security_remember_me"/>Don't ask for my password for two weeks</row>
+                    <row spans="2">
+                        <hbox>
+                            <h:input type="submit" value="Submit Query"/>
+                            <h:input type="reset" value="Reset"/>
+                        </hbox>
+                    </row>
+                </rows>
+            </grid>
+        </h:form>
+    </groupbox>
+</window>

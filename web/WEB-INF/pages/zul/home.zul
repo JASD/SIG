@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="home" title="Bienvenido CEK" ?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
+<window>
+
+</window>

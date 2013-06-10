@@ -50,4 +50,9 @@ public class UsuarioDAO extends AbstractDAO<CekUsuario> {
     public List<CekUsuario> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<CekUsuario> executeNamedQuery(String NamedQuery) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

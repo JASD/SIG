@@ -27,4 +27,6 @@ public abstract class AbstractDAO<T> {
     public abstract T find(Object id);
     
     public abstract List<T> findAll();
+    
+    public abstract List<T> executeNamedQuery(String NamedQuery);
 }

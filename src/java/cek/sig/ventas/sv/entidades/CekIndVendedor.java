@@ -22,8 +22,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CEK_IND_VENDEDOR")
 @NamedQueries({
-    @NamedQuery(name = "CekIndVendedor.findAll", query = "SELECT c FROM CekIndVendedor c")})
+    @NamedQuery(name = "CekIndVendedor.findAll", query = "SELECT c FROM CekIndVendedor c"),
+    @NamedQuery(name = "CekIndVendedor.cuentasRecuperadasUltimo",
+            query = "SELECT c "
+            + "FROM CekIndVendedor c "
+            + "WHERE c.cekIndVendedorPK.idPeriodo = (SELECT MAX(p.idPeriodo) FROM CekPeriodo p)")})
 public class CekIndVendedor implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CekIndVendedorPK cekIndVendedorPK;
@@ -244,5 +249,4 @@ public class CekIndVendedor implements Serializable {
     public String toString() {
         return "cek.sig.ventas.sv.entidades.CekIndVendedor[ cekIndVendedorPK=" + cekIndVendedorPK + " ]";
     }
-    
 }
