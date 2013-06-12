@@ -26,7 +26,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "CEK_PERIODO")
 @NamedQueries({
-    @NamedQuery(name = "CekPeriodo.findAll", query = "SELECT c FROM CekPeriodo c")})
+    @NamedQuery(name = "CekPeriodo.findAll", query = "SELECT c FROM CekPeriodo c"),
+@NamedQuery(name = "CekPeriodos.periodosDesc", query = "SELECT c FROM CekPeriodo c order by c.idPeriodo desc")})
 public class CekPeriodo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

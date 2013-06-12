@@ -17,35 +17,35 @@ public class CNVendedor implements Serializable {
     private Float cuentasNuevas;
     private Float cumplimiento;
 
-    public String getNombreVendedor() {
+    public String getVendedor() {
         return vendedor;
     }
 
-    public void setNombreVendedor(String nombreVendedor) {
-        this.vendedor = nombreVendedor;
+    public void setVendedor(String vendedor) {
+        this.vendedor = vendedor;
     }
 
-    public Float getProyectadoVendedor() {
+    public Float getProyectado() {
         return proyectado;
     }
 
-    public void setProyectadoVendedor(Float proyectadoVendedor) {
-        this.proyectado = proyectadoVendedor;
+    public void setProyectado(Float proyectado) {
+        this.proyectado = proyectado;
     }
 
-    public Float getNuevasVendedor() {
+    public Float getCuentasNuevas() {
         return cuentasNuevas;
     }
 
-    public void setNuevasVendedor(Float nuevasVendedor) {
-        this.cuentasNuevas = nuevasVendedor;
+    public void setCuentasNuevas(Float cuentasNuevas) {
+        this.cuentasNuevas = cuentasNuevas;
     }
 
-    public Float getCumplimientoVendedor() {
+    public Float getCumplimiento() {
         return cumplimiento;
     }
 
-    public void setCumplimientoVendedor(Float cumplimientoVendedor) {
-        this.cumplimiento = cumplimientoVendedor;
+    public void setCumplimiento(Float cumplimiento) {
+        this.cumplimiento = cumplimiento;
     }
 }

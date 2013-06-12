@@ -1,14 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
+/* * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package cek.sig.ventas.sv.servicios;
 
+import cek.sig.ventas.sv.controladores.Auxiliares;
 import cek.sig.ventas.sv.entidades.reportes.CRVendedor;
 import cek.sig.ventas.sv.entidades.CekIndVendedor;
 import cek.sig.ventas.sv.entidades.CekPeriodo;
+import cek.sig.ventas.sv.entidades.CekVendedor;
 import cek.sig.ventas.sv.entidades.reportes.CNVendedor;
+import cek.sig.ventas.sv.entidades.reportes.VVendedor;
+import cek.sig.ventas.sv.repositorios.CekVendedorDAO;
 import cek.sig.ventas.sv.repositorios.IndVendedorDAO;
+import cek.sig.ventas.sv.repositorios.PeriodoDAO;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,7 +33,9 @@ public class IndVendedorService {
 
     @Autowired
     private IndVendedorDAO indVendedorDAO;
-    private List<CekIndVendedor> records;
+    private CekVendedorDAO vendedorDAO;
+    private List<CekIndVendedor> records=new ArrayList<CekIndVendedor>();
+    private PeriodoDAO periodoDAO;
 
     public List<CRVendedor> getCuentasRecuperadas() {
         records = indVendedorDAO.executeNamedQuery("CekIndVendedor.cuentasRecuperadasUltimo");
@@ -55,13 +61,44 @@ public class IndVendedorService {
         // Map records
         for (CekIndVendedor ind : records) {
             CNVendedor cne = new CNVendedor();
-            cne.setNombreVendedor(ind.getCekVendedor().getVendNombre());
-            cne.setProyectadoVendedor(ind.getIndivProyCnuevos().floatValue());
-            cne.setNuevasVendedor(ind.getIndivCliNuevos().floatValue());
-            cne.setCumplimientoVendedor(ind.getIndivCumpCnuevos().floatValue());
+            cne.setVendedor(ind.getCekVendedor().getVendNombre());
+            cne.setProyectado(ind.getIndivProyCnuevos().floatValue());
+            cne.setCuentasNuevas(ind.getIndivCliNuevos().floatValue());
+            cne.setCumplimiento(ind.getIndivCumpCnuevos().floatValue());
             dtos.add(cne);
         }
 
+        return dtos;
+    }
+
+    public List<VVendedor> getVentasVendedor() {
+        List<VVendedor> dtos = new ArrayList<VVendedor>();
+        try {
+            List<CekVendedor> recordsVendedor = vendedorDAO.executeNamedQuery("CekVendedor.findAll");
+            List<CekPeriodo> periodosDesc = periodoDAO.executeNamedQuery("CekPeriodos.periodosDesc");
+
+            // Map records
+            for (CekVendedor ind : recordsVendedor) {
+                VVendedor vv = new VVendedor();
+                vv.setVendedor(ind.getVendNombre());
+                List<CekIndVendedor> indVendedorActual = ind.getCekIndVendedorList();
+                int indicePeriodo[] = new int[6];
+
+                for (int x = 0; x < 6; x++) {
+                    indicePeriodo[x] = periodosDesc.size() > x ? ind.getCekIndVendedorList().indexOf(periodosDesc.get(x)) : -1;
+                }
+
+                vv.setMes1(indicePeriodo[0] > 0 ? indVendedorActual.get(indicePeriodo[0]).getIndivVentaNeta().floatValue() : 0);
+                vv.setMes2(indicePeriodo[1] > 0 ? indVendedorActual.get(indicePeriodo[1]).getIndivVentaNeta().floatValue() : 0);
+                vv.setMes3(indicePeriodo[2] > 0 ? indVendedorActual.get(indicePeriodo[2]).getIndivVentaNeta().floatValue() : 0);
+                vv.setMes4(indicePeriodo[3] > 0 ? indVendedorActual.get(indicePeriodo[3]).getIndivVentaNeta().floatValue() : 0);
+                vv.setMes5(indicePeriodo[4] > 0 ? indVendedorActual.get(indicePeriodo[4]).getIndivVentaNeta().floatValue() : 0);
+                vv.setMes6(indicePeriodo[5] > 0 ? indVendedorActual.get(indicePeriodo[5]).getIndivVentaNeta().floatValue() : 0);
+                dtos.add(vv);
+            }
+        } catch (Exception e) {
+            System.out.print(e.getStackTrace());
+        }
         return dtos;
     }
 
@@ -75,7 +112,7 @@ public class IndVendedorService {
             SimpleDateFormat bartDateFormat = new SimpleDateFormat("MMMM yyyy");
             return bartDateFormat.format(c.getTime());
         }
-        return null;
+        return "Ahora";
     }
     /**
      *

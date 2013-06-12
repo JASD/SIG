@@ -1,40 +1,46 @@
-<zk>
-            <window title="Search" width="600px" border="normal"
-                      apply="cek.sig.ventas.sv.controller.SearchController">
-                <hbox align="center">
-                    Keyword:
-                    <textbox id="keywordBox" />
-                    <button id="searchButton" label="Search" image="/widgets/getting_started/img/search.png" />
-                </hbox>
-                <listbox id="carListbox" emptyMessage="No car found in the result" height="160px" style="margin-top:10px">
-                    <listhead>
-                        <listheader label="Model" />
-                        <listheader label="Make" />
-                        <listheader label="Price" width="20%"/>
-                    </listhead>
-                    <template name="model">
-                        <listitem>
-                            <listcell label="${each.model}"></listcell>
-                            <listcell label="${each.make}"></listcell>
-                            <listcell>$<label value="${each.price}" /></listcell>
-                        </listitem>
-                    </template>
-                </listbox>
-                <hbox style="margin-top:20px" id="detailBox" visible="false">
-                    <image id="previewImage" style="padding:10px" />
-                    <vbox>
-                        <hlayout>
-                            Model : <label id="modelLabel" style="font-weight:bold"/>
-                        </hlayout>
-                        <hlayout>
-                            Make : <label id="makeLabel" style="font-weight:bold"/>
-                        </hlayout>
-                        <hlayout>
-                            Price : 
-                            <span>$<label id="priceLabel" style="font-weight:bold"/></span>
-                        </hlayout>
-                        <label id="descriptionLabel" />
-                    </vbox>
-                </hbox>
-            </window>
-        </zk>
+<?page contentType="text/html" pageEncoding="UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
+<window self="@{define(left)}" title="Ventas por vendedor"
+          apply="cek.sig.ventas.sv.controladores.tacticos.VentasVendedor">
+    <label id="periodoSeleccionado"/>
+    <button style="margin:20px 20px 10px 10px;float:right" id="downloadButton"
+            label="Generar Reporte"/>
+    <combobox id="formatos" readonly="true" autodrop="true"
+              style="margin:20px 20px 10px 10px;float:right">
+        <comboitem label="Archivo de Excel"/>
+        <comboitem label="Archivo de Word"/>
+        <comboitem label="Archivo PDF"/>
+    </combobox>
+    <label style="margin:20px 20px 10px 10px;clear:left;float:right"
+           value="Tipo de reporte: "/>
+    <grid id="vvGrid"  
+            mold="paging" 
+            pageSize="10" 
+            emptyMessage="Información no disponible" 
+            style="clear:right;float:left; margin:10px">
+        <auxhead>
+            <auxheader style="text-align:center"
+                         colspan="4" label="Reporte de ventas por vendedor"/>
+        </auxhead>
+        <columns>
+            <column hflex="20" label="Vendedor" sort="auto(vendedor)"/>
+            <column hflex="20" label="1" sort="auto(mes1)"/>
+            <column hflex="6" label="mesLabel2" sort="auto(mes2)"/>
+            <column hflex="6" label="mesLabel3" sort="auto(mes3)"/>
+            <column hflex="6" label="mesLabel4" sort="auto(mes4)"/>
+            <column hflex="6" label="mesLabel5" sort="auto(mes5)"/>
+            <column hflex="6" label="mesLabel6" sort="auto(mes6)"/>
+        </columns>
+        <rows>
+            <row>
+                <label value="${each.vendedor}" />
+                <label value="${each.mes1}" />
+                <label value="${each.mes2}" />
+                <label value="${each.mes3}" />
+                <label value="${each.mes4}" />
+                <label value="${each.mes5}" />
+                <label value="${each.mes6}" />
+            </row>
+        </rows>
+    </grid>
+</window>

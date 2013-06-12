@@ -27,23 +27,27 @@
     </combobox>
     <label style="margin:20px 20px 10px 10px;clear:left;float:right"
            value="Tipo de reporte: "/>
-    <grid id="cnvGrid"  mold="paging" pageSize="10" emptyMessage="Información no disponible" style="clear:right;float:left; margin:10px">
+    <grid id="cnvGrid"  
+          mold="paging" 
+          pageSize="10" 
+          emptyMessage="Información no disponible" 
+          style="clear:right;float:left; margin:10px">
         <auxhead>
             <auxheader style="text-align:center"
                        colspan="4" label="Reporte de cuentas nuevas por vendedor"/>
         </auxhead>
         <columns>
-            <column hflex="20" label="Nombre" sort="auto(nombreVendedor)" />
-            <column hflex="6" label="Proyectado" sort="auto(proyectadoVendedor)" align="right"/>
-            <column hflex="6" label="Cuentas nuevas" sort="auto(nuevasVendedor)" align="right"/>
-            <column hflex="6" label="Cumplimiento" sort="auto(cumplimientoVendedor)" align="right"/>
+            <column hflex="20" label="Nombre" sort="auto(vendedor)" />
+            <column hflex="6" label="Proyectado" sort="auto(proyectado)" align="right"/>
+            <column hflex="6" label="Cuentas nuevas" sort="auto(cuentasNuevas)" align="right"/>
+            <column hflex="6" label="Cumplimiento" sort="auto(cumplimiento)" align="right"/>
         </columns>
         <template name="model">
             <row>
-                <label value="${each.nombreVendedor}" />
-                <label value="${each.proyectadoVendedor}" />
-                <label value="${each.nuevasVendedor}" />
-                <label value="${each.cumplimientoVendedor}" />
+                <label value="${each.vendedor}" />
+                <label value="${each.proyectado}" />
+                <label value="${each.cuentasNuevas}" />
+                <label value="${each.cumplimiento}" />
             </row>
         </template>
     </grid>
