@@ -34,7 +34,7 @@ public class IndVendedorService {
     @Autowired
     private IndVendedorDAO indVendedorDAO;
     private CekVendedorDAO vendedorDAO;
-    private List<CekIndVendedor> records=new ArrayList<CekIndVendedor>();
+    private List<CekIndVendedor> records = new ArrayList<CekIndVendedor>();
     private PeriodoDAO periodoDAO;
 
     public List<CRVendedor> getCuentasRecuperadas() {
@@ -74,29 +74,43 @@ public class IndVendedorService {
     public List<VVendedor> getVentasVendedor() {
         List<VVendedor> dtos = new ArrayList<VVendedor>();
         try {
-            List<CekVendedor> recordsVendedor = vendedorDAO.executeNamedQuery("CekVendedor.findAll");
+            //obtener todos los vendedores
+            List<CekVendedor> vendedores = vendedorDAO.findAll();
+            //Obtener todos los períodos en orden descendente
             List<CekPeriodo> periodosDesc = periodoDAO.executeNamedQuery("CekPeriodos.periodosDesc");
 
-            // Map records
-            for (CekVendedor ind : recordsVendedor) {
-                VVendedor vv = new VVendedor();
-                vv.setVendedor(ind.getVendNombre());
-                List<CekIndVendedor> indVendedorActual = ind.getCekIndVendedorList();
+            // Analizar vendedores
+            for (CekVendedor vendedorActual : vendedores) {
+                //variable para enviar los reportes al jasper
+                VVendedor entityReporteVendedor = new VVendedor();
+
+                //establece el nombre del vendedor actual
+                entityReporteVendedor.setVendedor(vendedorActual.getVendNombre());
+                //obtiene la lista de las actividades del vendedor
+                List<CekIndVendedor> indVendedorActual = vendedorActual.getCekIndVendedorList();
+
+                //almacena las posiciones de los indices en los que se encuentra un período especifico
                 int indicePeriodo[] = new int[6];
 
+                //busca los indices en los que se encuentran los períodos del mayor al menor, sino lo encuentra devuelve -1
                 for (int x = 0; x < 6; x++) {
-                    indicePeriodo[x] = periodosDesc.size() > x ? ind.getCekIndVendedorList().indexOf(periodosDesc.get(x)) : -1;
+                    indicePeriodo[x] = periodosDesc.size() > x ? vendedorActual.getCekIndVendedorList().indexOf(periodosDesc.get(x)) : -1;
                 }
 
-                vv.setMes1(indicePeriodo[0] > 0 ? indVendedorActual.get(indicePeriodo[0]).getIndivVentaNeta().floatValue() : 0);
-                vv.setMes2(indicePeriodo[1] > 0 ? indVendedorActual.get(indicePeriodo[1]).getIndivVentaNeta().floatValue() : 0);
-                vv.setMes3(indicePeriodo[2] > 0 ? indVendedorActual.get(indicePeriodo[2]).getIndivVentaNeta().floatValue() : 0);
-                vv.setMes4(indicePeriodo[3] > 0 ? indVendedorActual.get(indicePeriodo[3]).getIndivVentaNeta().floatValue() : 0);
-                vv.setMes5(indicePeriodo[4] > 0 ? indVendedorActual.get(indicePeriodo[4]).getIndivVentaNeta().floatValue() : 0);
-                vv.setMes6(indicePeriodo[5] > 0 ? indVendedorActual.get(indicePeriodo[5]).getIndivVentaNeta().floatValue() : 0);
-                dtos.add(vv);
+                //establece los valores de las ventas netas para cada mes. si no se encontró valor en el período,
+                //asigna cero a ese mes
+                entityReporteVendedor.setMes1(indicePeriodo[0] > 0 ? indVendedorActual.get(indicePeriodo[0]).getIndivVentaNeta().floatValue() : 0);
+                entityReporteVendedor.setMes2(indicePeriodo[1] > 0 ? indVendedorActual.get(indicePeriodo[1]).getIndivVentaNeta().floatValue() : 0);
+                entityReporteVendedor.setMes3(indicePeriodo[2] > 0 ? indVendedorActual.get(indicePeriodo[2]).getIndivVentaNeta().floatValue() : 0);
+                entityReporteVendedor.setMes4(indicePeriodo[3] > 0 ? indVendedorActual.get(indicePeriodo[3]).getIndivVentaNeta().floatValue() : 0);
+                entityReporteVendedor.setMes5(indicePeriodo[4] > 0 ? indVendedorActual.get(indicePeriodo[4]).getIndivVentaNeta().floatValue() : 0);
+                entityReporteVendedor.setMes6(indicePeriodo[5] > 0 ? indVendedorActual.get(indicePeriodo[5]).getIndivVentaNeta().floatValue() : 0);
+
+                //agrega el registro a la lista para tabular
+                dtos.add(entityReporteVendedor);
             }
         } catch (Exception e) {
+            System.out.print("ERROR");
             System.out.print(e.getStackTrace());
         }
         return dtos;

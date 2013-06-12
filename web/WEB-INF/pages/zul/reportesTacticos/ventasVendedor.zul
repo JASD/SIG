@@ -1,7 +1,7 @@
 <?page contentType="text/html" pageEncoding="UTF-8"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
 <window self="@{define(left)}" title="Ventas por vendedor"
-          apply="cek.sig.ventas.sv.controladores.tacticos.VentasVendedor">
+        apply="cek.sig.ventas.sv.controladores.tacticos.VentasVendedor">
     <label id="periodoSeleccionado"/>
     <button style="margin:20px 20px 10px 10px;float:right" id="downloadButton"
             label="Generar Reporte"/>
@@ -14,24 +14,24 @@
     <label style="margin:20px 20px 10px 10px;clear:left;float:right"
            value="Tipo de reporte: "/>
     <grid id="vvGrid"  
-            mold="paging" 
-            pageSize="10" 
-            emptyMessage="Información no disponible" 
-            style="clear:right;float:left; margin:10px">
+          mold="paging" 
+          pageSize="10" 
+          emptyMessage="Información no disponible" 
+          style="clear:right;float:left; margin:10px">
         <auxhead>
             <auxheader style="text-align:center"
-                         colspan="4" label="Reporte de ventas por vendedor"/>
+                       colspan="4" label="Reporte de ventas por vendedor"/>
         </auxhead>
         <columns>
             <column hflex="20" label="Vendedor" sort="auto(vendedor)"/>
-            <column hflex="20" label="1" sort="auto(mes1)"/>
+            <column hflex="20" label="mesLabel1" sort="auto(mes1)"/>
             <column hflex="6" label="mesLabel2" sort="auto(mes2)"/>
             <column hflex="6" label="mesLabel3" sort="auto(mes3)"/>
             <column hflex="6" label="mesLabel4" sort="auto(mes4)"/>
             <column hflex="6" label="mesLabel5" sort="auto(mes5)"/>
             <column hflex="6" label="mesLabel6" sort="auto(mes6)"/>
         </columns>
-        <rows>
+        <template name="model">
             <row>
                 <label value="${each.vendedor}" />
                 <label value="${each.mes1}" />
@@ -41,6 +41,7 @@
                 <label value="${each.mes5}" />
                 <label value="${each.mes6}" />
             </row>
-        </rows>
+        </template>
+    </rows>
     </grid>
 </window>

@@ -27,8 +27,9 @@ import javax.validation.constraints.Size;
 @Table(name = "CEK_PERIODO")
 @NamedQueries({
     @NamedQuery(name = "CekPeriodo.findAll", query = "SELECT c FROM CekPeriodo c"),
-@NamedQuery(name = "CekPeriodos.periodosDesc", query = "SELECT c FROM CekPeriodo c order by c.idPeriodo desc")})
+    @NamedQuery(name = "CekPeriodos.periodosDesc", query = "SELECT c FROM CekPeriodo c order by c.idPeriodo desc")})
 public class CekPeriodo implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -136,5 +137,4 @@ public class CekPeriodo implements Serializable {
     public String toString() {
         return "cek.sig.ventas.sv.entidades.CekPeriodo[ idPeriodo=" + idPeriodo + " ]";
     }
-    
 }
