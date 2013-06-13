@@ -3,7 +3,6 @@
  */
 package cek.sig.ventas.sv.servicios;
 
-import cek.sig.ventas.sv.controladores.Auxiliares;
 import cek.sig.ventas.sv.entidades.reportes.CRVendedor;
 import cek.sig.ventas.sv.entidades.CekIndVendedor;
 import cek.sig.ventas.sv.entidades.CekPeriodo;

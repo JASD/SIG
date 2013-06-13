@@ -22,8 +22,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CEK_IND_CLASIFICACION")
 @NamedQueries({
-    @NamedQuery(name = "CekIndClasificacion.findAll", query = "SELECT c FROM CekIndClasificacion c")})
+    @NamedQuery(name = "CekIndClasificacion.findAll", query = "SELECT c FROM CekIndClasificacion c"),
+    @NamedQuery(name = "CekIndClasificacion.cuentasRecuperadasUltimo",
+            query = "SELECT c "
+            + "FROM CekIndClasificacion c "
+            + "WHERE c.cekIndClasificacionPK.idPeriodo = (SELECT MAX(p.idPeriodo) FROM CekPeriodo p)")})
 public class CekIndClasificacion implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CekIndClasificacionPK cekIndClasificacionPK;
@@ -195,5 +200,4 @@ public class CekIndClasificacion implements Serializable {
     public String toString() {
         return "cek.sig.ventas.sv.entidades.CekIndClasificacion[ cekIndClasificacionPK=" + cekIndClasificacionPK + " ]";
     }
-    
 }
