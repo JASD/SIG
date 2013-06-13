@@ -15,44 +15,46 @@
 
     <image style="cursor: help" 
            src="/images/botonAyuda.gif"/>
-    <button style="margin:20px 20px 10px 10px;float:right"
-                label="Generar Reporte"/>
-    <combobox style="margin:20px 20px 10px 10px;float:right">
-        <comboitem label="Archivo de excel"/>
-        <comboitem label="Archivo de word"/>
+    <label id="periodoSeleccionado"/>
+    <button style="margin:20px 20px 10px 10px;float:right" id="downloadButton"
+            label="Generar Reporte"/>
+    <combobox id="formatos" readonly="true" autodrop="true"
+              style="margin:20px 20px 10px 10px;float:right">
+        <comboitem label="Archivo de Excel"/>
+        <comboitem label="Archivo de Word"/>
         <comboitem label="Archivo PDF"/>
-        <comboitem label="Archivo de texto"/>
     </combobox>
     <label style="margin:20px 20px 10px 10px;clear:left;float:right"
-               value="Tipo de reporte: "/>
-
-    <grid style="clear:right;float:left; margin:10px">
+           value="Tipo de reporte: "/>
+    <grid id="vpcGrid"  
+          mold="paging" 
+          pageSize="10" 
+          emptyMessage="Información no disponible" 
+          style="clear:right;float:left; margin:10px">
 
         <auxhead>
             <auxheader style="text-align:center" 
-                           colspan="10"  label="VENTAS CONTRA PRESUPUESTO"/>
+                       colspan="10"  label="VENTAS CONTRA PRESUPUESTO"/>
         </auxhead>                     
 
         <columns>
-            <column hflex="15">Categoria</column>
-            <column hflex="6">ventas</column>
-            <column hflex="6">Presupuesto</column>
-            <column hflex="4">Variacion %</column>
-            <column hflex="6">Ventas Acumuladas</column>
-            <column hflex="6">Presupuesto Acumulado</column>
-            <column hflex="4">Variacion Acumulada %</column>
-
+            <column hflex="20" label="Categoria" sort="auto(categoria)" />
+            <column hflex="6" label="ventas" sort="auto(ventas)"/>
+            <column hflex="6" label="Presupuesto" sort="auto(presupuesto)"/>
+            <column hflex="4" label="Variacion %" sort="auto(variacion)"/>
+            <column hflex="6" label="Ventas Acumuladas" sort="auto(ventasAcum)"/>
+            <column hflex="6" label="Presupuesto Acumulado" sort="auto(presupuestoAcum)"/>
+            <column hflex="4" label="Variacion Acumulada %" sort="auto(variacionAcum)"/>
         </columns>
         <template name="model">
-            <row >
-                <label value="Limpieza" />
-                <label value="100" />
-                <label value="100" />
-                <label value="0.0" />
-                <label value="20" />
-                <label value="20" />
-                <label value="10" />
-                <label value="0.0" />                                                       
+            <row>
+                <label value="${each.categoria}" />
+                <label value="${each.ventas}" />
+                <label value="${each.presupuesto}" />
+                <label value="${each.variacion}" />
+                <label value="${each.ventasAcum}" />
+                <label value="${each.presupuestoAcum}" />
+                <label value="${each.variacionAcum}" />                                          
             </row>
         </template>
     </grid>

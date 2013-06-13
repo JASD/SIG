@@ -24,7 +24,7 @@
         </auxhead>
         <columns>
             <column hflex="20" label="Vendedor" sort="auto(vendedor)"/>
-            <column hflex="20" label="mesLabel1" sort="auto(mes1)"/>
+            <column hflex="6" label="mesLabel1" sort="auto(mes1)"/>
             <column hflex="6" label="mesLabel2" sort="auto(mes2)"/>
             <column hflex="6" label="mesLabel3" sort="auto(mes3)"/>
             <column hflex="6" label="mesLabel4" sort="auto(mes4)"/>
