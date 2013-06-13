@@ -1,40 +1,60 @@
-<zk>
-            <window title="Search" width="600px" border="normal"
-                      apply="cek.sig.ventas.sv.controller.SearchController">
-                <hbox align="center">
-                    Keyword:
-                    <textbox id="keywordBox" />
-                    <button id="searchButton" label="Search" image="/widgets/getting_started/img/search.png" />
-                </hbox>
-                <listbox id="carListbox" emptyMessage="No car found in the result" height="160px" style="margin-top:10px">
-                    <listhead>
-                        <listheader label="Model" />
-                        <listheader label="Make" />
-                        <listheader label="Price" width="20%"/>
-                    </listhead>
-                    <template name="model">
-                        <listitem>
-                            <listcell label="${each.model}"></listcell>
-                            <listcell label="${each.make}"></listcell>
-                            <listcell>$<label value="${each.price}" /></listcell>
-                        </listitem>
-                    </template>
-                </listbox>
-                <hbox style="margin-top:20px" id="detailBox" visible="false">
-                    <image id="previewImage" style="padding:10px" />
-                    <vbox>
-                        <hlayout>
-                            Model : <label id="modelLabel" style="font-weight:bold"/>
-                        </hlayout>
-                        <hlayout>
-                            Make : <label id="makeLabel" style="font-weight:bold"/>
-                        </hlayout>
-                        <hlayout>
-                            Price : 
-                            <span>$<label id="priceLabel" style="font-weight:bold"/></span>
-                        </hlayout>
-                        <label id="descriptionLabel" />
-                    </vbox>
-                </hbox>
-            </window>
-        </zk>
+<?page contentType="text/html" pageEncoding="UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
+<window self="@{define(left)}" title="Ventas por vendedor"
+        apply="cek.sig.ventas.sv.controladores.estrategicos.VentasVsPresupuestoCategoria">
+    <label style="margin:20px 20px 10px 10px" 
+           value="Período a analizar: "/>
+    <combobox style="margin:20px">
+        <comboitem label="1 mes"/>
+        <comboitem label="2 meses"/>
+        <comboitem label="3 meses"/>
+        <comboitem label="4 meses"/>
+        <comboitem label="5 meses"/>
+        <comboitem label="6 meses"/>
+    </combobox>
+
+    <image style="cursor: help" 
+           src="/images/botonAyuda.gif"/>
+    <button style="margin:20px 20px 10px 10px;float:right"
+                label="Generar Reporte"/>
+    <combobox style="margin:20px 20px 10px 10px;float:right">
+        <comboitem label="Archivo de excel"/>
+        <comboitem label="Archivo de word"/>
+        <comboitem label="Archivo PDF"/>
+        <comboitem label="Archivo de texto"/>
+    </combobox>
+    <label style="margin:20px 20px 10px 10px;clear:left;float:right"
+               value="Tipo de reporte: "/>
+
+    <grid style="clear:right;float:left; margin:10px">
+
+        <auxhead>
+            <auxheader style="text-align:center" 
+                           colspan="10"  label="VENTAS CONTRA PRESUPUESTO"/>
+        </auxhead>                     
+
+        <columns>
+            <column hflex="15">Categoria</column>
+            <column hflex="6">ventas</column>
+            <column hflex="6">Presupuesto</column>
+            <column hflex="4">Variacion %</column>
+            <column hflex="6">Ventas Acumuladas</column>
+            <column hflex="6">Presupuesto Acumulado</column>
+            <column hflex="4">Variacion Acumulada %</column>
+
+        </columns>
+        <template name="model">
+            <row >
+                <label value="Limpieza" />
+                <label value="100" />
+                <label value="100" />
+                <label value="0.0" />
+                <label value="20" />
+                <label value="20" />
+                <label value="10" />
+                <label value="0.0" />                                                       
+            </row>
+        </template>
+    </grid>
+</window>
+

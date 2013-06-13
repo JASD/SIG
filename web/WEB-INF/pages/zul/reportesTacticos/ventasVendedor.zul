@@ -42,6 +42,5 @@
                 <label value="${each.mes6}" />
             </row>
         </template>
-    </rows>
     </grid>
 </window>

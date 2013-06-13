@@ -13,72 +13,9 @@
         <%
             request.setAttribute(org.zkoss.zk.ui.sys.Attributes.NO_CACHE, Boolean.TRUE);
         %>
-        <title>Reporte de Ventas contra presupuesto</title>
+        <title>Reporte de cuentas nuevas por vendedor</title>
     </head>
     <body> 
-        <z:page>
-            <z:window self="@{define(left)}" title="Reporte de Ventas contra Presupuesto">
-
-                <z:label style="margin:20px 20px 10px 10px" 
-                         value="Período a analizar: "/>
-                <z:combobox style="margin:20px">
-                    <z:comboitem label="1 mes"/>
-                    <z:comboitem label="2 meses"/>
-                    <z:comboitem label="3 meses"/>
-                    <z:comboitem label="4 meses"/>
-                    <z:comboitem label="5 meses"/>
-                    <z:comboitem label="6 meses"/>
-                </z:combobox>
-
-                <img style="cursor: help" 
-                     alt="ayuda"
-                     src="images/botonAyuda.gif"
-                     title="Es el período de meses anteriores a incluir en el reporte">
-                <z:button style="margin:20px 20px 10px 10px;float:right"
-                          label="Generar Reporte"/>
-                <z:combobox style="margin:20px 20px 10px 10px;float:right">
-                    <z:comboitem label="Archivo de excel"/>
-                    <z:comboitem label="Archivo de word"/>
-                    <z:comboitem label="Archivo PDF"/>
-                    <z:comboitem label="Archivo de texto"/>
-                </z:combobox>
-                <z:label style="margin:20px 20px 10px 10px;clear:left;float:right"
-                         value="Tipo de reporte: "/>
-
-                <z:grid style="clear:right;float:left; margin:10px">
-
-                    <z:auxhead>
-                        <z:auxheader style="text-align:center" 
-                                     colspan="10"  label="VENTAS CONTRA PRESUPUESTO"/>
-                    </z:auxhead>                     
-
-                    <z:columns>
-                        <z:column hflex="15">Categoria</z:column>
-                        <z:column hflex="6">ventas</z:column>
-                        <z:column hflex="6">Presupuesto</z:column>
-                        <z:column hflex="4">Variacion %</z:column>
-                        <z:column hflex="6">Ventas Acumuladas</z:column>
-                        <z:column hflex="6">Presupuesto Acumulado</z:column>
-                        <z:column hflex="4">Variacion Acumulada %</z:column>
-
-                    </z:columns>
-                    <z:rows>
-                        <z:row>
-                            <z:label value="Limpieza" />
-                            <z:label value="100" />
-                            <z:label value="100" />
-                            <z:label value="0.0" />
-                            <z:label value="20" />
-                            <z:label value="20" />
-                            <z:label value="10" />
-                            <z:label value="0.0" />                                                       
-                        </z:row>
-                    </z:rows>
-                </z:grid>
-            </z:window>
-            <z:div self="@{define(right)}" width="100%">
-
-            </z:div> 
-        </z:page>
+        <jsp:include page="../../zul/reportesEstrategicos/ventasVsPresupuestoCategoria.zul" />
     </body>
 </html>
