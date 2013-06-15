@@ -6,6 +6,7 @@ package cek.sig.ventas.sv.controladores.tacticos;
 
 import cek.sig.ventas.sv.controladores.util.JasperExporter;
 import cek.sig.ventas.sv.entidades.reportes.CNVendedor;
+import cek.sig.ventas.sv.entidades.reportes.Mes;
 import cek.sig.ventas.sv.servicios.IndVendedorService;
 import java.io.File;
 import java.io.IOException;
@@ -44,6 +45,10 @@ public class CuentasNuevasVendedor extends SelectorComposer<Component> {
     @Wire
     private Combobox periodos;
     @Wire
+    private Combobox anios;
+    @Wire
+    private Combobox meses;
+    @Wire
     private Combobox formatos;
     @Wire
     private Grid cnvGrid;
@@ -57,7 +62,6 @@ public class CuentasNuevasVendedor extends SelectorComposer<Component> {
     @RequestMapping(value = "/cuentasNuevasVendedor")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         ModelAndView mv = new ModelAndView("reportesTacticos/cuentasNuevasVendedor");
 
         return mv;
@@ -69,9 +73,10 @@ public class CuentasNuevasVendedor extends SelectorComposer<Component> {
         cnvList = indVendedorService.getCuentasNuevas();
         cnvGrid.setModel(new ListModelList<CNVendedor>(cnvList));
         periodo = indVendedorService.getPeriodo().toUpperCase();
-        //if (periodo != null) {
+        //Cargar los años distintos que hay en la base (solo obtiene maximo 5)
+        anios.setModel(new ListModelList<String>(
+                indVendedorService.obtenerAnios()));
             periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
-        //}
     }
 
     @Listen("onClick = #downloadButton")
@@ -110,5 +115,30 @@ public class CuentasNuevasVendedor extends SelectorComposer<Component> {
                     format, report);
             Filedownload.save(report, type);
         }
+    }
+    
+     /**
+     * Carga los meses despues de que el usuario seleccioo un año
+     */
+    @Listen("onSelect = #anios")
+    public void cargarMeses(){
+        String anioSeleccionado = anios.getSelectedItem().getValue();
+        meses.setModel(new ListModelList<Mes>(
+                indVendedorService.obtenerMeses(anioSeleccionado)));
+    }
+    
+    /**
+     * Recargar los datos automaticamente
+     * despues de seleccionar el mes
+     */
+    @Listen("onSelect = #meses")
+    public void recargarModelo() {
+        String anio = anios.getSelectedItem().getValue();
+        Mes mes = (Mes) meses.getSelectedItem().getValue();
+        cnvList = indVendedorService.getCuentasNuevas(anio,
+                mes.getNumero());
+        cnvGrid.setModel(new ListModelList<CNVendedor>(cnvList));
+        periodoSeleccionado.setValue("Período mostrado: ".concat(mes.getMes() + " "
+                + String.valueOf(anio)));
     }
 }

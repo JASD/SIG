@@ -128,13 +128,17 @@ public class CuentasRecuperadasVendedor extends SelectorComposer<Component> {
                 indVendedorService.obtenerMeses(anioSeleccionado)));
     }
     
+    /**
+     * Recargar los datos automaticamente
+     * despues de seleccionar el mes
+     */
     @Listen("onSelect = #meses")
     public void recargarModelo(){
         String anio = anios.getSelectedItem().getValue();
         Mes mes = (Mes) meses.getSelectedItem().getValue();
-        crvGrid.setModel(new ListModelList<CRVendedor>(
-                indVendedorService.seleccionarPeriodo(anio, 
-                mes.getNumero())));
+        crvList = indVendedorService.getCuentasRecuperadas(anio, 
+                mes.getNumero());
+        crvGrid.setModel(new ListModelList<CRVendedor>(crvList));
          periodoSeleccionado.setValue("Período mostrado: ".concat(mes.getMes() + " " 
                  + String.valueOf(anio) ));
     }

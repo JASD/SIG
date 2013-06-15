@@ -68,6 +68,23 @@ public class IndVendedorService {
 
         return dtos;
     }
+    
+    @Transactional(readOnly = true)
+    public List<CRVendedor> getCuentasRecuperadas(String anio, int mes) {
+
+        List<CekIndVendedor> records = indVendedorDAO.findByPeriodo(anio, mes);
+        List<CRVendedor> dtos = new ArrayList<CRVendedor>();
+        for (CekIndVendedor ind : records) {
+            CRVendedor cre = new CRVendedor();
+            cre.setNombreVendedor(ind.getCekVendedor().getVendNombre());
+            cre.setProyectadoVendedor(ind.getIndivProyCrecup().floatValue());
+            cre.setRecuperadoVendedor(ind.getIndivCliRecu().floatValue());
+            cre.setCumplimientoVendedor(ind.getIndivCumplCrecup().floatValue());
+            dtos.add(cre);
+        }
+        return dtos;
+
+    }
 
     /**
      * Obtengo las cuentas nuevas por cada vendedor
@@ -79,6 +96,22 @@ public class IndVendedorService {
         List<CekIndVendedor> records = indVendedorDAO.executeNamedQuery("CekIndVendedor.ultimo");
         List<CNVendedor> dtos = new ArrayList<CNVendedor>();
 
+        for (CekIndVendedor ind : records) {
+            CNVendedor cne = new CNVendedor();
+            cne.setVendedor(ind.getCekVendedor().getVendNombre());
+            cne.setProyectado(ind.getIndivProyCnuevos().floatValue());
+            cne.setCuentasNuevas(ind.getIndivCliNuevos().floatValue());
+            cne.setCumplimiento(ind.getIndivCumpCnuevos().floatValue());
+            dtos.add(cne);
+        }
+        return dtos;
+    }
+    
+    @Transactional(readOnly = true)
+    public List<CNVendedor> getCuentasNuevas(String anio, int mes) {
+
+        List<CekIndVendedor> records = indVendedorDAO.findByPeriodo(anio, mes);
+        List<CNVendedor> dtos = new ArrayList<CNVendedor>();
         for (CekIndVendedor ind : records) {
             CNVendedor cne = new CNVendedor();
             cne.setVendedor(ind.getCekVendedor().getVendNombre());
@@ -180,20 +213,5 @@ public class IndVendedorService {
         return meses;
     }
 
-    @Transactional(readOnly = true)
-    public List<CRVendedor> seleccionarPeriodo(String anio, int mes) {
-
-        List<CekIndVendedor> records = indVendedorDAO.findByPeriodo(anio, mes);
-        List<CRVendedor> dtos = new ArrayList<CRVendedor>();
-        for (CekIndVendedor ind : records) {
-            CRVendedor cre = new CRVendedor();
-            cre.setNombreVendedor(ind.getCekVendedor().getVendNombre());
-            cre.setProyectadoVendedor(ind.getIndivProyCrecup().floatValue());
-            cre.setRecuperadoVendedor(ind.getIndivCliRecu().floatValue());
-            cre.setCumplimientoVendedor(ind.getIndivCumplCrecup().floatValue());
-            dtos.add(cre);
-        }
-        return dtos;
-
-    }
+    
 }
