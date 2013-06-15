@@ -69,7 +69,7 @@ public class CuentasRecuperadasVendedor extends SelectorComposer<Component> {
         crvList = indVendedorService.getCuentasRecuperadas();
         crvGrid.setModel(new ListModelList<CRVendedor>(crvList));
         periodo = indVendedorService.getPeriodo().toUpperCase();
-        //Cargar los años distintos que hay en la base (solo obtiene maximo 5)
+        //Cargar los años distintos que hay en la base (solo obtiene maximo 10)
         anios.setModel(new ListModelList<String>(
                 indVendedorService.obtenerAnios()));
             periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));

@@ -59,12 +59,26 @@ public class IndClasificacionDAO extends AbstractDAO<CekIndClasificacion> {
         return (List<CekIndClasificacion>) sessionFactory.getCurrentSession().getNamedQuery(NamedQuery).list();
     }
 
-    public CekIndClasificacion obtenerPorPeriodoVendedor(CekPeriodo p, CekClasificacion c) {
+    public CekIndClasificacion obtenerPorPeriodoClasificacion(CekPeriodo p, CekClasificacion c) {
         Query q = sessionFactory.getCurrentSession()
                 .getNamedQuery("CekIndClasificacion.findByClasificacionPeriodo");
         q.setParameter("periodo", p);
         q.setParameter("categoria", c);
         return (CekIndClasificacion) q.uniqueResult();
+
+    }
+    
+     /**
+     * Busca los indicadores para un periodo dado
+     * @param anio
+     * @param mes
+     * @return 
+     */
+    public List<CekIndClasificacion> findByPeriodo(String anio, int mes) {
+        Query q = sessionFactory.getCurrentSession().getNamedQuery("CekIndClasificacion.findByPeriodo");
+        q.setInteger("anio", Integer.valueOf(anio));
+        q.setInteger("mes", mes);
+        return (List<CekIndClasificacion>) q.list();
 
     }
 }

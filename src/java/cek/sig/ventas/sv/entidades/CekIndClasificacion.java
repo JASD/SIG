@@ -23,13 +23,15 @@ import javax.persistence.Table;
 @Table(name = "CEK_IND_CLASIFICACION")
 @NamedQueries({
     @NamedQuery(name = "CekIndClasificacion.findAll", query = "SELECT c FROM CekIndClasificacion c"),
-    @NamedQuery(name = "CekIndClasificacion.cuentasRecuperadasUltimo",
+    @NamedQuery(name = "CekIndClasificacion.ultimo",
             query = "SELECT c "
             + "FROM CekIndClasificacion c "
             + "WHERE c.cekIndClasificacionPK.idPeriodo = (SELECT MAX(p.idPeriodo) FROM CekPeriodo p)"),
 @NamedQuery(name = "CekIndClasificacion.findByClasificacionPeriodo", query = "SELECT c "
         + "FROM CekIndClasificacion c "
-        + "WHERE c.cekPeriodo = :periodo AND c.cekClasificacion = :categoria")})
+        + "WHERE c.cekPeriodo = :periodo AND c.cekClasificacion = :categoria"),
+@NamedQuery(name = "CekIndClasificacion.findByPeriodo", query = "SELECT c "
+        + "FROM CekIndClasificacion c WHERE c.cekPeriodo.periAnio = :anio AND c.cekPeriodo.periMes = :mes")})
 public class CekIndClasificacion implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -70,7 +70,7 @@ public class VentasVsPresupuestoCategoria extends SelectorComposer<Component> {
     @Override
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
-        vcpList = indClasificacionService.getCuentasRecuperadas();
+        //vcpList = indClasificacionService.getCuentasRecuperadas();
         vpcGrid.setModel(new ListModelList<VPPTOCategoria>(vcpList));
         periodo = indClasificacionService.getPeriodo().toUpperCase();
         if (periodo != null) {
