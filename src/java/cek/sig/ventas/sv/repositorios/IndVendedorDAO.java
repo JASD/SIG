@@ -5,6 +5,8 @@
 package cek.sig.ventas.sv.repositorios;
 
 import cek.sig.ventas.sv.entidades.CekIndVendedor;
+import cek.sig.ventas.sv.entidades.CekPeriodo;
+import cek.sig.ventas.sv.entidades.CekVendedor;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -69,5 +71,14 @@ public class IndVendedorDAO extends AbstractDAO<CekIndVendedor> {
         q.setInteger("mes", mes);
         return (List<CekIndVendedor>) q.list();
 
+    }
+    
+    public CekIndVendedor obtenerPorPeriodoVendedor(CekPeriodo p, CekVendedor v){
+        Query q = sessionFactory.getCurrentSession()
+                .getNamedQuery("CekIndVendedor.findByVendedorPeriodo");
+        q.setParameter("periodo", p);
+        q.setParameter("vendedor", v);
+        return (CekIndVendedor)q.uniqueResult();
+        
     }
 }

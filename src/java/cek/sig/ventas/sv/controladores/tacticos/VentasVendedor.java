@@ -42,45 +42,65 @@ public class VentasVendedor extends SelectorComposer<Component> {
 
     private static final String JASPER_PATH = "/WEB-INF/jaspers/venta-por-vendedor.jasper";
     @Wire
-    private Combobox periodos;
-    @Wire
     private Combobox formatos;
     @Wire
     private Grid vvGrid;
     @Wire
-    private Label periodoSeleccionado;
+    private Label mes1;
+    @Wire
+    private Label mes2;
+    @Wire
+    private Label mes3;
+    @Wire
+    private Label mes4;
+    @Wire
+    private Label mes5;
+    @Wire
+    private Label mes6;
     @WireVariable
     private IndVendedorService indVendedorService;
     private List<VVendedor> vvList;
-    private String periodo;
-    private String mesLabel1="enero";
-    private String mesLabel2="enero";
-    private String mesLabel3="enero";
-    private String mesLabel4="enero";
-    private String mesLabel5="enero";
-    private String mesLabel6="enero";
 
     @RequestMapping(value = "/ventasVendedor")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        //logger.info("Returning hello view");
-        //PurchaseData pd = new PurchaseData();
         ModelAndView mv = new ModelAndView("reportesTacticos/ventasVendedor");
-        //mv.addObject("purchases", pd.getAllPurchases());
-
         return mv;
     }
 
     @Override
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
-        //vvList = indVendedorService.getVentasVendedor();
-        vvGrid.setModel(new ListModelList<VVendedor>(vvList));
-        periodo = indVendedorService.getPeriodo().toUpperCase();
-        if (periodo != null) {
-            periodoSeleccionado.setValue("Período mostrado: ".concat(periodo.toUpperCase()));
+        //Obtengo los encabezados para la tabla
+        //Aqui ya deja guardada la lista de los ultimos periodos en el service
+        List<String> periodos = indVendedorService.getUltimos6Periodos();
+        int contador = 1;
+        for (String p : periodos) {
+            if (contador == 1) {
+                mes1.setValue(p);
+            }
+            if (contador == 2) {
+                mes2.setValue(p);
+            }
+            if (contador == 3) {
+                mes3.setValue(p);
+            }
+            if (contador == 4) {
+                mes4.setValue(p);
+            }
+            if (contador == 5) {
+                mes5.setValue(p);
+            }
+            if (contador == 6) {
+                mes6.setValue(p);
+            }
+            contador++;
         }
+
+        //Se llena la tabla
+        vvList = indVendedorService.getVentas();
+        vvGrid.setModel(new ListModelList<VVendedor>(vvList));
+
     }
 
     @Listen("onClick = #downloadButton")
@@ -93,7 +113,7 @@ public class VentasVendedor extends SelectorComposer<Component> {
             HttpServletRequest request = (HttpServletRequest) exec.getNativeRequest();
             String realPath = request.getServletContext().getRealPath(JASPER_PATH);
             HashMap<String, Object> params = new HashMap<String, Object>();
-            params.put("periodo", periodo);
+            //params.put("periodo", periodo);
             String format;
             String type;
             switch (formatos.getSelectedIndex()) {

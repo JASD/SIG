@@ -1,40 +1,60 @@
-<zk>
-            <window title="Search" width="600px" border="normal"
-                      apply="cek.sig.ventas.sv.controller.SearchController">
-                <hbox align="center">
-                    Keyword:
-                    <textbox id="keywordBox" />
-                    <button id="searchButton" label="Search" image="/widgets/getting_started/img/search.png" />
-                </hbox>
-                <listbox id="carListbox" emptyMessage="No car found in the result" height="160px" style="margin-top:10px">
-                    <listhead>
-                        <listheader label="Model" />
-                        <listheader label="Make" />
-                        <listheader label="Price" width="20%"/>
-                    </listhead>
-                    <template name="model">
-                        <listitem>
-                            <listcell label="${each.model}"></listcell>
-                            <listcell label="${each.make}"></listcell>
-                            <listcell>$<label value="${each.price}" /></listcell>
-                        </listitem>
-                    </template>
-                </listbox>
-                <hbox style="margin-top:20px" id="detailBox" visible="false">
-                    <image id="previewImage" style="padding:10px" />
-                    <vbox>
-                        <hlayout>
-                            Model : <label id="modelLabel" style="font-weight:bold"/>
-                        </hlayout>
-                        <hlayout>
-                            Make : <label id="makeLabel" style="font-weight:bold"/>
-                        </hlayout>
-                        <hlayout>
-                            Price : 
-                            <span>$<label id="priceLabel" style="font-weight:bold"/></span>
-                        </hlayout>
-                        <label id="descriptionLabel" />
-                    </vbox>
-                </hbox>
-            </window>
-        </zk>
+<?page id="crv" title="Indice de Penetración por Vendedor"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
+<window self="@{define(left)}" title='Indice de Penetración por Vendedor'
+        apply="cek.sig.ventas.sv.controladores.estrategicos.IndicePenetracionVendedor">
+  
+   
+    <combobox id="formatos" readonly="true" autodrop="true"
+              style="margin:20px 20px 10px 10px;float:right">
+        <comboitem label="Archivo de Excel"/>
+        <comboitem label="Archivo de Word"/>
+        <comboitem label="Archivo PDF"/>
+    </combobox>
+    <label style="margin:20px 20px 10px 10px;clear:left;float:right"
+           value="Tipo de reporte: "/>
+    <panel>
+        <panelchildren>
+            <grid id="indPen"  mold="paging" pageSize="10" 
+                  emptyMessage="Información no disponible"
+                  style="clear:right;float:left; margin:10px">
+                
+                <auxhead>
+                    <auxheader style="text-align:center"
+                               colspan="4" label="Reporte de Indice de Penetración por Vendedor"/>
+                </auxhead>
+                <columns sizable="true">
+                    <column hflex="40" label="Nombre Vendedor" sort="auto(nombreVendedor)" />
+                    <column hflex="20" align="right">
+                        <label id="mes1" value="-" style="font-weight:bold"/>
+                    </column>
+                    <column hflex="20" align="right">
+                        <label id="mes2" value="-" style="font-weight:bold"/>
+                    </column>
+                    <column hflex="20" align="right">
+                        <label id="mes3" value="-" style="font-weight:bold"/>
+                    </column>
+                    <column hflex="20" align="right">
+                        <label id="mes4" value="-" style="font-weight:bold"/>
+                    </column>
+                    <column hflex="20" align="right">
+                        <label id="mes5" value="-" style="font-weight:bold"/>
+                    </column>
+                    <column hflex="20" align="right">
+                        <label id="mes6" value="-" style="font-weight:bold"/>
+                    </column>
+                </columns>
+                <template name="model">
+                    <row>
+                        <label value="${each.vendedor}"/>
+                        <label value="${each.mes1}"/>
+                        <label value="${each.mes2}"/>
+                        <label value="${each.mes3}"/>
+                        <label value="${each.mes4}"/>
+                        <label value="${each.mes5}"/>
+                        <label value="${each.mes6}"/>
+                    </row>
+                </template>
+            </grid>
+        </panelchildren>
+    </panel>
+</window>

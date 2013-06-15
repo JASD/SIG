@@ -57,6 +57,11 @@ public class PeriodoDAO extends AbstractDAO<CekPeriodo> {
         return (List<CekPeriodo>) sessionFactory.getCurrentSession().getNamedQuery(NamedQuery).list();
     }
     
+    public List<CekPeriodo> obtenerUltimos6Meses() {
+        Query q = sessionFactory.getCurrentSession().getNamedQuery("CekPeriodos.periodosDesc");
+        q.setMaxResults(6);
+        return q.list();
+    }
     
     public CekPeriodo obtenerUltimo(){
         return (CekPeriodo) sessionFactory.getCurrentSession()

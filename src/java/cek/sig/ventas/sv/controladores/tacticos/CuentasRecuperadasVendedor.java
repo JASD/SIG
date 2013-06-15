@@ -7,7 +7,7 @@ package cek.sig.ventas.sv.controladores.tacticos;
 import cek.sig.ventas.sv.entidades.reportes.CRVendedor;
 import cek.sig.ventas.sv.servicios.IndVendedorService;
 import cek.sig.ventas.sv.controladores.util.JasperExporter;
-import cek.sig.ventas.sv.entidades.reportes.Mes;
+import cek.sig.ventas.sv.controladores.util.Mes;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -91,6 +91,7 @@ public class CuentasRecuperadasVendedor extends SelectorComposer<Component> {
             String realPath = request.getServletContext().getRealPath(JASPER_PATH);
             HashMap<String, Object> params = new HashMap<String, Object>();
             params.put("periodo", periodo);
+            params.put("mostrar", Boolean.valueOf(false));
             String format;
             String type;
             switch (formatos.getSelectedIndex()) {

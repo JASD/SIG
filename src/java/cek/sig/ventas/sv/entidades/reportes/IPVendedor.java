@@ -10,7 +10,7 @@ import java.io.Serializable;
  *
  * @author Antonio
  */
-public class VVendedor implements Serializable {
+public class IPVendedor implements Serializable {
 
     private String vendedor;
     private Float mes1;
@@ -20,8 +20,7 @@ public class VVendedor implements Serializable {
     private Float mes5;
     private Float mes6;
 
-    public VVendedor() {
-
+    public IPVendedor() {
         this.mes1 = Float.valueOf(0);
         this.mes2 = Float.valueOf(0);
         this.mes3 = Float.valueOf(0);
@@ -29,8 +28,6 @@ public class VVendedor implements Serializable {
         this.mes5 = Float.valueOf(0);
         this.mes6 = Float.valueOf(0);
     }
-
-    
 
     public String getVendedor() {
         return vendedor;

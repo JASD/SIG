@@ -30,7 +30,9 @@ import javax.persistence.Table;
 @NamedQuery(name = "CekIndVendedor.findByPeriodo",
             query = "SELECT c "
             + "FROM CekIndVendedor c "
-            + "WHERE c.cekPeriodo.periAnio = :anio AND c.cekPeriodo.periMes = :mes")})
+            + "WHERE c.cekPeriodo.periAnio = :anio AND c.cekPeriodo.periMes = :mes"),
+@NamedQuery(name = "CekIndVendedor.findByVendedorPeriodo", query = "SELECT c "
+        + "FROM CekIndVendedor c WHERE c.cekPeriodo = :periodo AND c.cekVendedor = :vendedor")})
 public class CekIndVendedor implements Serializable {
 
     private static final long serialVersionUID = 1L;

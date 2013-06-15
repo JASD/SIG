@@ -4,6 +4,7 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="periodo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="mostrar" class="java.lang.Boolean" isForPrompting="false"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -22,6 +23,7 @@
 	</variable>
 	<title>
 		<band height="46" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{mostrar}]]></printWhenExpression>
 			<staticText>
 				<reportElement uuid="9fdea9f1-6abc-41de-98fd-1284058b42c9" x="188" y="0" width="370" height="26"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -100,6 +102,7 @@
 	</detail>
 	<pageFooter>
 		<band height="20" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{mostrar}]]></printWhenExpression>
 			<textField evaluationTime="Report">
 				<reportElement uuid="8f72116a-3c10-4498-9aa4-06cec330549e" x="704" y="0" width="46" height="20"/>
 				<textElement/>

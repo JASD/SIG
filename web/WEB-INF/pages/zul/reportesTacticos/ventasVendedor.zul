@@ -23,13 +23,25 @@
                        colspan="4" label="Reporte de ventas por vendedor"/>
         </auxhead>
         <columns>
-            <column hflex="20" label="Vendedor" sort="auto(vendedor)"/>
-            <column hflex="6" label="mesLabel1" sort="auto(mes1)"/>
-            <column hflex="6" label="mesLabel2" sort="auto(mes2)"/>
-            <column hflex="6" label="mesLabel3" sort="auto(mes3)"/>
-            <column hflex="6" label="mesLabel4" sort="auto(mes4)"/>
-            <column hflex="6" label="mesLabel5" sort="auto(mes5)"/>
-            <column hflex="6" label="mesLabel6" sort="auto(mes6)"/>
+            <column hflex="40" label="Nombre Vendedor" sort="auto(nombreVendedor)" />
+            <column hflex="20" align="right">
+                <label id="mes1" value="-" style="font-weight:bold"/>
+            </column>
+            <column hflex="20" align="right">
+                <label id="mes2" value="-" style="font-weight:bold"/>
+            </column>
+            <column hflex="20" align="right">
+                <label id="mes3" value="-" style="font-weight:bold"/>
+            </column>
+            <column hflex="20" align="right">
+                <label id="mes4" value="-" style="font-weight:bold"/>
+            </column>
+            <column hflex="20" align="right">
+                <label id="mes5" value="-" style="font-weight:bold"/>
+            </column>
+            <column hflex="20" align="right">
+                <label id="mes6" value="-" style="font-weight:bold"/>
+            </column>
         </columns>
         <template name="model">
             <row>

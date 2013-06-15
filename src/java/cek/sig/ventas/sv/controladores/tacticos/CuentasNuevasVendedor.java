@@ -6,7 +6,7 @@ package cek.sig.ventas.sv.controladores.tacticos;
 
 import cek.sig.ventas.sv.controladores.util.JasperExporter;
 import cek.sig.ventas.sv.entidades.reportes.CNVendedor;
-import cek.sig.ventas.sv.entidades.reportes.Mes;
+import cek.sig.ventas.sv.controladores.util.Mes;
 import cek.sig.ventas.sv.servicios.IndVendedorService;
 import java.io.File;
 import java.io.IOException;

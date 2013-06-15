@@ -8,7 +8,11 @@ import cek.sig.ventas.sv.entidades.reportes.CRVendedor;
 import cek.sig.ventas.sv.entidades.CekIndVendedor;
 import cek.sig.ventas.sv.entidades.CekPeriodo;
 import cek.sig.ventas.sv.entidades.reportes.CNVendedor;
-import cek.sig.ventas.sv.entidades.reportes.Mes;
+import cek.sig.ventas.sv.controladores.util.Mes;
+import cek.sig.ventas.sv.entidades.CekVendedor;
+import cek.sig.ventas.sv.entidades.reportes.IPVendedor;
+import cek.sig.ventas.sv.entidades.reportes.VVendedor;
+import cek.sig.ventas.sv.repositorios.CekVendedorDAO;
 import cek.sig.ventas.sv.repositorios.IndVendedorDAO;
 import cek.sig.ventas.sv.repositorios.PeriodoDAO;
 import java.text.SimpleDateFormat;
@@ -32,13 +36,13 @@ public class IndVendedorService {
 
     @Autowired
     private IndVendedorDAO indVendedorDAO;
-    //private CekVendedorDAO vendedorDAO;
-    //private List<CekIndVendedor> records; //= new ArrayList<CekIndVendedor>();
+    @Autowired
+    private CekVendedorDAO vendedorDAO;
     @Autowired
     private PeriodoDAO periodoDAO;
+    private List<CekPeriodo> ultimos6;
 
     /**
-     * Método que abre conexión a la base de datos y ejecuta el query para
      * encontrar las cuentas recuperadas del ultimo periodo que existe en la
      * base de datos
      *
@@ -68,7 +72,7 @@ public class IndVendedorService {
 
         return dtos;
     }
-    
+
     @Transactional(readOnly = true)
     public List<CRVendedor> getCuentasRecuperadas(String anio, int mes) {
 
@@ -87,7 +91,7 @@ public class IndVendedorService {
     }
 
     /**
-     * Obtengo las cuentas nuevas por cada vendedor
+     * Obtengo las cuentas nuevas por cada vendedor para el ultimo mes
      *
      * @return
      */
@@ -106,7 +110,14 @@ public class IndVendedorService {
         }
         return dtos;
     }
-    
+
+    /**
+     * Obtengo las cuentas nuevas para un periodo seleccionado
+     *
+     * @param anio
+     * @param mes
+     * @return
+     */
     @Transactional(readOnly = true)
     public List<CNVendedor> getCuentasNuevas(String anio, int mes) {
 
@@ -124,58 +135,169 @@ public class IndVendedorService {
     }
 
     /**
+     * Obtengo el indice de penetracion para los ultimos 6 meses
      *
      * @return
      */
-    /*
-     public List<VVendedor> getVentasVendedor() {
-     List<VVendedor> dtos = new ArrayList<VVendedor>();
-     try {
-     //obtener todos los vendedores
-     List<CekVendedor> vendedores = vendedorDAO.findAll();
-     //Obtener todos los períodos en orden descendente
-     List<CekPeriodo> periodosDesc = periodoDAO.executeNamedQuery("CekPeriodos.periodosDesc");
+    @Transactional(readOnly = true)
+    public List<IPVendedor> getIndicePenetracion() {
 
-     // Analizar vendedores
-     for (CekVendedor vendedorActual : vendedores) {
-     //variable para enviar los reportes al jasper
-     VVendedor entityReporteVendedor = new VVendedor();
+        //Buscar todos los vendedores
+        List<CekVendedor> vendedores = vendedorDAO
+                .executeNamedQuery("CekVendedor.findAll");
 
-     //establece el nombre del vendedor actual
-     entityReporteVendedor.setVendedor(vendedorActual.getVendNombre());
-     //obtiene la lista de las actividades del vendedor
-     List<CekIndVendedor> indVendedorActual = vendedorActual.getCekIndVendedorList();
+        //Instancerar la nueva lista
+        List<IPVendedor> indicesPenetracion = new ArrayList<IPVendedor>();
 
-     //almacena las posiciones de los indices en los que se encuentra un período especifico
-     int indicePeriodo[] = new int[6];
+        // Y Por cada vendedor
+        for (CekVendedor v : vendedores) {
 
-     //busca los indices en los que se encuentran los períodos del mayor al menor, sino lo encuentra devuelve -1
-     for (int x = 0; x < 6; x++) {
-     indicePeriodo[x] = periodosDesc.size() > x ? vendedorActual.getCekIndVendedorList().indexOf(periodosDesc.get(x)) : -1;
-     }
+            IPVendedor ipv = null;
+            int contador = 1;
+            boolean entro = false;
 
-     //establece los valores de las ventas netas para cada mes. si no se encontró valor en el período,
-     //asigna cero a ese mes
-     entityReporteVendedor.setMes1(indicePeriodo[0] > 0 ? indVendedorActual.get(indicePeriodo[0]).getIndivVentaNeta().floatValue() : 0);
-     entityReporteVendedor.setMes2(indicePeriodo[1] > 0 ? indVendedorActual.get(indicePeriodo[1]).getIndivVentaNeta().floatValue() : 0);
-     entityReporteVendedor.setMes3(indicePeriodo[2] > 0 ? indVendedorActual.get(indicePeriodo[2]).getIndivVentaNeta().floatValue() : 0);
-     entityReporteVendedor.setMes4(indicePeriodo[3] > 0 ? indVendedorActual.get(indicePeriodo[3]).getIndivVentaNeta().floatValue() : 0);
-     entityReporteVendedor.setMes5(indicePeriodo[4] > 0 ? indVendedorActual.get(indicePeriodo[4]).getIndivVentaNeta().floatValue() : 0);
-     entityReporteVendedor.setMes6(indicePeriodo[5] > 0 ? indVendedorActual.get(indicePeriodo[5]).getIndivVentaNeta().floatValue() : 0);
+            //Para los ultimos 6 meses
+            for (CekPeriodo p : ultimos6) {
+                //consultar si tiene indices para ese periodo
+                CekIndVendedor indv = indVendedorDAO.obtenerPorPeriodoVendedor(p, v);
+                if (indv != null) {
+                    //si tiene
+                    if (!entro) {
+                        //si ya entro antes no se vuelve a crear instancia
+                        //ni se pone de nuevo el nombre
+                        ipv = new IPVendedor();
+                        ipv.setVendedor(indv.getCekVendedor().getVendNombre());
+                        entro = true;
+                    }
 
-     //agrega el registro a la lista para tabular
-     dtos.add(entityReporteVendedor);
-     }
-     } catch (Exception e) {
-     System.out.print("ERROR");
-     System.out.print(e.getStackTrace());
-     }
-     return dtos;
-     }*/
+                    if (contador == 1 && entro) {
+                        //Es el primer mes
+                        ipv.setMes1(indv.getIndivPenetracion().floatValue());
+                    }
+                    if (contador == 2 && entro) {
+                        //Es el segundo mes
+                        ipv.setMes2(indv.getIndivPenetracion().floatValue());
+                    }
+                    if (contador == 3 && entro) {
+                        //Es el tercer mes
+                        ipv.setMes3(indv.getIndivPenetracion().floatValue());
+                    }
+                    if (contador == 4 && entro) {
+                        //Es el cuarto mes
+                        ipv.setMes4(indv.getIndivPenetracion().floatValue());
+                    }
+                    if (contador == 5 && entro) {
+                        //Es el quinto mes mes
+                        ipv.setMes5(indv.getIndivPenetracion().floatValue());
+                    }
+                    if (contador == 6 && entro) {
+                        //Es el sexto mes
+                        ipv.setMes6(indv.getIndivPenetracion().floatValue());
+                    }
+                }
+                contador++;
+            }
+            if (entro) {
+                //agregar a la lista
+                indicesPenetracion.add(ipv);
+            }
+        }
+        return indicesPenetracion;
+
+    }
+
+    /**
+     * Obtengo las ventas para los ultimos 6 meses
+     *
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public List<VVendedor> getVentas() {
+        
+        //Buscar todos los vendedores
+        List<CekVendedor> vendedores = vendedorDAO
+                .executeNamedQuery("CekVendedor.findAll");
+
+        //Instancerar la nueva lista
+        List<VVendedor> ventas = new ArrayList<VVendedor>();
+
+        // Y Por cada vendedor
+        for (CekVendedor v : vendedores) {
+
+            VVendedor vvendedor = null;
+            int contador = 1;
+            boolean entro = false;
+
+            //Para los ultimos 6 meses
+            for (CekPeriodo p : ultimos6) {
+                
+                //consultar si tiene indices para ese periodo
+                CekIndVendedor indv = indVendedorDAO.obtenerPorPeriodoVendedor(p, v);
+                if (indv != null) {
+                    //si tiene
+                    if (!entro) {
+                        //si ya entro antes no se vuelve a crear instancia
+                        //ni se pone de nuevo el nombre
+                        vvendedor = new VVendedor();
+                        vvendedor.setVendedor(indv.getCekVendedor().getVendNombre());
+                        entro = true;
+                    }
+
+                    if (contador == 1 && entro) {
+                        //Es el primer mes
+                        vvendedor.setMes1(indv.getIndivVentaNeta().floatValue());
+                    }
+                    if (contador == 2 && entro) {
+                        //Es el segundo mes
+                        vvendedor.setMes2(indv.getIndivVentaNeta().floatValue());
+                    }
+                    if (contador == 3 && entro) {
+                        //Es el tercer mes
+                        vvendedor.setMes3(indv.getIndivVentaNeta().floatValue());
+                    }
+                    if (contador == 4 && entro) {
+                        //Es el cuarto mes
+                        vvendedor.setMes4(indv.getIndivVentaNeta().floatValue());
+                    }
+                    if (contador == 5 && entro) {
+                        //Es el quinto mes mes
+                        vvendedor.setMes5(indv.getIndivVentaNeta().floatValue());
+                    }
+                    if (contador == 6 && entro) {
+                        //Es el sexto mes
+                        vvendedor.setMes6(indv.getIndivVentaNeta().floatValue());
+                    }
+                }
+                contador++;
+            }
+            if (entro) {
+                //agregar a la lista
+                ventas.add(vvendedor);
+            }
+        }
+        return ventas;
+
+    }
     //Aqui empiezan los metodos que compartirian todos los services
+    
+    /**
+     * Se obtienen los ultimos 6 periodos
+     * @return 
+     */
+    @Transactional(readOnly = true)
+    public List<String> getUltimos6Periodos() {
+        ultimos6 = periodoDAO.obtenerUltimos6Meses();
+        List<String> periodosGrid = new ArrayList<String>();
+        for (CekPeriodo p : ultimos6) {
+            String periodo = Auxiliares.getMes(p.getPeriMes()).toUpperCase()
+                    .concat(" "+ String.valueOf(p.getPeriAnio()));
+            periodosGrid.add(periodo);
+        }
+        return periodosGrid;
+    }
+
     @Transactional(readOnly = true)
     public String getPeriodo() {
-        //if (!records.isEmpty()) {
         CekPeriodo periodo = (CekPeriodo) periodoDAO.obtenerUltimo();
         Calendar c = new GregorianCalendar();
         c.set(GregorianCalendar.MONTH, periodo.getPeriMes() - 1);
@@ -183,10 +305,13 @@ public class IndVendedorService {
         c.set(GregorianCalendar.DAY_OF_MONTH, 1);
         SimpleDateFormat bartDateFormat = new SimpleDateFormat("MMMM yyyy");
         return bartDateFormat.format(c.getTime());
-        //}
-        //return "";
     }
 
+    /**
+     * Obtiene los años que se pueden elegir en el combobox
+     *
+     * @return
+     */
     @Transactional(readOnly = true)
     public List<String> obtenerAnios() {
 
@@ -200,6 +325,12 @@ public class IndVendedorService {
 
     }
 
+    /**
+     * Obtiene los meses que esten registrados dado un año seleccionado
+     *
+     * @param anio
+     * @return
+     */
     @Transactional(readOnly = true)
     public List<Mes> obtenerMeses(String anio) {
 
@@ -213,5 +344,4 @@ public class IndVendedorService {
         return meses;
     }
 
-    
 }

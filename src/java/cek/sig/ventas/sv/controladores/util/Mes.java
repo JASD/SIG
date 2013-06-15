@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cek.sig.ventas.sv.entidades.reportes;
+package cek.sig.ventas.sv.controladores.util;
 
 import java.io.Serializable;
 
