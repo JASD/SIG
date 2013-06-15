@@ -9,7 +9,6 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -45,13 +44,13 @@ public class CekIndClasificacionDAO extends AbstractDAO<CekIndClasificacion> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Transactional(readOnly = true)
+    //@Transactional(readOnly = true)
     @Override
     public List<CekIndClasificacion> findAll() {
         return (List<CekIndClasificacion>) sessionFactory.getCurrentSession().getNamedQuery("CekIndClasificacion.findAll").list();
     }
 
-    @Transactional(readOnly = true)
+    //@Transactional(readOnly = true)
     @Override
     public List<CekIndClasificacion> executeNamedQuery(String NamedQuery) {
         return (List<CekIndClasificacion>) sessionFactory.getCurrentSession().getNamedQuery(NamedQuery).list();

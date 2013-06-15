@@ -16,9 +16,6 @@ public class VPPTOCategoria implements Serializable {
     private Float ventas;
     private Float presupuesto;
     private Float variacion;
-    private Float ventasAcum;
-    private Float presupuestoAcum;
-    private Float variacionAcum;
 
     public String getCategoria() {
         return categoria;
@@ -50,29 +47,5 @@ public class VPPTOCategoria implements Serializable {
 
     public void setVariacion(Float variacion) {
         this.variacion = variacion;
-    }
-
-    public Float getVentasAcum() {
-        return ventasAcum;
-    }
-
-    public void setVentasAcum(Float ventasAcum) {
-        this.ventasAcum = ventasAcum;
-    }
-
-    public Float getPresupuestoAcum() {
-        return presupuestoAcum;
-    }
-
-    public void setPresupuestoAcum(Float presupuestoAcum) {
-        this.presupuestoAcum = presupuestoAcum;
-    }
-
-    public Float getVariacionAcum() {
-        return variacionAcum;
-    }
-
-    public void setVariacionAcum(Float variacionAcum) {
-        this.variacionAcum = variacionAcum;
     }
 }

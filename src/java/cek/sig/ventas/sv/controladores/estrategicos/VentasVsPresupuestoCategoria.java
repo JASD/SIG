@@ -6,9 +6,7 @@ package cek.sig.ventas.sv.controladores.estrategicos;
 
 import cek.sig.ventas.sv.controladores.util.JasperExporter;
 import cek.sig.ventas.sv.entidades.reportes.VPPTOCategoria;
-import cek.sig.ventas.sv.repositorios.CekIndClasificacionDAO;
 import cek.sig.ventas.sv.servicios.IndClasificacionService;
-import cek.sig.ventas.sv.servicios.IndVendedorService;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -49,7 +47,7 @@ public class VentasVsPresupuestoCategoria extends SelectorComposer<Component> {
     @Wire
     private Combobox formatos;
     @Wire
-    private Grid vcpGrid;
+    private Grid vpcGrid;
     @Wire
     private Label periodoSeleccionado;
     @WireVariable
@@ -73,7 +71,7 @@ public class VentasVsPresupuestoCategoria extends SelectorComposer<Component> {
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
         vcpList = indClasificacionService.getCuentasRecuperadas();
-        vcpGrid.setModel(new ListModelList<VPPTOCategoria>(vcpList));
+        vpcGrid.setModel(new ListModelList<VPPTOCategoria>(vcpList));
         periodo = indClasificacionService.getPeriodo().toUpperCase();
         if (periodo != null) {
             periodoSeleccionado.setValue("Período mostrado: ".concat(periodo.toUpperCase()));

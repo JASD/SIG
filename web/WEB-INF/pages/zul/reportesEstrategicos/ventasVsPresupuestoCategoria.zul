@@ -34,7 +34,7 @@
 
         <auxhead>
             <auxheader style="text-align:center" 
-                       colspan="10"  label="VENTAS CONTRA PRESUPUESTO"/>
+                       colspan="10"  label="VENTAS CONTRA PRESUPUESTO "/>
         </auxhead>                     
 
         <columns>
@@ -42,19 +42,13 @@
             <column hflex="6" label="ventas" sort="auto(ventas)"/>
             <column hflex="6" label="Presupuesto" sort="auto(presupuesto)"/>
             <column hflex="4" label="Variacion %" sort="auto(variacion)"/>
-            <column hflex="6" label="Ventas Acumuladas" sort="auto(ventasAcum)"/>
-            <column hflex="6" label="Presupuesto Acumulado" sort="auto(presupuestoAcum)"/>
-            <column hflex="4" label="Variacion Acumulada %" sort="auto(variacionAcum)"/>
         </columns>
         <template name="model">
             <row>
                 <label value="${each.categoria}" />
                 <label value="${each.ventas}" />
                 <label value="${each.presupuesto}" />
-                <label value="${each.variacion}" />
-                <label value="${each.ventasAcum}" />
-                <label value="${each.presupuestoAcum}" />
-                <label value="${each.variacionAcum}" />                                          
+                <label value="${each.variacion}" />                                       
             </row>
         </template>
     </grid>

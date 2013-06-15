@@ -52,11 +52,6 @@
         <description>ZK listener for cleanup when a session is destroyed</description>
         <listener-class>org.zkoss.zk.ui.http.HttpSessionListener</listener-class>
     </listener>
-    <listener>
-        <description>ZK JSP Tags environment initiation </description>
-        <display-name>ZK JSP Initiator</display-name>
-        <listener-class>org.zkoss.jsp.spec.JspFactoryContextListener</listener-class>
-    </listener>
     <servlet>
         <servlet-name>zkLoader</servlet-name>
         <servlet-class>
