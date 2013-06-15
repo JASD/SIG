@@ -4,8 +4,11 @@
  */
 package cek.sig.ventas.sv.repositorios;
 
+import cek.sig.ventas.sv.entidades.CekClasificacion;
 import cek.sig.ventas.sv.entidades.CekIndClasificacion;
+import cek.sig.ventas.sv.entidades.CekPeriodo;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -54,5 +57,14 @@ public class IndClasificacionDAO extends AbstractDAO<CekIndClasificacion> {
     @Override
     public List<CekIndClasificacion> executeNamedQuery(String NamedQuery) {
         return (List<CekIndClasificacion>) sessionFactory.getCurrentSession().getNamedQuery(NamedQuery).list();
+    }
+
+    public CekIndClasificacion obtenerPorPeriodoVendedor(CekPeriodo p, CekClasificacion c) {
+        Query q = sessionFactory.getCurrentSession()
+                .getNamedQuery("CekIndClasificacion.findByClasificacionPeriodo");
+        q.setParameter("periodo", p);
+        q.setParameter("categoria", c);
+        return (CekIndClasificacion) q.uniqueResult();
+
     }
 }

@@ -1,27 +1,57 @@
-<zk>
-            <grid>
-                    <auxhead>
-                        <auxheader colspan="4" label="Reporte de ventas por categoría" style="text-align:center" />
-                    </auxhead>
-
-                    <columns>
-                        <column hflex="20">categoría</column>
-                        <column hflex="6">mes 1</column>
-                        <column hflex="6">mes 2</column>
-                        <column hflex="6">mes 4</column>
-                        <column hflex="6">mes 5</column>
-                        <column hflex="6">mes 6</column>
-                    </columns>
-                    
-                    <rows>
-                        <row>
-                            <label value="Limpieza" />
-                            <label value="$91123.10" />
-                            <label value="$29120.01" />
-                            <label value="$20849.97" />
-                            <label value="$91123.10" />
-                            <label value="$29120.01" />
-                        </row>                    
-                    </rows>
-                </grid>
-        </zk>
+<?page id="ipv" title="Ventas por Categoría" contentType="text/html" pageEncoding="UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
+<window self="@{define(left)}" title='Ventas por Categoría'
+        apply="cek.sig.ventas.sv.controladores.tacticos.VentasCategoria">
+    <button style="margin:20px 20px 10px 10px;float:right" id="downloadButton"
+            label="Generar Reporte"/>
+    <combobox id="formatos" readonly="true" autodrop="true"
+              style="margin:20px 20px 10px 10px;float:right">
+        <comboitem label="Archivo de Excel"/>
+        <comboitem label="Archivo de Word"/>
+        <comboitem label="Archivo PDF"/>
+    </combobox>
+    <label style="margin:20px 20px 10px 10px;clear:left;float:right"
+           value="Tipo de reporte: "/>
+    
+    <grid id="vc"  mold="paging" pageSize="10" 
+          emptyMessage="Información no disponible"
+          style="clear:right;float:left; margin:10px">
+                
+        <auxhead>
+            <auxheader style="text-align:center"
+                       colspan="7" label="Ventas por Categoría"/>
+        </auxhead>
+        <columns sizable="true">
+            <column hflex="40" label="Categoría" sort="auto(categoria)" />
+            <column hflex="20" align="right">
+                <label id="mes1" value="-" style="font-weight:bold"/>
+            </column>
+            <column hflex="20" align="right">
+                <label id="mes2" value="-" style="font-weight:bold"/>
+            </column>
+            <column hflex="20" align="right">
+                <label id="mes3" value="-" style="font-weight:bold"/>
+            </column>
+            <column hflex="20" align="right">
+                <label id="mes4" value="-" style="font-weight:bold"/>
+            </column>
+            <column hflex="20" align="right">
+                <label id="mes5" value="-" style="font-weight:bold"/>
+            </column>
+            <column hflex="20" align="right">
+                <label id="mes6" value="-" style="font-weight:bold"/>
+            </column>
+        </columns>
+        <template name="model">
+            <row>
+                <label value="${each.categoria}"/>
+                <label value="${each.mes1}"/>
+                <label value="${each.mes2}"/>
+                <label value="${each.mes3}"/>
+                <label value="${each.mes4}"/>
+                <label value="${each.mes5}"/>
+                <label value="${each.mes6}"/>
+            </row>
+        </template>
+    </grid>
+</window>

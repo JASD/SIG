@@ -26,7 +26,10 @@ import javax.persistence.Table;
     @NamedQuery(name = "CekIndClasificacion.cuentasRecuperadasUltimo",
             query = "SELECT c "
             + "FROM CekIndClasificacion c "
-            + "WHERE c.cekIndClasificacionPK.idPeriodo = (SELECT MAX(p.idPeriodo) FROM CekPeriodo p)")})
+            + "WHERE c.cekIndClasificacionPK.idPeriodo = (SELECT MAX(p.idPeriodo) FROM CekPeriodo p)"),
+@NamedQuery(name = "CekIndClasificacion.findByClasificacionPeriodo", query = "SELECT c "
+        + "FROM CekIndClasificacion c "
+        + "WHERE c.cekPeriodo = :periodo AND c.cekClasificacion = :categoria")})
 public class CekIndClasificacion implements Serializable {
 
     private static final long serialVersionUID = 1L;

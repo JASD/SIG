@@ -8,7 +8,9 @@ import cek.sig.ventas.sv.controladores.util.Mes;
 import cek.sig.ventas.sv.entidades.CekClasificacion;
 import cek.sig.ventas.sv.entidades.CekIndClasificacion;
 import cek.sig.ventas.sv.entidades.CekPeriodo;
+import cek.sig.ventas.sv.entidades.reportes.VCategoria;
 import cek.sig.ventas.sv.entidades.reportes.VPPTOCategoria;
+import cek.sig.ventas.sv.repositorios.ClasificacionDAO;
 import cek.sig.ventas.sv.repositorios.IndClasificacionDAO;
 import cek.sig.ventas.sv.repositorios.PeriodoDAO;
 import java.text.SimpleDateFormat;
@@ -35,8 +37,11 @@ public class IndClasificacionService {
     private List<CekPeriodo> ultimos6;
     @Autowired
     private IndClasificacionDAO indClasificacionDAO;
+    @Autowired
+    private ClasificacionDAO clasificacionDAO;
     private List<CekIndClasificacion> records = new ArrayList<CekIndClasificacion>();
 
+    //prueba de paco
     @Transactional(readOnly = true)
     public List<VPPTOCategoria> getCuentasRecuperadas() {
         records = indClasificacionDAO.executeNamedQuery("CekIndClasificacion.cuentasRecuperadasUltimo");
@@ -54,80 +59,79 @@ public class IndClasificacionService {
 
         return dtos;
     }
-    
+
     /**
      * Obtengo las ventas para los ultimos 6 meses
      *
      * @return
      */
-    /*
     @Transactional(readOnly = true)
-    public List<VVendedor> getVentas() {
-        
+    public List<VCategoria> getVentas() {
+
         //Buscar todas las categorias
-        List<CekClasificacion> categorias = indClasificacionDAO
-                .executeNamedQuery("CekVendedor.findAll");
+        List<CekClasificacion> categorias = clasificacionDAO
+                .executeNamedQuery("CekClasificacion.findAll");
 
         //Instancerar la nueva lista
-        List<VVendedor> ventas = new ArrayList<VVendedor>();
+        List<VCategoria> ventas = new ArrayList<VCategoria>();
 
-        // Y Por cada vendedor
-        for (CekVendedor v : vendedores) {
+        // Y Por cada categoria
+        for (CekClasificacion c : categorias) {
 
-            VVendedor vvendedor = null;
+            VCategoria vcategoria = null;
             int contador = 1;
             boolean entro = false;
 
             //Para los ultimos 6 meses
             for (CekPeriodo p : ultimos6) {
-                
+
                 //consultar si tiene indices para ese periodo
-                CekIndVendedor indv = indVendedorDAO.obtenerPorPeriodoVendedor(p, v);
+                CekIndClasificacion indv = indClasificacionDAO.obtenerPorPeriodoVendedor(p, c);
                 if (indv != null) {
                     //si tiene
                     if (!entro) {
                         //si ya entro antes no se vuelve a crear instancia
                         //ni se pone de nuevo el nombre
-                        vvendedor = new VVendedor();
-                        vvendedor.setVendedor(indv.getCekVendedor().getVendNombre());
+                        vcategoria = new VCategoria();
+                        vcategoria.setCategoria(indv.getCekClasificacion().getClasNombre());
                         entro = true;
                     }
 
                     if (contador == 1 && entro) {
                         //Es el primer mes
-                        vvendedor.setMes1(indv.getIndivVentaNeta().floatValue());
+                        vcategoria.setMes1(indv.getIndcVentaNeta().floatValue());
                     }
                     if (contador == 2 && entro) {
                         //Es el segundo mes
-                        vvendedor.setMes2(indv.getIndivVentaNeta().floatValue());
+                        vcategoria.setMes2(indv.getIndcVentaNeta().floatValue());
                     }
                     if (contador == 3 && entro) {
                         //Es el tercer mes
-                        vvendedor.setMes3(indv.getIndivVentaNeta().floatValue());
+                        vcategoria.setMes3(indv.getIndcVentaNeta().floatValue());
                     }
                     if (contador == 4 && entro) {
                         //Es el cuarto mes
-                        vvendedor.setMes4(indv.getIndivVentaNeta().floatValue());
+                        vcategoria.setMes4(indv.getIndcVentaNeta().floatValue());
                     }
                     if (contador == 5 && entro) {
                         //Es el quinto mes mes
-                        vvendedor.setMes5(indv.getIndivVentaNeta().floatValue());
+                        vcategoria.setMes5(indv.getIndcVentaNeta().floatValue());
                     }
                     if (contador == 6 && entro) {
                         //Es el sexto mes
-                        vvendedor.setMes6(indv.getIndivVentaNeta().floatValue());
+                        vcategoria.setMes6(indv.getIndcVentaNeta().floatValue());
                     }
                 }
                 contador++;
             }
             if (entro) {
                 //agregar a la lista
-                ventas.add(vvendedor);
+                ventas.add(vcategoria);
             }
         }
         return ventas;
 
-    }*/
+    }
 
     /**
      * Se obtienen los ultimos 6 periodos
