@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Utilidad por categoria" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="968" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="158721d0-b68c-4fc2-b720-bb5989ebcf24">
+	<property name="ireport.zoom" value="1.1000000000000019"/>
+	<property name="ireport.x" value="112"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="periodo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="mostrar" class="java.lang.Boolean" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="categoria" class="java.lang.String"/>
+	<field name="vBrutas" class="java.lang.Float"/>
+	<field name="vNetas" class="java.lang.Float"/>
+	<field name="descuento" class="java.lang.Float"/>
+	<field name="costo" class="java.lang.Float"/>
+	<field name="costoPorc" class="java.lang.Float"/>
+	<field name="gastos" class="java.lang.Float"/>
+	<field name="gastosPorc" class="java.lang.Float"/>
+	<field name="utilidad" class="java.lang.Float"/>
+	<field name="utilidadPorc" class="java.lang.Float"/>
+	<variable name="vBrutas_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{vBrutas}]]></variableExpression>
+	</variable>
+	<variable name="descuento_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{descuento}]]></variableExpression>
+	</variable>
+	<variable name="vNetas_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{vNetas}]]></variableExpression>
+	</variable>
+	<variable name="costo_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{costo}]]></variableExpression>
+	</variable>
+	<variable name="gastos_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{gastos}]]></variableExpression>
+	</variable>
+	<variable name="utilidad_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{utilidad}]]></variableExpression>
+	</variable>
+	<variable name="porcCosto" class="java.lang.Float">
+		<variableExpression><![CDATA[$V{costo_1}/$V{vNetas_1}]]></variableExpression>
+	</variable>
+	<variable name="porcGastos" class="java.lang.Float">
+		<variableExpression><![CDATA[$V{gastos_1}/$V{vNetas_1}]]></variableExpression>
+	</variable>
+	<variable name="porcUtilidad" class="java.lang.Float">
+		<variableExpression><![CDATA[$V{utilidad_1}/$V{vNetas_1}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="46" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{mostrar}]]></printWhenExpression>
+			<staticText>
+				<reportElement uuid="9fdea9f1-6abc-41de-98fd-1284058b42c9" x="299" y="0" width="370" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CEK DE CENTROAMERICA EL SALVADOR]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="86e1688b-5094-4aed-9cdd-b1b33645b726" x="2" y="0" width="91" height="46"/>
+				<imageExpression><![CDATA["..\\..\\images\\LOGO_CEK.gif"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="d8d77cd4-e232-4a8d-83b4-86d88931d5fe" x="313" y="26" width="337" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE UTILIDAD POR CATEGORÍA]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="e0814710-d247-4c99-9aa9-c53f80534570" x="784" y="6" width="184" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["PERIODO: " + $P{periodo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="80f20f5b-76bb-4269-94b2-bc6d1f2ce165" x="80" y="20" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[CATEGORIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="07361dc5-676a-4655-add1-39b479c0bece" x="669" y="0" width="140" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[GASTOS INDIRECTOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5f9d2613-b6af-4421-a766-4b2a49305329" x="510" y="0" width="140" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[COSTO DE VENTAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9430389c-1975-4314-9d87-632e0321a5fe" x="292" y="0" width="210" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[VENTAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9171a986-7abd-44ac-9fa2-87343fa04491" x="828" y="0" width="140" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[UTILIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7be49ec5-c7b7-415f-81a9-8f7a88152dd1" x="292" y="20" width="70" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[BRUTAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7ecb1c52-c773-457e-94e5-e2a19a3378c9" x="432" y="20" width="70" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[NETAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d7e444b7-29da-4482-80c3-143e04db6f4f" x="362" y="20" width="70" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[DESC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="341a5f22-297c-4abf-9806-190629384e16" x="510" y="20" width="70" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[MONTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1deceb30-91c1-429e-a2cf-cdff9f7561dc" x="580" y="20" width="70" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3138a200-db5e-45ff-91a9-4e1e1a40e4be" x="739" y="20" width="70" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="39c694b9-d782-4527-9165-84ef4beee94d" x="669" y="20" width="70" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[MONTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f1795547-3d75-4cb6-a67b-c7bcb3139a7e" x="898" y="20" width="70" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="de4dec5b-cc22-4c2f-9fc4-10cddb46c853" x="828" y="20" width="70" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[MONTO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement uuid="c5cffd2e-f3dd-4c6f-be8a-6490b5790e43" x="2" y="1" width="276" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="4e9925d3-52d2-4a60-9f7d-b74f2f22c9e1" x="292" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{vBrutas}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="c8e14b2c-b9e5-4d28-9877-91b06c25aa17" x="362" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{descuento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="ed3d0508-fcbd-480f-b3cb-a0ca9cbf96ab" x="432" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{vNetas}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="8ae669fe-4585-467a-a49b-c4299597f835" x="510" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{costo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement uuid="e9ca5c7c-b5d7-4169-92e1-bcb7175a10e1" x="580" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{costoPorc}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="2c6cee21-dbdd-4b77-b02b-4a122f0744a7" x="669" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{gastos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement uuid="270f497a-21ad-4af9-a911-388abab1ce75" x="739" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{gastosPorc}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="92156b99-48ea-4cae-979a-a76ef73384b9" x="828" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{utilidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement uuid="5fe64b18-0f38-486f-8864-d433f3b23844" x="898" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{utilidadPorc}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{mostrar}]]></printWhenExpression>
+			<textField evaluationTime="Report">
+				<reportElement uuid="8f72116a-3c10-4498-9aa4-06cec330549e" x="922" y="1" width="46" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6231b34b-a0d5-47e3-b1dc-73aaf80c97b0" x="797" y="1" width="125" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5e3224be-a804-4ddb-894a-f45349b307e2" x="192" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="6c76ba15-a860-49dc-82f5-5c244ed7e084" x="2" y="0" width="966" height="1"/>
+			</line>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="1620f8c8-1e22-4df3-b8ff-36743eeafafa" x="292" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{vBrutas_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="6110259c-d5ad-49a6-96c4-75ba32dc6533" x="362" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{descuento_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="594462c3-816a-46af-8d77-287038da6308" x="432" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{vNetas_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="cbea02e2-651d-4769-a4e4-a53ac252440e" x="510" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{costo_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="c901c569-fa9e-4350-90ac-49ac30307f1f" x="669" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{gastos_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="69bff760-99d5-4158-802d-d328c0afd122" x="828" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{utilidad_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement uuid="c16aba68-b929-474c-bf06-ab5eec3e3137" x="580" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{porcCosto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement uuid="77500173-c76a-467f-a86c-0a7a1a916c00" x="739" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{porcGastos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement uuid="d66b5256-8192-4632-ac69-713d3e8920ab" x="898" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{porcUtilidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

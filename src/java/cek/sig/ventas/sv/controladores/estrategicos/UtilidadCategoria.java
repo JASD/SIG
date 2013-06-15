@@ -41,7 +41,7 @@ import org.zkoss.zul.ListModelList;
 @Controller
 public class UtilidadCategoria extends SelectorComposer<Component> {
 
-    private static final String JASPER_PATH = "/WEB-INF/jaspers/cuentas_recuperadas_vendedor.jasper";
+    private static final String JASPER_PATH = "/WEB-INF/jaspers/utilidad_categoria.jasper";
     @Wire
     private Combobox anios;
     @Wire
@@ -117,7 +117,7 @@ public class UtilidadCategoria extends SelectorComposer<Component> {
                     params.put("mostrar", Boolean.valueOf(true));
                     break;
             }
-            File report = File.createTempFile("CuentasRecuperadasVendedores", format);
+            File report = File.createTempFile("UtilidadCategoria", format);
             JasperExporter.export(realPath, params, new JRBeanCollectionDataSource(utilList),
                     format, report);
             Filedownload.save(report, type);
