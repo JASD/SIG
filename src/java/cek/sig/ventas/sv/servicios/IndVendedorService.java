@@ -12,7 +12,7 @@ import cek.sig.ventas.sv.controladores.util.Mes;
 import cek.sig.ventas.sv.entidades.CekVendedor;
 import cek.sig.ventas.sv.entidades.reportes.IPVendedor;
 import cek.sig.ventas.sv.entidades.reportes.VVendedor;
-import cek.sig.ventas.sv.repositorios.CekVendedorDAO;
+import cek.sig.ventas.sv.repositorios.VendedorDAO;
 import cek.sig.ventas.sv.repositorios.IndVendedorDAO;
 import cek.sig.ventas.sv.repositorios.PeriodoDAO;
 import java.text.SimpleDateFormat;
@@ -37,7 +37,7 @@ public class IndVendedorService {
     @Autowired
     private IndVendedorDAO indVendedorDAO;
     @Autowired
-    private CekVendedorDAO vendedorDAO;
+    private VendedorDAO vendedorDAO;
     @Autowired
     private PeriodoDAO periodoDAO;
     private List<CekPeriodo> ultimos6;

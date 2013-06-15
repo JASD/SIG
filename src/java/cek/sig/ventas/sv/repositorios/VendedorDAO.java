@@ -4,7 +4,7 @@
  */
 package cek.sig.ventas.sv.repositorios;
 
-import cek.sig.ventas.sv.entidades.CekIndClasificacion;
+import cek.sig.ventas.sv.entidades.CekVendedor;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,44 +15,44 @@ import org.springframework.stereotype.Repository;
  * @author Antonio
  */
 @Repository
-public class CekIndClasificacionDAO extends AbstractDAO<CekIndClasificacion> {
+public class VendedorDAO extends AbstractDAO<CekVendedor> {
 
     @Autowired
     private SessionFactory sessionFactory;
 
-    public CekIndClasificacionDAO() {
-        super(CekIndClasificacion.class);
+    public VendedorDAO() {
+        super(CekVendedor.class);
     }
 
     @Override
-    public void create(CekIndClasificacion entity) {
+    public void create(CekVendedor entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void edit(CekIndClasificacion entity) {
+    public void edit(CekVendedor entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(CekIndClasificacion entity) {
+    public void delete(CekVendedor entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public CekIndClasificacion find(Object id) {
+    public CekVendedor find(Object id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     //@Transactional(readOnly = true)
     @Override
-    public List<CekIndClasificacion> findAll() {
-        return (List<CekIndClasificacion>) sessionFactory.getCurrentSession().getNamedQuery("CekIndClasificacion.findAll").list();
+    public List<CekVendedor> findAll() {
+        return (List<CekVendedor>) sessionFactory.getCurrentSession().getNamedQuery("CekVendedor.findAll").list();
     }
 
     //@Transactional(readOnly = true)
     @Override
-    public List<CekIndClasificacion> executeNamedQuery(String NamedQuery) {
-        return (List<CekIndClasificacion>) sessionFactory.getCurrentSession().getNamedQuery(NamedQuery).list();
+    public List<CekVendedor> executeNamedQuery(String NamedQuery) {
+        return (List<CekVendedor>) sessionFactory.getCurrentSession().getNamedQuery(NamedQuery).list();
     }
 }
