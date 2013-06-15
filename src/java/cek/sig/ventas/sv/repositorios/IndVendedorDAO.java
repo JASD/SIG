@@ -6,10 +6,10 @@ package cek.sig.ventas.sv.repositorios;
 
 import cek.sig.ventas.sv.entidades.CekIndVendedor;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -45,15 +45,29 @@ public class IndVendedorDAO extends AbstractDAO<CekIndVendedor> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Transactional(readOnly = true)
+    //@Transactional(readOnly = true)
     @Override
     public List<CekIndVendedor> findAll() {
         return (List<CekIndVendedor>) sessionFactory.getCurrentSession().getNamedQuery("CekIndVendedor.findAll").list();
     }
 
-    @Transactional(readOnly = true)
+    //@Transactional(readOnly = true)
     @Override
     public List<CekIndVendedor> executeNamedQuery(String NamedQuery) {
         return (List<CekIndVendedor>) sessionFactory.getCurrentSession().getNamedQuery(NamedQuery).list();
+    }
+    
+    /**
+     * Busca los indicadores para un periodo dado
+     * @param anio
+     * @param mes
+     * @return 
+     */
+    public List<CekIndVendedor> findByPeriodo(String anio, int mes) {
+        Query q = sessionFactory.getCurrentSession().getNamedQuery("CekIndVendedor.findByPeriodo");
+        q.setInteger("anio", Integer.valueOf(anio));
+        q.setInteger("mes", mes);
+        return (List<CekIndVendedor>) q.list();
+
     }
 }

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cek.sig.ventas.sv.controladores;
+package cek.sig.ventas.sv.controladores.util;
 
 /**
  *
@@ -10,7 +10,7 @@ package cek.sig.ventas.sv.controladores;
  */
 public class Auxiliares {
 
-    public String getMes(int mes) {
+    public static String getMes(int mes) {
         String r = "";
         switch (mes) {
             case 1:

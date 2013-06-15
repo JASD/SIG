@@ -27,7 +27,13 @@ import javax.validation.constraints.Size;
 @Table(name = "CEK_PERIODO")
 @NamedQueries({
     @NamedQuery(name = "CekPeriodo.findAll", query = "SELECT c FROM CekPeriodo c"),
-    @NamedQuery(name = "CekPeriodos.periodosDesc", query = "SELECT c FROM CekPeriodo c order by c.idPeriodo desc")})
+    @NamedQuery(name = "CekPeriodo.findUltimo",
+            query = "SELECT c FROM CekPeriodo c "
+            + "WHERE c.idPeriodo = (SELECT MAX(p.idPeriodo) FROM CekPeriodo p)"),
+    @NamedQuery(name = "CekPeriodos.periodosDesc", query = "SELECT c FROM CekPeriodo c order by c.idPeriodo desc"),
+    @NamedQuery(name = "CekPeriodo.findAnios", query = "SELECT DISTINCT c.periAnio FROM CekPeriodo c ORDER BY c.periAnio DESC"),
+    @NamedQuery(name = "CekPeriodo.findMeses", query = "SELECT DISTINCT c.periMes "
+        + "FROM CekPeriodo c WHERE c.periAnio = :anio ORDER BY c.periMes")})
 public class CekPeriodo implements Serializable {
 
     private static final long serialVersionUID = 1L;

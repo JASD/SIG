@@ -6,7 +6,6 @@ package cek.sig.ventas.sv.controladores.tacticos;
 
 import cek.sig.ventas.sv.controladores.util.JasperExporter;
 import cek.sig.ventas.sv.entidades.reportes.CNVendedor;
-import cek.sig.ventas.sv.entidades.reportes.CRVendedor;
 import cek.sig.ventas.sv.servicios.IndVendedorService;
 import java.io.File;
 import java.io.IOException;
@@ -59,10 +58,7 @@ public class CuentasNuevasVendedor extends SelectorComposer<Component> {
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //logger.info("Returning hello view");
-        //PurchaseData pd = new PurchaseData();
         ModelAndView mv = new ModelAndView("reportesTacticos/cuentasNuevasVendedor");
-        //mv.addObject("purchases", pd.getAllPurchases());
 
         return mv;
     }
@@ -73,9 +69,9 @@ public class CuentasNuevasVendedor extends SelectorComposer<Component> {
         cnvList = indVendedorService.getCuentasNuevas();
         cnvGrid.setModel(new ListModelList<CNVendedor>(cnvList));
         periodo = indVendedorService.getPeriodo().toUpperCase();
-        if (periodo != null) {
-            periodoSeleccionado.setValue("Período mostrado: ".concat(periodo.toUpperCase()));
-        }
+        //if (periodo != null) {
+            periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
+        //}
     }
 
     @Listen("onClick = #downloadButton")

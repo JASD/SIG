@@ -75,7 +75,7 @@ public class VentasVendedor extends SelectorComposer<Component> {
     @Override
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
-        vvList = indVendedorService.getVentasVendedor();
+        //vvList = indVendedorService.getVentasVendedor();
         vvGrid.setModel(new ListModelList<VVendedor>(vvList));
         periodo = indVendedorService.getPeriodo().toUpperCase();
         if (periodo != null) {

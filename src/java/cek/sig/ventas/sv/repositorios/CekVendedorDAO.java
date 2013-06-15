@@ -45,13 +45,13 @@ public class CekVendedorDAO extends AbstractDAO<CekVendedor> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Transactional(readOnly = true)
+    //@Transactional(readOnly = true)
     @Override
     public List<CekVendedor> findAll() {
         return (List<CekVendedor>) sessionFactory.getCurrentSession().getNamedQuery("CekVendedor.findAll").list();
     }
 
-    @Transactional(readOnly = true)
+    //@Transactional(readOnly = true)
     @Override
     public List<CekVendedor> executeNamedQuery(String NamedQuery) {
         return (List<CekVendedor>) sessionFactory.getCurrentSession().getNamedQuery(NamedQuery).list();

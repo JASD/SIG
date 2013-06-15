@@ -7,11 +7,9 @@ package cek.sig.ventas.sv.controladores.tacticos;
 import cek.sig.ventas.sv.entidades.reportes.CRVendedor;
 import cek.sig.ventas.sv.servicios.IndVendedorService;
 import cek.sig.ventas.sv.controladores.util.JasperExporter;
+import cek.sig.ventas.sv.entidades.reportes.Mes;
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -45,7 +43,9 @@ public class CuentasRecuperadasVendedor extends SelectorComposer<Component> {
 
     private static final String JASPER_PATH = "/WEB-INF/jaspers/cuentas_recuperadas_vendedor.jasper";
     @Wire
-    private Combobox periodos;
+    private Combobox anios;
+    @Wire
+    private Combobox meses;
     @Wire
     private Combobox formatos;
     @Wire
@@ -60,7 +60,6 @@ public class CuentasRecuperadasVendedor extends SelectorComposer<Component> {
     @RequestMapping(value = "/cuentasRecuperadasVendedor")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
-        
         return new ModelAndView("reportesTacticos/cuentasRecuperadasVendedor");
     }
 
@@ -70,11 +69,17 @@ public class CuentasRecuperadasVendedor extends SelectorComposer<Component> {
         crvList = indVendedorService.getCuentasRecuperadas();
         crvGrid.setModel(new ListModelList<CRVendedor>(crvList));
         periodo = indVendedorService.getPeriodo().toUpperCase();
-        if (periodo != null) {
-            periodoSeleccionado.setValue("Período mostrado: ".concat(periodo.toUpperCase()));
-        }
+        //Cargar los años distintos que hay en la base (solo obtiene maximo 5)
+        anios.setModel(new ListModelList<String>(
+                indVendedorService.obtenerAnios()));
+            periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
     }
 
+    /**
+     * Descarga el reporte
+     * @throws JRException
+     * @throws IOException 
+     */
     @Listen("onClick = #downloadButton")
     public void generarReporte() throws JRException, IOException {
         if (formatos.getSelectedIndex() == -1) {
@@ -111,5 +116,26 @@ public class CuentasRecuperadasVendedor extends SelectorComposer<Component> {
                     format, report);
             Filedownload.save(report, type);
         }
+    }
+    
+    /**
+     * Carga los meses despues de que el usuario seleccioo un año
+     */
+    @Listen("onSelect = #anios")
+    public void cargarMeses(){
+        String anioSeleccionado = anios.getSelectedItem().getValue();
+        meses.setModel(new ListModelList<Mes>(
+                indVendedorService.obtenerMeses(anioSeleccionado)));
+    }
+    
+    @Listen("onSelect = #meses")
+    public void recargarModelo(){
+        String anio = anios.getSelectedItem().getValue();
+        Mes mes = (Mes) meses.getSelectedItem().getValue();
+        crvGrid.setModel(new ListModelList<CRVendedor>(
+                indVendedorService.seleccionarPeriodo(anio, 
+                mes.getNumero())));
+         periodoSeleccionado.setValue("Período mostrado: ".concat(mes.getMes() + " " 
+                 + String.valueOf(anio) ));
     }
 }
