@@ -91,25 +91,28 @@ public class CuentasRecuperadasVendedor extends SelectorComposer<Component> {
             String realPath = request.getServletContext().getRealPath(JASPER_PATH);
             HashMap<String, Object> params = new HashMap<String, Object>();
             params.put("periodo", periodo);
-            params.put("mostrar", Boolean.valueOf(false));
             String format;
             String type;
             switch (formatos.getSelectedIndex()) {
                 case 0:
                     format = JasperExporter.EXTENSION_TYPE_EXCEL;
                     type = JasperExporter.MEDIA_TYPE_EXCEL;
+                    params.put("mostrar", Boolean.valueOf(false));
                     break;
                 case 1:
                     format = JasperExporter.EXTENSION_TYPE_WORD;
                     type = JasperExporter.MEDIA_TYPE_WORD;
+                    params.put("mostrar", Boolean.valueOf(true));
                     break;
                 case 2:
                     format = JasperExporter.EXTENSION_TYPE_PDF;
                     type = JasperExporter.MEDIA_TYPE_PDF;
+                    params.put("mostrar", Boolean.valueOf(true));
                     break;
                 default:
                     format = JasperExporter.EXTENSION_TYPE_PDF;
                     type = JasperExporter.MEDIA_TYPE_PDF;
+                    params.put("mostrar", Boolean.valueOf(true));
                     break;
             }
             File report = File.createTempFile("CuentasRecuperadasVendedores", format);
@@ -134,13 +137,13 @@ public class CuentasRecuperadasVendedor extends SelectorComposer<Component> {
      * despues de seleccionar el mes
      */
     @Listen("onSelect = #meses")
-    public void recargarModelo(){
+    public void recargarModelo() {
         String anio = anios.getSelectedItem().getValue();
         Mes mes = (Mes) meses.getSelectedItem().getValue();
-        crvList = indVendedorService.getCuentasRecuperadas(anio, 
+        crvList = indVendedorService.getCuentasRecuperadas(anio,
                 mes.getNumero());
         crvGrid.setModel(new ListModelList<CRVendedor>(crvList));
-         periodoSeleccionado.setValue("Período mostrado: ".concat(mes.getMes() + " " 
-                 + String.valueOf(anio) ));
+        periodo = mes.getMes() + " " + String.valueOf(anio);
+        periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
     }
 }

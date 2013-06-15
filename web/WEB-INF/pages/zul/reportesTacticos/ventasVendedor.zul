@@ -2,7 +2,6 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
 <window self="@{define(left)}" title="Ventas por vendedor"
         apply="cek.sig.ventas.sv.controladores.tacticos.VentasVendedor">
-    <label id="periodoSeleccionado"/>
     <button style="margin:20px 20px 10px 10px;float:right" id="downloadButton"
             label="Generar Reporte"/>
     <combobox id="formatos" readonly="true" autodrop="true"
@@ -20,7 +19,7 @@
           style="clear:right;float:left; margin:10px">
         <auxhead>
             <auxheader style="text-align:center"
-                       colspan="4" label="Reporte de ventas por vendedor"/>
+                       colspan="7" label="Reporte de ventas por vendedor"/>
         </auxhead>
         <columns>
             <column hflex="40" label="Nombre Vendedor" sort="auto(nombreVendedor)" />

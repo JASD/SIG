@@ -1,104 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="158721d0-b68c-4fc2-b720-bb5989ebcf24">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cuentas Nuevas Vendedor" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="158721d0-b68c-4fc2-b720-bb5989ebcf24">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="periodo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="mostrar" class="java.lang.Boolean" isForPrompting="false"/>
 	<field name="vendedor" class="java.lang.String"/>
 	<field name="proyectado" class="java.lang.Float"/>
 	<field name="cuentasNuevas" class="java.lang.Float"/>
 	<field name="cumplimiento" class="java.lang.Float"/>
+	<variable name="proyectado_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{proyectado}]]></variableExpression>
+	</variable>
+	<variable name="cuentasNuevas_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{cuentasNuevas}]]></variableExpression>
+	</variable>
+	<variable name="cumplimientoTotal" class="java.lang.Float">
+		<variableExpression><![CDATA[$V{proyectado_1}/$V{cuentasNuevas_1}]]></variableExpression>
+	</variable>
 	<title>
-		<band height="56" splitType="Stretch">
+		<band height="46" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{mostrar}]]></printWhenExpression>
 			<staticText>
-				<reportElement uuid="9fdea9f1-6abc-41de-98fd-1284058b42c9" x="178" y="20" width="370" height="26"/>
+				<reportElement uuid="9fdea9f1-6abc-41de-98fd-1284058b42c9" x="195" y="0" width="370" height="26"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CEK DE CENTROAMERICA EL SALVADOR]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement uuid="3275c72c-3e9d-4eec-8486-ef05a9bf35de" x="548" y="0" width="204" height="20"/>
-				<textElement textAlignment="Right" verticalAlignment="Top"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 			<image>
-				<reportElement uuid="86e1688b-5094-4aed-9cdd-b1b33645b726" x="11" y="10" width="91" height="46"/>
+				<reportElement uuid="86e1688b-5094-4aed-9cdd-b1b33645b726" x="0" y="0" width="91" height="46"/>
 				<imageExpression><![CDATA["..\\..\\images\\LOGO_CEK.gif"]]></imageExpression>
 			</image>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="d8d77cd4-e232-4a8d-83b4-86d88931d5fe" x="217" y="0" width="313" height="20"/>
-				<textElement verticalAlignment="Bottom">
+				<reportElement uuid="d8d77cd4-e232-4a8d-83b4-86d88931d5fe" x="216" y="26" width="313" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE CUENTAS NUEVAS POR VENDEDOR]]></text>
 			</staticText>
+			<textField>
+				<reportElement uuid="00d5b342-d185-47e4-afbe-2cae21154fc4" x="568" y="10" width="184" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["PERIODO: " + $P{periodo}]]></textFieldExpression>
+			</textField>
 		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="45" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="ce065e95-ca10-4622-97ae-7b7d208bca3a" x="11" y="20" width="239" height="20"/>
+				<reportElement uuid="ce065e95-ca10-4622-97ae-7b7d208bca3a" x="11" y="0" width="267" height="20"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[VENDEDOR]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="4063bb0a-c825-491a-8a18-5628dad20a1d" x="300" y="20" width="100" height="20"/>
+				<reportElement uuid="4063bb0a-c825-491a-8a18-5628dad20a1d" x="326" y="0" width="100" height="20"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[PROYECTADO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="b3b37ccd-ce1c-4a4c-b082-d6c26a6eded4" x="448" y="20" width="100" height="20"/>
+				<reportElement uuid="b3b37ccd-ce1c-4a4c-b082-d6c26a6eded4" x="491" y="0" width="100" height="20"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[CUENTAS NUEVAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d2dd88cb-4597-4ec9-94d0-dbf706169926" x="591" y="20" width="100" height="20"/>
+				<reportElement uuid="d2dd88cb-4597-4ec9-94d0-dbf706169926" x="650" y="0" width="100" height="20"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[CUMPLIMIENTO %]]></text>
+				<text><![CDATA[CUMPLIMIENTO]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<textField>
-				<reportElement uuid="6c08ba16-28e0-40c8-a071-6ac5bfeedd3d" x="11" y="2" width="239" height="20"/>
-				<textElement/>
+				<reportElement uuid="6c08ba16-28e0-40c8-a071-6ac5bfeedd3d" x="11" y="2" width="267" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
 				<textFieldExpression><![CDATA[$F{vendedor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="0d49966f-80e4-4baf-afc6-5e18fb2fc098" x="300" y="2" width="100" height="20"/>
-				<textElement/>
+				<reportElement uuid="0d49966f-80e4-4baf-afc6-5e18fb2fc098" x="326" y="2" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
 				<textFieldExpression><![CDATA[new DecimalFormat("0").format($F{proyectado})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="3f9fc64e-3692-4eda-b0eb-a665ceb72494" x="448" y="2" width="100" height="20"/>
-				<textElement/>
+				<reportElement uuid="3f9fc64e-3692-4eda-b0eb-a665ceb72494" x="491" y="2" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
 				<textFieldExpression><![CDATA[new DecimalFormat("0").format($F{cuentasNuevas})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="1e23008b-6c46-45dc-a553-e960de2e5211" x="591" y="2" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[new DecimalFormat("0").format($F{cumplimiento})]]></textFieldExpression>
+				<reportElement uuid="1e23008b-6c46-45dc-a553-e960de2e5211" x="650" y="2" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[new DecimalFormat("0.00").format($F{cumplimiento})]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
 		<band height="20" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{mostrar}]]></printWhenExpression>
 			<textField evaluationTime="Report">
 				<reportElement uuid="8f72116a-3c10-4498-9aa4-06cec330549e" x="704" y="0" width="46" height="20"/>
 				<textElement/>
@@ -109,9 +118,35 @@
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement uuid="08d1d9e1-729d-4ec6-9459-bcb36d32e9a1" x="0" y="19" width="750" height="1"/>
+			</line>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="aa806e8c-e1d5-419a-be10-c8a6dffc5d2c" x="178" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="b592c067-8b62-4d39-bcfe-71dd306a711d" x="326" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[new DecimalFormat("0").format($V{proyectado_1})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0d3e35f4-576d-4dde-adc0-665803e7a79d" x="491" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[new DecimalFormat("0").format($V{cuentasNuevas_1})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5420ffde-29de-412e-a963-e4211878deaa" x="650" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[new DecimalFormat("0.00").format($V{cumplimientoTotal})]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>

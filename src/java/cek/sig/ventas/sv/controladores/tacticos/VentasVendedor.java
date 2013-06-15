@@ -113,28 +113,37 @@ public class VentasVendedor extends SelectorComposer<Component> {
             HttpServletRequest request = (HttpServletRequest) exec.getNativeRequest();
             String realPath = request.getServletContext().getRealPath(JASPER_PATH);
             HashMap<String, Object> params = new HashMap<String, Object>();
-            //params.put("periodo", periodo);
+            params.put("periodo1", mes1.getValue());
+            params.put("periodo2", mes2.getValue());
+            params.put("periodo3", mes3.getValue());
+            params.put("periodo4", mes4.getValue());
+            params.put("periodo5", mes5.getValue());
+            params.put("periodo6", mes6.getValue());
             String format;
             String type;
             switch (formatos.getSelectedIndex()) {
                 case 0:
                     format = JasperExporter.EXTENSION_TYPE_EXCEL;
                     type = JasperExporter.MEDIA_TYPE_EXCEL;
+                    params.put("mostrar", Boolean.valueOf(false));
                     break;
                 case 1:
                     format = JasperExporter.EXTENSION_TYPE_WORD;
                     type = JasperExporter.MEDIA_TYPE_WORD;
+                    params.put("mostrar", Boolean.valueOf(true));
                     break;
                 case 2:
                     format = JasperExporter.EXTENSION_TYPE_PDF;
                     type = JasperExporter.MEDIA_TYPE_PDF;
+                    params.put("mostrar", Boolean.valueOf(true));
                     break;
                 default:
                     format = JasperExporter.EXTENSION_TYPE_PDF;
                     type = JasperExporter.MEDIA_TYPE_PDF;
+                    params.put("mostrar", Boolean.valueOf(true));
                     break;
             }
-            File report = File.createTempFile("CuentasNuevasVendedores", format);
+            File report = File.createTempFile("VentasVendedores", format);
             JasperExporter.export(realPath, params, new JRBeanCollectionDataSource(vvList),
                     format, report);
             Filedownload.save(report, type);

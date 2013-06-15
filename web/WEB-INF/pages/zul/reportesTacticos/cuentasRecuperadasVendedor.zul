@@ -1,4 +1,4 @@
-<?page id="crv" title="Cuentas Recuperadas Vendedor"?>
+<?page id="crv" title="Cuentas Recuperadas Vendedor" contentType="text/html" pageEncoding="UTF-8"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
 <window self="@{define(left)}" title='Cuentas Recuperadas por Vendedor'
         apply="cek.sig.ventas.sv.controladores.tacticos.CuentasRecuperadasVendedor">

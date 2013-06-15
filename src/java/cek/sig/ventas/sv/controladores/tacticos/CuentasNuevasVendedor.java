@@ -43,8 +43,6 @@ public class CuentasNuevasVendedor extends SelectorComposer<Component> {
 
     private static final String JASPER_PATH = "/WEB-INF/jaspers/cuentas-nuevas-por-vendedor.jasper";
     @Wire
-    private Combobox periodos;
-    @Wire
     private Combobox anios;
     @Wire
     private Combobox meses;
@@ -63,7 +61,6 @@ public class CuentasNuevasVendedor extends SelectorComposer<Component> {
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ModelAndView mv = new ModelAndView("reportesTacticos/cuentasNuevasVendedor");
-
         return mv;
     }
 
@@ -96,18 +93,22 @@ public class CuentasNuevasVendedor extends SelectorComposer<Component> {
                 case 0:
                     format = JasperExporter.EXTENSION_TYPE_EXCEL;
                     type = JasperExporter.MEDIA_TYPE_EXCEL;
+                    params.put("mostrar", Boolean.valueOf(false));
                     break;
                 case 1:
                     format = JasperExporter.EXTENSION_TYPE_WORD;
                     type = JasperExporter.MEDIA_TYPE_WORD;
+                    params.put("mostrar", Boolean.valueOf(true));
                     break;
                 case 2:
                     format = JasperExporter.EXTENSION_TYPE_PDF;
                     type = JasperExporter.MEDIA_TYPE_PDF;
+                    params.put("mostrar", Boolean.valueOf(true));
                     break;
                 default:
                     format = JasperExporter.EXTENSION_TYPE_PDF;
                     type = JasperExporter.MEDIA_TYPE_PDF;
+                    params.put("mostrar", Boolean.valueOf(true));
                     break;
             }
             File report = File.createTempFile("CuentasNuevasVendedores", format);
@@ -138,7 +139,7 @@ public class CuentasNuevasVendedor extends SelectorComposer<Component> {
         cnvList = indVendedorService.getCuentasNuevas(anio,
                 mes.getNumero());
         cnvGrid.setModel(new ListModelList<CNVendedor>(cnvList));
-        periodoSeleccionado.setValue("Período mostrado: ".concat(mes.getMes() + " "
-                + String.valueOf(anio)));
+        periodo = mes.getMes() + " " + String.valueOf(anio);
+        periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
     }
 }

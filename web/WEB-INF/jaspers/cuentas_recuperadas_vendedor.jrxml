@@ -38,7 +38,7 @@
 			<staticText>
 				<reportElement uuid="d8d77cd4-e232-4a8d-83b4-86d88931d5fe" x="199" y="26" width="337" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font size="12"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE CUENTAS RECUPERADAS POR VENDEDOR]]></text>
 			</staticText>
@@ -57,7 +57,7 @@
 			<staticText>
 				<reportElement uuid="80f20f5b-76bb-4269-94b2-bc6d1f2ce165" x="78" y="0" width="100" height="20"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[NOMBRE VENDEDOR]]></text>
+				<text><![CDATA[VENDEDOR]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="07361dc5-676a-4655-add1-39b479c0bece" x="650" y="0" width="100" height="20"/>

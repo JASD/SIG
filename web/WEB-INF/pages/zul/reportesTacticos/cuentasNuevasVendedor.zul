@@ -16,9 +16,6 @@
             <comboitem label="${each}" />
         </template>
     </combobox>
-    <image style="cursor: help" 
-           src="/images/help.png"
-    />
     <label id="periodoSeleccionado"/>
     <button style="margin:20px 20px 10px 10px;float:right" id="downloadButton"
             label="Generar Reporte"/>
@@ -37,7 +34,7 @@
           style="clear:right;float:left; margin:10px">
         <auxhead>
             <auxheader style="text-align:center"
-                       colspan="4" label="Reporte de cuentas nuevas por vendedor"/>
+                       colspan="4" label="Reporte de Cuentas Nuevas por Vendedor"/>
         </auxhead>
         <columns>
             <column hflex="20" label="Nombre" sort="auto(vendedor)" />
