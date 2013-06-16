@@ -65,14 +65,14 @@
                 <template name="model">
                     <row>
                         <label value="${each.categoria}"/>
-                        <label value="${each.vBrutas}"/>
-                        <label value="${each.descuento}"/>
-                        <label value="${each.vNetas}"/>
-                        <label value="${each.costo}"/>
+                        <label value="${c:formatNumber(each.vBrutas, '$ #,##0.00')}"/>
+                        <label value="${c:formatNumber(each.descuento, '$ #,##0.00')}"/>
+                        <label value="${c:formatNumber(each.vNetas, '$ #,##0.00')}"/>
+                        <label value="${c:formatNumber(each.costo, '$ #,##0.00')}"/>
                         <label value="${c:formatNumber(each.costoPorc, '##.00%')}"/>
-                        <label value="${each.gastos}"/>
+                        <label value="${c:formatNumber(each.gastos, '$ #,##0.00')}"/>
                         <label value="${c:formatNumber(each.gastosPorc, '##.00%')}"/>
-                        <label value="${each.utilidad}"/>
+                        <label value="${c:formatNumber(each.utilidad, '$ #,##0.00')}"/>
                         <label value="${c:formatNumber(each.utilidadPorc, '##.00%')}"/>
                     </row>
                 </template>
