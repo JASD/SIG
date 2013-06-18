@@ -10,6 +10,7 @@ import cek.sig.ventas.sv.entidades.CekPeriodo;
 import cek.sig.ventas.sv.entidades.reportes.CNVendedor;
 import cek.sig.ventas.sv.controladores.util.Mes;
 import cek.sig.ventas.sv.entidades.CekVendedor;
+import cek.sig.ventas.sv.entidades.reportes.CVVendedor;
 import cek.sig.ventas.sv.entidades.reportes.IPVendedor;
 import cek.sig.ventas.sv.entidades.reportes.VVendedor;
 import cek.sig.ventas.sv.repositorios.VendedorDAO;
@@ -107,6 +108,38 @@ public class IndVendedorService {
             cne.setCuentasNuevas(ind.getIndivCliNuevos().floatValue());
             cne.setCumplimiento(ind.getIndivCumpCnuevos().floatValue());
             dtos.add(cne);
+        }
+        return dtos;
+    }
+
+    @Transactional(readOnly = true)
+    public List<CVVendedor> getCumplimientoVentasVendedor() {
+        List<CekIndVendedor> records = indVendedorDAO.executeNamedQuery("CekIndVendedor.ultimo");
+        List<CVVendedor> dtos = new ArrayList<CVVendedor>();
+
+        for (CekIndVendedor ind : records) {
+            CVVendedor cne = new CVVendedor();
+            cne.setVendedor(ind.getCekVendedor().getVendNombre());
+            cne.setProyectado(ind.getIndivProyVenta().floatValue());
+            cne.setVentas(ind.getIndivVentaNeta().floatValue());
+            cne.setCumplimiento(ind.getIndivCumpVenta().floatValue());
+            dtos.add(cne);
+        }
+        return dtos;
+    }
+
+    @Transactional(readOnly = true)
+    public List<CVVendedor> getCumplimientoVentasVendedor(String anio, int mes) {
+
+        List<CekIndVendedor> records = indVendedorDAO.findByPeriodo(anio, mes);
+        List<CVVendedor> dtos = new ArrayList<CVVendedor>();
+        for (CekIndVendedor ind : records) {
+            CVVendedor cvv = new CVVendedor();
+            cvv.setVendedor(ind.getCekVendedor().getVendNombre());
+            cvv.setProyectado(ind.getIndivProyVenta().floatValue());
+            cvv.setVentas(ind.getIndivVentaNeta().floatValue());
+            cvv.setCumplimiento(ind.getIndivCumpVenta().floatValue());
+            dtos.add(cvv);
         }
         return dtos;
     }
@@ -213,7 +246,7 @@ public class IndVendedorService {
      */
     @Transactional(readOnly = true)
     public List<VVendedor> getVentas() {
-        
+
         //Buscar todos los vendedores
         List<CekVendedor> vendedores = vendedorDAO
                 .executeNamedQuery("CekVendedor.findAll");
@@ -230,7 +263,7 @@ public class IndVendedorService {
 
             //Para los ultimos 6 meses
             for (CekPeriodo p : ultimos6) {
-                
+
                 //consultar si tiene indices para ese periodo
                 CekIndVendedor indv = indVendedorDAO.obtenerPorPeriodoVendedor(p, v);
                 if (indv != null) {
@@ -279,10 +312,11 @@ public class IndVendedorService {
 
     }
     //Aqui empiezan los metodos que compartirian todos los services
-    
+
     /**
      * Se obtienen los ultimos 6 periodos
-     * @return 
+     *
+     * @return
      */
     @Transactional(readOnly = true)
     public List<String> getUltimos6Periodos() {
@@ -290,7 +324,7 @@ public class IndVendedorService {
         List<String> periodosGrid = new ArrayList<String>();
         for (CekPeriodo p : ultimos6) {
             String periodo = Auxiliares.getMes(p.getPeriMes()).toUpperCase()
-                    .concat(" "+ String.valueOf(p.getPeriAnio()));
+                    .concat(" " + String.valueOf(p.getPeriAnio()));
             periodosGrid.add(periodo);
         }
         return periodosGrid;
@@ -343,5 +377,4 @@ public class IndVendedorService {
         }
         return meses;
     }
-
 }

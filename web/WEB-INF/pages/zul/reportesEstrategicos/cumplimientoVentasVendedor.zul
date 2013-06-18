@@ -1,7 +1,8 @@
-<?page contentType="text/html" pageEncoding="UTF-8"?>
+<?page id="ipv" title="Indice de Penetración por Vendedor" contentType="text/html" pageEncoding="UTF-8"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
-<window self="@{define(left)}" title="Ventas por vendedor"
-        apply="cek.sig.ventas.sv.controladores.estrategicos.VentasVsPresupuestoCategoria">
+<window self="@{define(left)}" title='Indice de Penetración por Vendedor'
+        apply="cek.sig.ventas.sv.controladores.estrategicos.CumplimientoVentasVendedor">
+
     <label style="margin:20px 20px 10px 10px" 
            value="Período a analizar: "/>
     <combobox id="anios" constraint="no empty: Elija un Año"
@@ -27,7 +28,7 @@
     </combobox>
     <label style="margin:20px 20px 10px 10px;clear:left;float:right"
            value="Tipo de reporte: "/>
-    <grid id="vpcGrid"  
+    <grid id="cvvGrid"  
           mold="paging" 
           pageSize="10" 
           emptyMessage="Información no disponible" 
@@ -35,23 +36,22 @@
 
         <auxhead>
             <auxheader style="text-align:center" 
-                       colspan="10"  label="VENTAS CONTRA PRESUPUESTO "/>
-        </auxhead>                     
+                       colspan="10"  label="Cumplimiento de ventas por vendedor"/>
+        </auxhead> 
 
         <columns>
-            <column hflex="20" label="Categoria" sort="auto(categoria)" />
-            <column hflex="6" label="ventas" sort="auto(ventas)"/>
-            <column hflex="6" label="Presupuesto" sort="auto(presupuesto)"/>
-            <column hflex="4" label="Variacion %" sort="auto(variacion)"/>
+            <column hflex="20" label="Nombre" sort="auto(vendedor)" />
+            <column hflex="6" label="Proyectado" sort="auto(proyectado)" align="right"/>
+            <column hflex="6" label="Ventas" sort="auto(ventas)" align="right"/>
+            <column hflex="6" label="Cumplimiento" sort="auto(cumplimiento)" align="right"/>
         </columns>
         <template name="model">
             <row>
-                <label value="${each.categoria}" />
+                <label value="${each.vendedor}" />
+                <label value="${each.proyectado}" />
                 <label value="${each.ventas}" />
-                <label value="${each.presupuesto}" />
-                <label value="${each.variacion}" />                                       
+                <label value="${each.cumplimiento}" />
             </row>
         </template>
     </grid>
 </window>
-

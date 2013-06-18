@@ -30,8 +30,6 @@ public class VVendedor implements Serializable {
         this.mes6 = Float.valueOf(0);
     }
 
-    
-
     public String getVendedor() {
         return vendedor;
     }

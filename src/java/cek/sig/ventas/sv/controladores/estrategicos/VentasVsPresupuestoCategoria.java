@@ -5,8 +5,10 @@
 package cek.sig.ventas.sv.controladores.estrategicos;
 
 import cek.sig.ventas.sv.controladores.util.JasperExporter;
+import cek.sig.ventas.sv.controladores.util.Mes;
+import cek.sig.ventas.sv.entidades.reportes.CNVendedor;
 import cek.sig.ventas.sv.entidades.reportes.VPPTOCategoria;
-import cek.sig.ventas.sv.servicios.IndClasificacionService;
+import cek.sig.ventas.sv.servicios.IndVendedorService;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -41,9 +43,11 @@ import org.zkoss.zul.ListModelList;
 public class VentasVsPresupuestoCategoria extends SelectorComposer<Component> {
 //////////////////falta modificar el jasper
 
-    private static final String JASPER_PATH = "/WEB-INF/jaspers/venta-por-vendedor.jasper";
+    private static final String JASPER_PATH = "/WEB-INF/jaspers/cuentas-nuevas-por-vendedor.jasper";
     @Wire
-    private Combobox periodos;
+    private Combobox anios;
+    @Wire
+    private Combobox meses;
     @Wire
     private Combobox formatos;
     @Wire
@@ -51,8 +55,8 @@ public class VentasVsPresupuestoCategoria extends SelectorComposer<Component> {
     @Wire
     private Label periodoSeleccionado;
     @WireVariable
-    private IndClasificacionService indClasificacionService;
-    private List<VPPTOCategoria> vcpList;
+    private IndVendedorService indVendedorService;
+    private List<VPPTOCategoria> vpcList;
     private String periodo;
 
     @RequestMapping(value = "/ventasVsPresupuestoCategoria")
@@ -70,12 +74,13 @@ public class VentasVsPresupuestoCategoria extends SelectorComposer<Component> {
     @Override
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
-        //vcpList = indClasificacionService.getCuentasRecuperadas();
-        vpcGrid.setModel(new ListModelList<VPPTOCategoria>(vcpList));
-        periodo = indClasificacionService.getPeriodo().toUpperCase();
-        if (periodo != null) {
-            periodoSeleccionado.setValue("Período mostrado: ".concat(periodo.toUpperCase()));
-        }
+        vpcList = indVendedorService.getCuentasNuevas();
+        vpcGrid.setModel(new ListModelList<VPPTOCategoria>(vpcList));
+        periodo = indVendedorService.getPeriodo().toUpperCase();
+        //Cargar los años distintos que hay en la base (solo obtiene maximo 5)
+        anios.setModel(new ListModelList<String>(
+                indVendedorService.obtenerAnios()));
+            periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
     }
 
     @Listen("onClick = #downloadButton")
@@ -95,24 +100,53 @@ public class VentasVsPresupuestoCategoria extends SelectorComposer<Component> {
                 case 0:
                     format = JasperExporter.EXTENSION_TYPE_EXCEL;
                     type = JasperExporter.MEDIA_TYPE_EXCEL;
+                    params.put("mostrar", Boolean.valueOf(false));
                     break;
                 case 1:
                     format = JasperExporter.EXTENSION_TYPE_WORD;
                     type = JasperExporter.MEDIA_TYPE_WORD;
+                    params.put("mostrar", Boolean.valueOf(true));
                     break;
                 case 2:
                     format = JasperExporter.EXTENSION_TYPE_PDF;
                     type = JasperExporter.MEDIA_TYPE_PDF;
+                    params.put("mostrar", Boolean.valueOf(true));
                     break;
                 default:
                     format = JasperExporter.EXTENSION_TYPE_PDF;
                     type = JasperExporter.MEDIA_TYPE_PDF;
+                    params.put("mostrar", Boolean.valueOf(true));
                     break;
             }
             File report = File.createTempFile("CuentasNuevasVendedores", format);
-            JasperExporter.export(realPath, params, new JRBeanCollectionDataSource(vcpList),
+            JasperExporter.export(realPath, params, new JRBeanCollectionDataSource(vpcList),
                     format, report);
             Filedownload.save(report, type);
         }
+    }
+    
+     /**
+     * Carga los meses despues de que el usuario seleccioo un año
+     */
+    @Listen("onSelect = #anios")
+    public void cargarMeses(){
+        String anioSeleccionado = anios.getSelectedItem().getValue();
+        meses.setModel(new ListModelList<Mes>(
+                indVendedorService.obtenerMeses(anioSeleccionado)));
+    }
+    
+    /**
+     * Recargar los datos automaticamente
+     * despues de seleccionar el mes
+     */
+    @Listen("onSelect = #meses")
+    public void recargarModelo() {
+        String anio = anios.getSelectedItem().getValue();
+        Mes mes = (Mes) meses.getSelectedItem().getValue();
+        vpcList = indVendedorService.getCuentasNuevas(anio,
+                mes.getNumero());
+        vpcGrid.setModel(new ListModelList<VPPTOCategoria>(vpcList));
+        periodo = mes.getMes() + " " + String.valueOf(anio);
+        periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
     }
 }

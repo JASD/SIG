@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="158721d0-b68c-4fc2-b720-bb5989ebcf24">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="20"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="nombreMes1" class="java.lang.String"/>
+	<parameter name="nombreMes2" class="java.lang.String"/>
+	<parameter name="nombreMes3" class="java.lang.String"/>
+	<parameter name="nombreMes4" class="java.lang.String"/>
+	<parameter name="nombreMes5" class="java.lang.String"/>
+	<parameter name="nombreMes6" class="java.lang.String"/>
 	<field name="vendedor" class="java.lang.String"/>
 	<field name="mes1" class="java.lang.Float"/>
 	<field name="mes2" class="java.lang.Float"/>
@@ -26,7 +32,7 @@
 			</textField>
 			<image>
 				<reportElement uuid="86e1688b-5094-4aed-9cdd-b1b33645b726" x="11" y="10" width="91" height="46"/>
-				<imageExpression><![CDATA["\\img\\logo.gif"]]></imageExpression>
+				<imageExpression><![CDATA["..\\..\\images\\LOGO_CEK.gif"]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -50,85 +56,85 @@
 				</textElement>
 				<text><![CDATA[VENDEDOR]]></text>
 			</staticText>
-			<staticText>
-				<reportElement uuid="fb99140c-6fa4-45e1-b448-d7a3e33d7147" x="111" y="14" width="100" height="20"/>
-				<textElement>
+			<textField>
+				<reportElement uuid="5ea75953-3504-4fae-a69e-43f9fb005df8" x="111" y="14" width="100" height="20"/>
+				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[MES 1]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="dd3ba1ca-a5bc-4248-9878-66d7555cff17" x="211" y="14" width="100" height="20"/>
-				<textElement>
+				<textFieldExpression><![CDATA[$P{nombreMes1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9d47afd3-2c35-414b-bcf2-96f1797dd767" x="211" y="14" width="100" height="20"/>
+				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[MES 2]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="06c39761-b471-4ffd-a271-61d9ff6977aa" x="311" y="14" width="100" height="20"/>
-				<textElement>
+				<textFieldExpression><![CDATA[$P{nombreMes2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6c0e1566-2a9a-4299-9889-168947acd82e" x="311" y="14" width="100" height="20"/>
+				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[MES 3]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="dea7b1bb-f967-4107-b2c2-0f9ba28376e0" x="411" y="14" width="100" height="20"/>
-				<textElement>
+				<textFieldExpression><![CDATA[$P{nombreMes3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2e126124-872e-4cee-8922-7a8f81e4f56b" x="411" y="14" width="100" height="20"/>
+				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[MES 4]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="c72d9ab7-85f1-4047-b2c8-e87d37688de0" x="511" y="14" width="100" height="20"/>
-				<textElement>
+				<textFieldExpression><![CDATA[$P{nombreMes4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="eec2e440-c824-44f9-8bfc-088097791e7c" x="511" y="14" width="100" height="20"/>
+				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[MES 5]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="cb422d39-b8f9-4003-a850-d8d3823b8187" x="611" y="14" width="100" height="20"/>
-				<textElement>
+				<textFieldExpression><![CDATA[$P{nombreMes5}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7169a8cb-c2ef-4090-8e93-8c0f3923083a" x="611" y="14" width="100" height="20"/>
+				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[MES 6]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$P{nombreMes6}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
-			<textField>
+		<band height="20" splitType="Stretch">
+			<textField pattern="">
 				<reportElement uuid="9f44d0e1-2470-4e72-a88a-a171888b6635" x="11" y="0" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{vendedor}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement uuid="6675adeb-c2a0-429a-b500-82b37ba69116" x="111" y="0" width="100" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{mes1}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement uuid="bb955784-393b-4889-b377-8f208fee8140" x="211" y="0" width="100" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{mes2}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement uuid="12e3f2cb-1f66-48e4-b4f5-ebc730aae527" x="311" y="0" width="100" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{mes3}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement uuid="537b60e2-e6b7-4869-87cd-f9ae884174b4" x="411" y="0" width="100" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{mes4}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement uuid="12097f5b-e325-42d5-86a9-20c4224a5222" x="511" y="0" width="100" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{mes5}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement uuid="00ea581a-0497-4ef3-928d-30f0deeb0656" x="611" y="0" width="100" height="20"/>
-				<textElement/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{mes6}]]></textFieldExpression>
 			</textField>
 		</band>

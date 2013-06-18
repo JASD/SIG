@@ -5,13 +5,13 @@
     <label style="margin:20px 20px 10px 10px" 
            value="Período a analizar: "/>
     <combobox id="anios" constraint="no empty: Elija un Año"
-        style="margin:20px 20px 10px 10px" >
+              style="margin:20px 20px 10px 10px" >
         <template name="model">
             <comboitem label="${each}" />
         </template>
     </combobox> 
     <combobox id="meses" constraint="no empty: Elija un Mes"
-        style="margin:20px 20px 10px 10px" >
+              style="margin:20px 20px 10px 10px" >
         <template name="model">
             <comboitem label="${each}" />
         </template>
@@ -37,7 +37,7 @@
                        colspan="4" label="Reporte de Cuentas Nuevas por Vendedor"/>
         </auxhead>
         <columns>
-            <column hflex="20" label="Nombre" sort="auto(vendedor)" />
+            <column hflex="20" label="Vendedor" sort="auto(vendedor)" />
             <column hflex="6" label="Proyectado" sort="auto(proyectado)" align="right"/>
             <column hflex="6" label="Cuentas nuevas" sort="auto(cuentasNuevas)" align="right"/>
             <column hflex="6" label="Cumplimiento" sort="auto(cumplimiento)" align="right"/>

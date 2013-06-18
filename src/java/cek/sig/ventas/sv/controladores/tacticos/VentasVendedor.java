@@ -113,12 +113,12 @@ public class VentasVendedor extends SelectorComposer<Component> {
             HttpServletRequest request = (HttpServletRequest) exec.getNativeRequest();
             String realPath = request.getServletContext().getRealPath(JASPER_PATH);
             HashMap<String, Object> params = new HashMap<String, Object>();
-            params.put("periodo1", mes1.getValue());
-            params.put("periodo2", mes2.getValue());
-            params.put("periodo3", mes3.getValue());
-            params.put("periodo4", mes4.getValue());
-            params.put("periodo5", mes5.getValue());
-            params.put("periodo6", mes6.getValue());
+            params.put("nombreMes1", mes1.getValue());
+            params.put("nombreMes2", mes2.getValue());
+            params.put("nombreMes3", mes3.getValue());
+            params.put("nombreMes4", mes4.getValue());
+            params.put("nombreMes5", mes5.getValue());
+            params.put("nombreMes6", mes6.getValue());
             String format;
             String type;
             switch (formatos.getSelectedIndex()) {
