@@ -7,7 +7,6 @@ import cek.sig.ventas.sv.controladores.util.Auxiliares;
 import cek.sig.ventas.sv.controladores.util.Mes;
 import cek.sig.ventas.sv.entidades.CekClasificacion;
 import cek.sig.ventas.sv.entidades.CekIndClasificacion;
-import cek.sig.ventas.sv.entidades.CekIndVendedor;
 import cek.sig.ventas.sv.entidades.CekPeriodo;
 import cek.sig.ventas.sv.entidades.reportes.CRVendedor;
 import cek.sig.ventas.sv.entidades.reportes.UCategoria;
@@ -43,9 +42,8 @@ public class IndClasificacionService {
     @Autowired
     private ClasificacionDAO clasificacionDAO;
     //private List<CekIndClasificacion> records = new ArrayList<CekIndClasificacion>();
-
     //prueba de paco
-    /*@Transactional(readOnly = true)
+            /*@Transactional(readOnly = true)
      public List<VPPTOCategoria> getCuentasRecuperadas() {
      records = indClasificacionDAO.executeNamedQuery("CekIndClasificacion.cuentasRecuperadasUltimo");
      List<VPPTOCategoria> dtos = new ArrayList<VPPTOCategoria>();
@@ -61,8 +59,7 @@ public class IndClasificacionService {
      }
         
      return dtos;
-     }*/
-    /**
+     }*/ /**
      * Obtengo las ventas para los ultimos 6 meses
      *
      * @return
@@ -252,5 +249,38 @@ public class IndClasificacionService {
             meses.add(m);
         }
         return meses;
+    }
+
+    @Transactional(readOnly = true)
+    public List<VPPTOCategoria> getClasificacion() {
+        List<CekIndClasificacion> records = indClasificacionDAO.executeNamedQuery("CekIndClasificacion.ultimo");
+        List<VPPTOCategoria> dtos = new ArrayList<VPPTOCategoria>();
+
+        for (CekIndClasificacion ind : records) {
+            VPPTOCategoria cne = new VPPTOCategoria();
+            cne.setCategoria(ind.getCekClasificacion().getClasNombre());
+            cne.setVentas(ind.getIndcVentaNeta().floatValue());
+            cne.setPresupuesto(ind.getIndcPpto().floatValue());
+            cne.setVariacion(ind.getIndcVarPpto().floatValue());
+            dtos.add(cne);
+        }
+        return dtos;
+    }
+
+    @Transactional(readOnly = true)
+    public List<VPPTOCategoria> getClasificacion(String anio, int mes) {
+
+        List<CekIndClasificacion> records = indClasificacionDAO.findByPeriodo(anio, mes);
+        List<VPPTOCategoria> dtos = new ArrayList<VPPTOCategoria>();
+        for (CekIndClasificacion ind : records) {
+            VPPTOCategoria cne = new VPPTOCategoria();
+            cne.setCategoria(ind.getCekClasificacion().getClasNombre());
+            cne.setVentas(ind.getIndcVentaNeta().floatValue());
+            cne.setPresupuesto(ind.getIndcPpto().floatValue());
+            cne.setVariacion(ind.getIndcVarPpto().floatValue());
+            dtos.add(cne);
+        }
+        return dtos;
+
     }
 }
