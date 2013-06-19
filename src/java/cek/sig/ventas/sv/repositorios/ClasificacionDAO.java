@@ -6,6 +6,7 @@ package cek.sig.ventas.sv.repositorios;
 
 import cek.sig.ventas.sv.entidades.CekClasificacion;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -53,4 +54,11 @@ public class ClasificacionDAO extends AbstractDAO<CekClasificacion> {
     public List<CekClasificacion> executeNamedQuery(String NamedQuery) {
        return sessionFactory.getCurrentSession().getNamedQuery(NamedQuery).list();
     }
+    
+    public List<String> obtenerCategorias(){
+        Query q = sessionFactory.getCurrentSession().getNamedQuery("CekClasificacion.findByCategoria");
+        List<String> cat = q.list();
+        return cat;
+    }
+
 }
