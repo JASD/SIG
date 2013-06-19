@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="158721d0-b68c-4fc2-b720-bb5989ebcf24">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="77"/>
+	<property name="ireport.x" value="526"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="periodo" class="java.lang.String"/>
 	<field name="categoria" class="java.lang.String"/>
 	<field name="ventas" class="java.lang.Float"/>
 	<field name="presupuesto" class="java.lang.Float"/>
@@ -25,15 +26,15 @@
 				</textElement>
 				<text><![CDATA[CEK DE CENTROAMERICA EL SALVADOR]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement uuid="3275c72c-3e9d-4eec-8486-ef05a9bf35de" x="548" y="0" width="204" height="20"/>
-				<textElement textAlignment="Right" verticalAlignment="Top"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 			<image>
 				<reportElement uuid="86e1688b-5094-4aed-9cdd-b1b33645b726" x="11" y="10" width="91" height="46"/>
 				<imageExpression><![CDATA["..\\..\\images\\LOGO_CEK.gif"]]></imageExpression>
 			</image>
+			<textField>
+				<reportElement uuid="780fb7ed-5e3c-4728-93b0-666fe7dab54b" x="566" y="0" width="184" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["PERIODO: " + $P{periodo}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>

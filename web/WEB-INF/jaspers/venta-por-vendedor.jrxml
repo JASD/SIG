@@ -9,6 +9,7 @@
 	<parameter name="nombreMes4" class="java.lang.String"/>
 	<parameter name="nombreMes5" class="java.lang.String"/>
 	<parameter name="nombreMes6" class="java.lang.String"/>
+	<parameter name="periodo" class="java.lang.String"/>
 	<field name="vendedor" class="java.lang.String"/>
 	<field name="mes1" class="java.lang.Float"/>
 	<field name="mes2" class="java.lang.Float"/>
@@ -43,15 +44,15 @@
 				</textElement>
 				<text><![CDATA[CEK DE CENTROAMERICA EL SALVADOR]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement uuid="3275c72c-3e9d-4eec-8486-ef05a9bf35de" x="548" y="0" width="204" height="20"/>
-				<textElement textAlignment="Right" verticalAlignment="Top"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 			<image>
 				<reportElement uuid="86e1688b-5094-4aed-9cdd-b1b33645b726" x="11" y="10" width="91" height="46"/>
 				<imageExpression><![CDATA["..\\..\\images\\LOGO_CEK.gif"]]></imageExpression>
 			</image>
+			<textField>
+				<reportElement uuid="5024f7cd-6c82-42dd-b7d5-35c78b48012a" x="566" y="10" width="184" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["PERIODO: " + $P{periodo}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>

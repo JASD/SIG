@@ -43,7 +43,7 @@
             <grid id="kvpGrid"  mold="paging" pageSize="10" emptyMessage="Informacion no disponible">
                 <auxhead>
                     <auxheader style="text-align:center"
-                               colspan="3" label="Reporte de Ventas en Kilogramos de pruductos por categoria"/>
+                               colspan="3" label="Reporte de Ventas en Kilogramos de productos por categoria"/>
                 </auxhead>
                 <columns sizable="true">
                     <column hflex="6" label="Producto" sort="auto(producto)" />
