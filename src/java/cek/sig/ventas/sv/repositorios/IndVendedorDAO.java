@@ -73,6 +73,10 @@ public class IndVendedorDAO extends AbstractDAO<CekIndVendedor> {
 
     }
     
+    
+    
+
+    
     public CekIndVendedor obtenerPorPeriodoVendedor(CekPeriodo p, CekVendedor v){
         Query q = sessionFactory.getCurrentSession()
                 .getNamedQuery("CekIndVendedor.findByVendedorPeriodo");
