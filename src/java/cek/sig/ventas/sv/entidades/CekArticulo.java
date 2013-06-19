@@ -12,6 +12,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -40,6 +42,9 @@ public class CekArticulo implements Serializable {
     private String artiNombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cekArticulo", fetch = FetchType.LAZY)
     private List<CekIndArticulo> cekIndArticuloList;
+    @JoinColumn(name = "ARTI_CLASIFI", referencedColumnName = "ID_CLASIFICACION")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private CekClasificacion idClasificacion;
 
     public CekArticulo() {
     }
@@ -70,6 +75,14 @@ public class CekArticulo implements Serializable {
 
     public void setCekIndArticuloList(List<CekIndArticulo> cekIndArticuloList) {
         this.cekIndArticuloList = cekIndArticuloList;
+    }
+
+    public CekClasificacion getIdClasificacion() {
+        return idClasificacion;
+    }
+
+    public void setIdClasificacion(CekClasificacion idClasificacion) {
+        this.idClasificacion = idClasificacion;
     }
 
     @Override

@@ -50,7 +50,7 @@ public class IndArticuloService {
 
      
      @Transactional(readOnly = true)
-    public List<KPCategoria> getCategorias(String anio, int mes, String categoria) {
+    public List<KPCategoria> getArticuloPorCategoria(String anio, int mes, CekClasificacion categoria) {
 
         //Hago la consulta a la base
              
@@ -61,11 +61,9 @@ public class IndArticuloService {
         for (CekIndArticulo indc : records) {
             KPCategoria kvc = new KPCategoria();
             kvc.setProducto(indc.getCekArticulo().getArtiNombre());
-            kvc.setProyKg(indc.getIndaProyKg().floatValue());
-            kvc.setKgVproductos(indc.getIndaKg().floatValue());
-            kvc.setCumplimiento(indc.getIndaCumpProy().floatValue());
-            
-            
+            kvc.setProyKg(indc.getIndaProyKg());
+            kvc.setKgVproductos(indc.getIndaKg());
+            kvc.setCumplimiento(indc.getIndaCumpProy());
             dtos.add(kvc);
         }
 

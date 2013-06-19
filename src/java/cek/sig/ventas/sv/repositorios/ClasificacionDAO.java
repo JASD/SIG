@@ -55,10 +55,9 @@ public class ClasificacionDAO extends AbstractDAO<CekClasificacion> {
        return sessionFactory.getCurrentSession().getNamedQuery(NamedQuery).list();
     }
     
-    public List<String> obtenerCategorias(){
-        Query q = sessionFactory.getCurrentSession().getNamedQuery("CekClasificacion.findByCategoria");
-        List<String> cat = q.list();
-        return cat;
+    public List<CekClasificacion> obtenerCategorias(){
+        Query q = sessionFactory.getCurrentSession().getNamedQuery("CekClasificacion.findAll");
+        return q.list();
     }
 
 }

@@ -4,9 +4,7 @@
  */
 package cek.sig.ventas.sv.repositorios;
 
-import cek.sig.ventas.sv.servicios.*;
 import cek.sig.ventas.sv.entidades.CekClasificacion;
-import cek.sig.ventas.sv.entidades.CekIndArticulo;
 import cek.sig.ventas.sv.entidades.CekPeriodo;
 import cek.sig.ventas.sv.entidades.CekIndArticulo;
 import java.util.List;
@@ -76,12 +74,13 @@ public class IndArticuloDAO extends AbstractDAO<CekIndArticulo> {
      * @param mes
      * @return 
      */
-    public List<CekIndArticulo> findByPeriodoCategoria(String anio, int mes,String categoria) {
+    public List<CekIndArticulo> findByPeriodoCategoria(String anio, int mes, 
+            CekClasificacion categoria) {
         
         Query q = sessionFactory.getCurrentSession().getNamedQuery("CekIndArticulo.findByPeriodoCategoria");
         q.setInteger("anio", Integer.valueOf(anio));
         q.setInteger("mes", mes);
-        q.setString("categoria", categoria);
+        q.setParameter("categoria", categoria);
         return (List<CekIndArticulo>) q.list();
 
     }

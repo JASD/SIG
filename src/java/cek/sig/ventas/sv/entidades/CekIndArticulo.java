@@ -23,20 +23,23 @@ import javax.persistence.Table;
 @Table(name = "CEK_IND_ARTICULO")
 @NamedQueries({
     @NamedQuery(name = "CekIndArticulo.findAll", query = "SELECT c FROM CekIndArticulo c"),
-    @NamedQuery(name = "CekIndArticulo.findByPeriodoCategoria", query = "SELECT c FROM CekIndArticulo c WHERE c.cekPeriodo.periAnio = :anio AND c.cekPeriodo.periMes = :mes")})
+    @NamedQuery(name = "CekIndArticulo.findByPeriodoCategoria", 
+        query = "SELECT c FROM CekIndArticulo c WHERE "
+        + "c.cekPeriodo.periAnio = :anio AND c.cekPeriodo.periMes = :mes "
+        + "AND c.cekArticulo.idClasificacion = :categoria")})
 public class CekIndArticulo implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CekIndArticuloPK cekIndArticuloPK;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "ATTRIBUTE_13")
-    private Double attribute13;
+    @Column(name = "INDA_VENTA")
+    private Float indaVenta;
     @Column(name = "INDA_KG")
-    private Double indaKg;
+    private Float indaKg;
     @Column(name = "INDA_PROY_KG")
-    private Double indaProyKg;
+    private Float indaProyKg;
     @Column(name = "INDA_CUMP_PROY")
-    private Long indaCumpProy;
+    private Float indaCumpProy;
     @JoinColumn(name = "ID_PERIODO", referencedColumnName = "ID_PERIODO", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private CekPeriodo cekPeriodo;
@@ -66,35 +69,35 @@ public class CekIndArticulo implements Serializable {
         this.cekIndArticuloPK = cekIndArticuloPK;
     }
 
-    public Double getAttribute13() {
-        return attribute13;
+    public Float getIndaVenta() {
+        return indaVenta;
     }
 
-    public void setAttribute13(Double attribute13) {
-        this.attribute13 = attribute13;
+    public void setIndaVenta(Float indaVenta) {
+        this.indaVenta = indaVenta;
     }
 
-    public Double getIndaKg() {
+    public Float getIndaKg() {
         return indaKg;
     }
 
-    public void setIndaKg(Double indaKg) {
+    public void setIndaKg(Float indaKg) {
         this.indaKg = indaKg;
     }
 
-    public Double getIndaProyKg() {
+    public Float getIndaProyKg() {
         return indaProyKg;
     }
 
-    public void setIndaProyKg(Double indaProyKg) {
+    public void setIndaProyKg(Float indaProyKg) {
         this.indaProyKg = indaProyKg;
     }
 
-    public Long getIndaCumpProy() {
+    public Float getIndaCumpProy() {
         return indaCumpProy;
     }
 
-    public void setIndaCumpProy(Long indaCumpProy) {
+    public void setIndaCumpProy(Float indaCumpProy) {
         this.indaCumpProy = indaCumpProy;
     }
 

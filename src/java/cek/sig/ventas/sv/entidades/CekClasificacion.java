@@ -101,7 +101,7 @@ public class CekClasificacion implements Serializable {
 
     @Override
     public String toString() {
-        return "cek.sig.ventas.sv.entidades.CekClasificacion[ idClasificacion=" + idClasificacion + " ]";
+        return clasNombre;
     }
     
 }

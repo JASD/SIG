@@ -4,21 +4,13 @@
  */
 package cek.sig.ventas.sv.controladores.tacticos;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.select.SelectorComposer;
 import cek.sig.ventas.sv.entidades.reportes.KPCategoria;
 import cek.sig.ventas.sv.servicios.IndClasificacionService;
 import cek.sig.ventas.sv.servicios.IndArticuloService;
 //import cek.sig.ventas.sv.servicios.ClasificacionService;
 import cek.sig.ventas.sv.controladores.util.JasperExporter;
 import cek.sig.ventas.sv.controladores.util.Mes;
+import cek.sig.ventas.sv.entidades.CekClasificacion;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -39,6 +31,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Grid;
@@ -50,8 +43,8 @@ import org.zkoss.zul.ListModelList;
  * @author Ever
  */
 @Controller
-public class KilogramoProductoVendido extends SelectorComposer<Component>{
-    
+public class KilogramoProductoVendido extends SelectorComposer<Component> {
+
     private static final String JASPER_PATH = "/WEB-INF/jaspers/ventas_kg_categorias.jasper";
     @Wire
     private Combobox anios;
@@ -65,38 +58,39 @@ public class KilogramoProductoVendido extends SelectorComposer<Component>{
     private Grid kvpGrid;
     @Wire
     private Label periodoSeleccionado;
+    @Wire
+    private Button downloadButton;
     @WireVariable
     private IndClasificacionService indClasificacionService;
+    @WireVariable
     private IndArticuloService indArticuloService;
-//    private ClasificacionService clasificacionService;
     private List<KPCategoria> catList;
     private String periodo;
-    
-     @RequestMapping(value = "/kilogramoProductoVendido")
+
+    @RequestMapping(value = "/kilogramoProductoVendido")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        //logger.info("Returning hello view");
-        //PurchaseData pd = new PurchaseData();
         ModelAndView mv = new ModelAndView("reportesTacticos/kilogramoProductoVendido");
-        //mv.addObject("purchases", pd.getAllPurchases());
-
         return mv;
     }
-     
-  @Override
+
+    @Override
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
-        
-        
+
+
         periodo = indClasificacionService.getPeriodo().toUpperCase();
+        //cargar las categoria
+
+        categ.setModel(new ListModelList<CekClasificacion>(
+                indClasificacionService.obtenerCatgorias()));
         //Cargar los aÃ±os distintos que hay en la base (solo obtiene maximo 10)
         anios.setModel(new ListModelList<String>(
                 indClasificacionService.obtenerAnios()));
         periodoSeleccionado.setValue("Periodo mostrado: ".concat(periodo));
-        
-        
-        
+
+
+
     }
 
     /**
@@ -156,26 +150,34 @@ public class KilogramoProductoVendido extends SelectorComposer<Component>{
         meses.setModel(new ListModelList<Mes>(
                 indClasificacionService.obtenerMeses(anioSeleccionado)));
     }
-
+    
     @Listen("onSelect = #meses")
-    public void cargarCategorias() {
-        categ.setModel(new ListModelList<String>(indClasificacionService.obtenerCatgorias()));
+    public void habilitarCategorias() {
+        categ.setDisabled(false);
     }
     
+    
+
     /**
      * Recargar los datos automaticamente despues de seleccionar el mes
      */
- @Listen("onSelect = #categ")
+    @Listen("onSelect = #categ")
     public void recargarModelo() {
         String anio = anios.getSelectedItem().getValue();
         Mes mes = (Mes) meses.getSelectedItem().getValue();
-        String cat=categ.getSelectedItem().getValue();
-        
-        catList=indArticuloService.getCategorias(anio, mes.getNumero(), cat);
+        CekClasificacion cat = 
+                (CekClasificacion) categ.getSelectedItem().getValue();
+
+        catList = indArticuloService.getArticuloPorCategoria(anio, mes.getNumero(), cat);
         //catList = indArticuloService.getCategorias(anio, mes.getNumero(), cat));
         kvpGrid.setModel(new ListModelList<KPCategoria>(catList));
         periodo = mes.getMes() + " " + String.valueOf(anio);
         periodoSeleccionado.setValue("Periodo mostrado: ".concat(periodo));
+        
+        downloadButton.setDisabled(false);
+        if(catList.isEmpty()){
+            downloadButton.setDisabled(true);
+        }
+        
     }
-}   
-
+}

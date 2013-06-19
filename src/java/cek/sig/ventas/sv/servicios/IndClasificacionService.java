@@ -337,17 +337,10 @@ public class IndClasificacionService {
 
         return dtos;
     } 
-     
-     @Transactional(readOnly = true)
-    public List<String> obtenerCatgorias() {
-
-        List<String> cat =
-                clasificacionDAO.obtenerCategorias();
-        List<String> categorias = new ArrayList<String>();
-        for (String a : cat) {
-            categorias.add(a);
-        }
-        return categorias;
+   
+    @Transactional(readOnly = true)
+    public List<CekClasificacion> obtenerCatgorias() {
+        return clasificacionDAO.obtenerCategorias();
 
     }
 
