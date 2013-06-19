@@ -1,40 +1,53 @@
-<zk>
-            <window title="Search" width="600px" border="normal"
-                      apply="cek.sig.ventas.sv.controller.SearchController">
-                <hbox align="center">
-                    Keyword:
-                    <textbox id="keywordBox" />
-                    <button id="searchButton" label="Search" image="/widgets/getting_started/img/search.png" />
-                </hbox>
-                <listbox id="carListbox" emptyMessage="No car found in the result" height="160px" style="margin-top:10px">
-                    <listhead>
-                        <listheader label="Model" />
-                        <listheader label="Make" />
-                        <listheader label="Price" width="20%"/>
-                    </listhead>
-                    <template name="model">
-                        <listitem>
-                            <listcell label="${each.model}"></listcell>
-                            <listcell label="${each.make}"></listcell>
-                            <listcell>$<label value="${each.price}" /></listcell>
-                        </listitem>
-                    </template>
-                </listbox>
-                <hbox style="margin-top:20px" id="detailBox" visible="false">
-                    <image id="previewImage" style="padding:10px" />
-                    <vbox>
-                        <hlayout>
-                            Model : <label id="modelLabel" style="font-weight:bold"/>
-                        </hlayout>
-                        <hlayout>
-                            Make : <label id="makeLabel" style="font-weight:bold"/>
-                        </hlayout>
-                        <hlayout>
-                            Price : 
-                            <span>$<label id="priceLabel" style="font-weight:bold"/></span>
-                        </hlayout>
-                        <label id="descriptionLabel" />
-                    </vbox>
-                </hbox>
-            </window>
-        </zk>
+<?page id="kvc" title="Kilogramos Vendidos Categoria"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
+<window self="@{define(left)}" title='Kilogramos Vendidos por Categoria'
+        apply="cek.sig.ventas.sv.controladores.tacticos.KilogramosVendidosCategoria">
+    <label style="margin:20px 20px 10px 10px" 
+           value="PerÃƒÂ­odo a analizar: "/>
+     <combobox id="anios" constraint="no empty: Elija un AÃ±o"
+        style="margin:20px 20px 10px 10px" >
+        <template name="model">
+            <comboitem label="${each}" />
+        </template>
+    </combobox> 
+    <combobox id="meses" constraint="no empty: Elija un Mes"
+        style="margin:20px 20px 10px 10px" >
+        <template name="model">
+            <comboitem label="${each}" />
+        </template>
+    </combobox>
+     <label id="periodoSeleccionado"/>
+    <button style="margin:20px 20px 10px 10px;float:right" id="downloadButton"
+            label="Generar Reporte"/>
+    <combobox id="formatos" readonly="true" autodrop="true"
+              style="margin:20px 20px 10px 10px;float:right">
+        <comboitem label="Archivo de Excel"/>
+        <comboitem label="Archivo de Word"/>
+        <comboitem label="Archivo PDF"/>
+    </combobox>
+    <label style="margin:20px 20px 10px 10px;clear:left;float:right"
+           value="Tipo de reporte: "/>
+    <panel>
+        <panelchildren>
+            <grid id="vkcGrid"  mold="paging" pageSize="10" emptyMessage="Informacion no disponible">
+                <auxhead>
+                    <auxheader style="text-align:center"
+                               colspan="3" label="Reporte de Ventas en Kilogramos por Categoria"/>
+                </auxhead>
+                <columns sizable="true">
+                    <column hflex="6" label="Categoria" sort="auto(categoria)" />
+                    <column hflex="6" label="Kilogramos" sort="auto(kilogramos)" align="right"/>
+                    <column hflex="6" label="Porcentaje" sort="auto(porcentaje)" align="right"/>
+                </columns>
+                <template name="model">
+                    <row>
+                        <label value="${each.categoria}"/>
+                        <label value="${c:formatNumber(each.kilogramos, ' #,##0.00')}"/>
+                        <label value="${c:formatNumber(each.porcentaje/100, '##.00%')}"/>
+                    </row>
+                </template>
+            </grid>
+        </panelchildren>
+    </panel>
+</window>
