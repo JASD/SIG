@@ -28,6 +28,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Grid;
@@ -40,7 +41,7 @@ import org.zkoss.zul.ListModelList;
  */
 @Controller
 public class CuentasRecuperadasVendedor extends SelectorComposer<Component> {
-
+    
     private static final String JASPER_PATH = "/WEB-INF/jaspers/cuentas_recuperadas_vendedor.jasper";
     @Wire
     private Combobox anios;
@@ -52,17 +53,19 @@ public class CuentasRecuperadasVendedor extends SelectorComposer<Component> {
     private Grid crvGrid;
     @Wire
     private Label periodoSeleccionado;
+    @Wire
+    private Button downloadButton;
     @WireVariable
     private IndVendedorService indVendedorService;
     private List<CRVendedor> crvList;
     private String periodo;
-
+    
     @RequestMapping(value = "/cuentasRecuperadasVendedor")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         return new ModelAndView("reportesTacticos/cuentasRecuperadasVendedor");
     }
-
+    
     @Override
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
@@ -72,13 +75,18 @@ public class CuentasRecuperadasVendedor extends SelectorComposer<Component> {
         //Cargar los años distintos que hay en la base (solo obtiene maximo 10)
         anios.setModel(new ListModelList<String>(
                 indVendedorService.obtenerAnios()));
-            periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
+        periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
+        
+        if (crvList.isEmpty()) {
+            downloadButton.setDisabled(true);
+        }
     }
 
     /**
      * Descarga el reporte
+     *
      * @throws JRException
-     * @throws IOException 
+     * @throws IOException
      */
     @Listen("onClick = #downloadButton")
     public void generarReporte() throws JRException, IOException {
@@ -121,20 +129,19 @@ public class CuentasRecuperadasVendedor extends SelectorComposer<Component> {
             Filedownload.save(report, type);
         }
     }
-    
+
     /**
      * Carga los meses despues de que el usuario seleccioo un año
      */
     @Listen("onSelect = #anios")
-    public void cargarMeses(){
+    public void cargarMeses() {
         String anioSeleccionado = anios.getSelectedItem().getValue();
         meses.setModel(new ListModelList<Mes>(
                 indVendedorService.obtenerMeses(anioSeleccionado)));
     }
-    
+
     /**
-     * Recargar los datos automaticamente
-     * despues de seleccionar el mes
+     * Recargar los datos automaticamente despues de seleccionar el mes
      */
     @Listen("onSelect = #meses")
     public void recargarModelo() {

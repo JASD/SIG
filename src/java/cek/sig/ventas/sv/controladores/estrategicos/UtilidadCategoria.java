@@ -28,6 +28,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Grid;
@@ -52,6 +53,8 @@ public class UtilidadCategoria extends SelectorComposer<Component> {
     private Grid utilGrid;
     @Wire
     private Label periodoSeleccionado;
+    @Wire
+    private Button downloadButton;
     @WireVariable
     private IndClasificacionService indClasificacionService;
     private List<UCategoria> utilList;
@@ -74,6 +77,11 @@ public class UtilidadCategoria extends SelectorComposer<Component> {
         anios.setModel(new ListModelList<String>(
                 indClasificacionService.obtenerAnios()));
         periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
+        
+        //si la lista esta vacia desactivar boton descarga
+        if(utilList.isEmpty()){
+            downloadButton.setDisabled(true);
+        }
     }
 
     /**
