@@ -77,7 +77,7 @@ public class CuentasPerdidasVendedor extends SelectorComposer<Component> {
          //Cargar los aÃ±os distintos que hay en la base (solo obtiene maximo 5)
         anios.setModel(new ListModelList<String>(
                 indVendedorService.obtenerAnios()));
-            periodoSeleccionado.setValue("PerÃ­odo mostrado: ".concat(periodo));
+            periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
         if(cpvList.isEmpty()){
             downloadButton.setDisabled(true);
         }

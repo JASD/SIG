@@ -45,6 +45,10 @@
     <welcome-file-list>
         <welcome-file>redirect.jsp</welcome-file>
     </welcome-file-list>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/forbidden.htm</location>
+    </error-page>
     
     
     <!-- Configuracion ZK -->

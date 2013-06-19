@@ -81,7 +81,7 @@ public class KilogramosVendidosCategoria extends SelectorComposer<Component>{
         //Cargar los aÃ±os distintos que hay en la base (solo obtiene maximo 10)
         anios.setModel(new ListModelList<String>(
                 indClasificacionService.obtenerAnios()));
-        periodoSeleccionado.setValue("PerÃ­odo mostrado: ".concat(periodo));
+        periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
         if(catList.isEmpty()){
             downloadButton.setDisabled(true);
         }

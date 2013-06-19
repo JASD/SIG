@@ -21,15 +21,23 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SessionController {
 
-   
     protected final Log logger = LogFactory.getLog(getClass());
 
     @RequestMapping(value = "/home")
     public ModelAndView home(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         logger.info("Returning home view");
 
         return new ModelAndView("home");
+    }
+
+    @RequestMapping(value = "/forbidden")
+    public ModelAndView forbidden(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        logger.info("Returning home view");
+
+        return new ModelAndView("forbidden");
     }
 }

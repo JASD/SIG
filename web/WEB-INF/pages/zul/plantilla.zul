@@ -18,14 +18,14 @@
                        value="Sistema de Información Gerencial Departamento de Ventas CEK" />
             </div>
             <menubar style="width:100%;margin-bottom:10px" id="menubar">
-                <menuitem label="HOME" href="/index.htm" />
+                <menuitem label="HOME" href="/home.htm" />
                 <menu label="Reportes Tácticos">
                     <menupopup>
                         <menuitem label="Ventas por categoría" href="/ventasCategoria.htm" />
                         <menuitem label="Ventas por vendedor" href="/ventasVendedor.htm"/>
-                        <menuitem label="Cuentas nuevas mensuales por vendedor" href="/cuentasNuevasVendedor.htm" />
                         <menuitem label="Kilogramos vendidos por categoría" href="/kilogramosVendidosCategoria.htm" />
                         <menuitem label="Kilogramos de productos vendidos por categoría" href="/kilogramoProductoVendido.htm" />
+                        <menuitem label="Cuentas nuevas mensuales por vendedor" href="/cuentasNuevasVendedor.htm" />
                         <menuitem label="Cuentas mensuales recuperadas por vendedor" href="/cuentasRecuperadasVendedor.htm" />
                         <menuitem label="Cuentas mensuales perdidas por vendedor" href="/cuentasPerdidasVendedor.htm" />
                         <menuseparator></menuseparator>
@@ -35,9 +35,9 @@
                     <menupopup>
                         <menuitem label="Cumplimiento de ventas vs presupuesto por categoría" href="/ventasVsPresupuestoCategoria.htm"/>
                         <menuitem label="Cumplimiento de ventas por vendedor" href="/cumplimientoVentasVendedor.htm"/>
-                        <menuitem label="Utilidad por categoría" href="/utilidadCategoria.htm"/>
                         <menuitem label="Índice de penetración por vendedor" href="/indicePenetracionVendedor.htm"/>
                         <menuitem label="Índice de cobertura por vendedor" href="/indiceCoberturaVendedor.htm"/>
+                        <menuitem label="Utilidad por categoría" href="/utilidadCategoria.htm"/>
                         <menuseparator></menuseparator>
                     </menupopup>
                 </menu>
