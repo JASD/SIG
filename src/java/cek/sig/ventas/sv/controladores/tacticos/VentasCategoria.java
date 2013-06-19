@@ -27,6 +27,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Grid;
@@ -57,6 +58,8 @@ public class VentasCategoria extends SelectorComposer<Component> {
     private Label mes5;
     @Wire
     private Label mes6;
+    @Wire
+    private Button downloadButton;
     @WireVariable
     private IndClasificacionService indClasificacionService;
     private List<VCategoria> vcList;
@@ -101,6 +104,10 @@ public class VentasCategoria extends SelectorComposer<Component> {
         //Se llena la tabla
         vcList = indClasificacionService.getVentas();
         vc.setModel(new ListModelList<VCategoria>(vcList));
+        
+        if(vcList.isEmpty()){
+            downloadButton.setDisabled(true);
+        }
 
     }
 

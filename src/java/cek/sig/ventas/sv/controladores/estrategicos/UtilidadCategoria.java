@@ -151,6 +151,10 @@ public class UtilidadCategoria extends SelectorComposer<Component> {
         Mes mes = (Mes) meses.getSelectedItem().getValue();
         utilList = indClasificacionService.getUtilidad(anio,
                 mes.getNumero());
+        downloadButton.setDisabled(false);
+         if (utilList.isEmpty()) {
+            downloadButton.setDisabled(true);
+        }
         utilGrid.setModel(new ListModelList<UCategoria>(utilList));
         periodo = mes.getMes() + " " + String.valueOf(anio);
         periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));

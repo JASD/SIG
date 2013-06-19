@@ -149,6 +149,10 @@ public class CuentasRecuperadasVendedor extends SelectorComposer<Component> {
         Mes mes = (Mes) meses.getSelectedItem().getValue();
         crvList = indVendedorService.getCuentasRecuperadas(anio,
                 mes.getNumero());
+        downloadButton.setDisabled(false);
+         if (crvList.isEmpty()) {
+            downloadButton.setDisabled(true);
+        }
         crvGrid.setModel(new ListModelList<CRVendedor>(crvList));
         periodo = mes.getMes() + " " + String.valueOf(anio);
         periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
