@@ -1,40 +1,56 @@
-<zk>
-            <window title="Search" width="600px" border="normal"
-                      apply="cek.sig.ventas.sv.controller.SearchController">
-                <hbox align="center">
-                    Keyword:
-                    <textbox id="keywordBox" />
-                    <button id="searchButton" label="Search" image="/widgets/getting_started/img/search.png" />
-                </hbox>
-                <listbox id="carListbox" emptyMessage="No car found in the result" height="160px" style="margin-top:10px">
-                    <listhead>
-                        <listheader label="Model" />
-                        <listheader label="Make" />
-                        <listheader label="Price" width="20%"/>
-                    </listhead>
-                    <template name="model">
-                        <listitem>
-                            <listcell label="${each.model}"></listcell>
-                            <listcell label="${each.make}"></listcell>
-                            <listcell>$<label value="${each.price}" /></listcell>
-                        </listitem>
-                    </template>
-                </listbox>
-                <hbox style="margin-top:20px" id="detailBox" visible="false">
-                    <image id="previewImage" style="padding:10px" />
-                    <vbox>
-                        <hlayout>
-                            Model : <label id="modelLabel" style="font-weight:bold"/>
-                        </hlayout>
-                        <hlayout>
-                            Make : <label id="makeLabel" style="font-weight:bold"/>
-                        </hlayout>
-                        <hlayout>
-                            Price : 
-                            <span>$<label id="priceLabel" style="font-weight:bold"/></span>
-                        </hlayout>
-                        <label id="descriptionLabel" />
-                    </vbox>
-                </hbox>
-            </window>
-        </zk>
+<?page id="crv" title="Cuentas Perdidas Vendedor"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
+<window self="@{define(left)}" title='Cuentas Perdidas por Vendedor'
+        apply="cek.sig.ventas.sv.controladores.tacticos.CuentasPerdidasVendedor">
+    <label style="margin:20px 20px 10px 10px" 
+           value="PerÃ­odo a analizar: "/>
+     <combobox id="anios" constraint="no empty: Elija un AÃ±o"
+        style="margin:20px 20px 10px 10px" >
+        <template name="model">
+            <comboitem label="${each}" />
+        </template>
+    </combobox> 
+    <combobox id="meses" constraint="no empty: Elija un Mes"
+        style="margin:20px 20px 10px 10px" >
+        <template name="model">
+            <comboitem label="${each}" />
+        </template>
+    </combobox>
+     <label id="periodoSeleccionado"/>
+    <button style="margin:20px 20px 10px 10px;float:right" id="downloadButton"
+            label="Generar Reporte"/>
+    <combobox id="formatos" readonly="true" autodrop="true"
+              style="margin:20px 20px 10px 10px;float:right">
+        <comboitem label="Archivo de Excel"/>
+        <comboitem label="Archivo de Word"/>
+        <comboitem label="Archivo PDF"/>
+    </combobox>
+    <label style="margin:20px 20px 10px 10px;clear:left;float:right"
+           value="Tipo de reporte: "/>
+    <panel>
+        <panelchildren>
+            <grid id="cpvGrid"  mold="paging" pageSize="10" emptyMessage="InformaciÃ³n no disponible">
+                
+                <auxhead>
+                    <auxheader style="text-align:center"
+                               colspan="4" label="Reporte de Cuentas Perdidas por Vendedor"/>
+                </auxhead>
+                <columns sizable="true">
+                    <column hflex="20" label="Nombre" sort="auto(nombreVendedor)" />
+                    <column hflex="6" label="Perdido" sort="auto(perdidoVendedor)" align="right"/>
+                    <column hflex="6" label="Total Cartera" sort="auto(totalCartera)" align="right"/>
+                    <column hflex="6" label="Porcentaje Cartera" align="right"/>
+                </columns>
+                <template name="model">
+                    <row>
+                        <label value="${each.nombreVendedor}"/>
+                        <label value="${c:formatNumber(each.perdidoVendedor, ' #,##0.00')}"/>
+                        <label value="${c:formatNumber(each.totalCartera, ' #,##0.00')}"/>
+                        <label value="${c:formatNumber(each.porcentajeCartera, '##.00%')}"/>
+                    </row>
+                </template>
+            </grid>
+        </panelchildren>
+    </panel>
+</window>
