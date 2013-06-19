@@ -6,7 +6,6 @@ package cek.sig.ventas.sv.controladores.estrategicos;
 
 import cek.sig.ventas.sv.controladores.util.JasperExporter;
 import cek.sig.ventas.sv.controladores.util.Mes;
-import cek.sig.ventas.sv.entidades.reportes.CNVendedor;
 import cek.sig.ventas.sv.entidades.reportes.CVVendedor;
 import cek.sig.ventas.sv.servicios.IndVendedorService;
 import java.io.File;
@@ -29,6 +28,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Grid;
@@ -53,6 +53,8 @@ public class CumplimientoVentasVendedor extends SelectorComposer<Component> {
     private Grid cvvGrid;
     @Wire
     private Label periodoSeleccionado;
+    @Wire
+    private Button downloadButton;
     @WireVariable
     private IndVendedorService indVendedorService;
     private List<CVVendedor> cvvList;
@@ -80,6 +82,10 @@ public class CumplimientoVentasVendedor extends SelectorComposer<Component> {
         anios.setModel(new ListModelList<String>(
                 indVendedorService.obtenerAnios()));
         periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
+        
+        if(cvvList.isEmpty()){
+            downloadButton.setDisabled(true);
+        }
     }
 
     @Listen("onClick = #downloadButton")
@@ -146,5 +152,9 @@ public class CumplimientoVentasVendedor extends SelectorComposer<Component> {
         cvvGrid.setModel(new ListModelList<CVVendedor>(cvvList));
         periodo = mes.getMes() + " " + String.valueOf(anio);
         periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
+        downloadButton.setDisabled(false);
+        if(cvvList.isEmpty()){
+            downloadButton.setDisabled(true);
+        }
     }
 }
