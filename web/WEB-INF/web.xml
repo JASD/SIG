@@ -50,6 +50,10 @@
         <location>/forbidden.htm</location>
     </error-page>
     <error-page>
+        <error-code>404</error-code>
+        <location>/forbidden.htm</location>
+    </error-page>
+    <error-page>
         <error-code>500</error-code>
         <location>/forbidden.htm</location>
     </error-page>
