@@ -4,8 +4,9 @@
     <panel>
         <panelchildren>
             <div style="text-align:center;margin:20px">
-                <image id="image" src="/images/LOGO_CEK.gif" />
-                <label style="font-size: xx-large" 
+                <image id="image" width="100px" height="60px"
+                       src="/images/LOGO_CEK.gif" style="float:left;display:block;"/>
+                <label style="font-size: 26px" 
                        value="CEK DE CENTROAMERICA EL SALVADOR" />
                 <label style="text-align:right;display:block;" value="Usuario: " >
                     ${authentication.principal.username}
@@ -13,8 +14,8 @@
                 <a href="/j_spring_security_logout" style="float:right">
                     cerrar sesion
                 </a>
-                <label style="text-align:center;display:block;font-size: large" 
-                       value="Sistema de informacion gerencial departamento de ventas CEK de C.A" />
+                <label style="text-align:center;display:block;font-size: 20px" 
+                       value="Sistema de Información Gerencial Departamento de Ventas CEK" />
             </div>
             <menubar style="width:100%;margin-bottom:10px" id="menubar">
                 <menuitem label="HOME" href="/index.htm" />

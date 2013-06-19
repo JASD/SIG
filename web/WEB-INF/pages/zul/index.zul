@@ -1,32 +1,68 @@
-<?page id="index" title="CEK de Centroamérica"?>
-<window id="loginwin" title="CUSTOM ZK + SPRING SECURITY LOGIN" border="normal" width="500px">
-    <!-- this form-login-page form is also used as the
-    form-error-page to ask for a login again. -->
-    <html style="color:red" if="${not empty param.login_error}">
+<?page id="index" title="SIG Ventas CEK El Salvador"?>
+<zk>
+
+    <style>
+        .breeze .complex-layout, .breeze .complex-layout .z-south,
+        .breeze .complex-layout .z-west { background: #F7F7F7; }
+        .z-borderlayout { background: #FFFFFF } .complex-layout .z-north
+        { background: #008BB6; } img.complex-layout-header-img {
+        padding: 0 10px; } .complex-layout-header-label { position:
+        relative; top: -30px; padding-left: 40px; font-size: 24px;
+        color: White; font-weight: bold; } .inner-border, .inner-border
+        .z-north, .inner-border .z-west, .inner-border .z-south,
+        .inner-border .z-east { background: #FFFFFF; } .dl-link {
+        text-decoration: none; cursor: pointer; }
+</style>
+
+    <borderlayout sclass="complex-layout" height="600px">
+        <north size="90px" border="0">
+            <div>
+                <image sclass="complex-layout-header-img"
+                   src="/images/logo-cek.jpg" width="450px" height="90px"/>
+                <label sclass="complex-layout-header-label" 
+                   value="CEK de Centro América El Salvador" />
+            </div>
+        </north>
+        <center>
+            <window id="loginwin" 
+                title="Acceso al sistema" 
+                border="normal" width="500px" 
+                position="center" mode="overlapped">
+                <html style="color:red" if="${not empty param.login_error}">
       <![CDATA[
-        Your login attempt was not successful, try again.<br/><br/>
-        Reason: ${SPRING_SECURITY_LAST_EXCEPTION.message}
+        Credenciales Incorrectas
        ]]>
-    </html>
- 
-    <groupbox>
-        <caption>Login</caption>
-        <h:form id="f" name="f" action="j_spring_security_check" method="POST"
-            xmlns:h="native">
-            <grid>
-                <rows>
-                    <row>User: <textbox id="u" name="j_username"/></row>
-                    <row>Password: <textbox id="p" type="password" name="j_password"/></row>
-                    <row>
-                        <checkbox id="r" name="j_spring_security_remember_me"/>Don't ask for my password for two weeks</row>
-                    <row spans="2">
-                        <hbox>
-                            <h:input type="submit" value="Submit Query"/>
-                            <h:input type="reset" value="Reset"/>
-                        </hbox>
-                    </row>
-                </rows>
-            </grid>
-        </h:form>
-    </groupbox>
-</window>
+                </html>
+                <groupbox closable="false">
+                    <caption>Login</caption>
+                    <h:form id="f" name="f" action="j_spring_security_check" method="POST"
+                        xmlns:h="native">
+                        <grid>
+                            <rows>
+                                <row>Usuario: <textbox id="u" name="j_username" maxlength="16"/></row>
+                                <row>Contraseña: <textbox id="p" type="password" name="j_password" 
+                                                      maxlength="32"/>
+                                </row>
+                   
+                                <row spans="2">
+                                    <hbox>
+                                        <h:input type="submit" value="Acceder"/>
+                                    </hbox>
+                                </row>
+                            </rows>
+                        </grid>
+                    </h:form>
+                </groupbox>
+            
+            </window>
+        </center>
+        <south size="40px" border="0"
+           style="background: none repeat scroll 0 0 ;">
+            <toolbar mold="panel" align="center">
+                <toolbarbutton label="Ayuda" />
+                <toolbarbutton label="Acerca de" />
+                <toolbarbutton label="Reportar un problema" />
+            </toolbar>
+        </south>
+    </borderlayout>
+</zk>

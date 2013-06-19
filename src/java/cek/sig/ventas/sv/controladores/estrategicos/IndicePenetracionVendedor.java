@@ -27,6 +27,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Grid;
@@ -57,6 +58,8 @@ public class IndicePenetracionVendedor extends SelectorComposer<Component> {
     private Label mes5;
     @Wire
     private Label mes6;
+    @Wire
+    private Button downloadButton;
     @WireVariable
     private IndVendedorService indVendedorService;
     private List<IPVendedor> ipvList;
@@ -102,6 +105,11 @@ public class IndicePenetracionVendedor extends SelectorComposer<Component> {
         //Se llena la tabla
         ipvList = indVendedorService.getIndicePenetracion();
         indPen.setModel(new ListModelList<IPVendedor>(ipvList));
+        
+        //Si la tabla no tiene datos deshabilitar el boton reporte
+        if(ipvList.isEmpty()){
+            downloadButton.setDisabled(true);
+        }
 
     }
 
