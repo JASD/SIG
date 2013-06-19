@@ -44,7 +44,7 @@
                     <row>
                         <label value="${each.categoria}"/>
                         <label value="${c:formatNumber(each.kilogramos, ' #,##0.00')}"/>
-                        <label value="${c:formatNumber(each.porcentaje/100, '##.00%')}"/>
+                        <label value="${c:formatNumber(each.porcentaje, '##.00%')}"/>
                     </row>
                 </template>
             </grid>

@@ -172,15 +172,15 @@ public class IndClasificacionService {
         for (CekIndClasificacion indu : records) {
             UCategoria uc = new UCategoria();
             uc.setCategoria(indu.getCekClasificacion().getClasNombre());
-            uc.setvBrutas(indu.getIndcVentaBruta().floatValue());
-            uc.setDescuento(indu.getIndcTotDesc().floatValue());
-            uc.setvNetas(indu.getIndcVentaNeta().floatValue());
-            uc.setCosto(indu.getIndcCostoVenta().floatValue());
-            uc.setCostoPorc(uc.getCosto() / uc.getvNetas() * Float.valueOf(100));
+            uc.setvBrutas(indu.getIndcVentaBruta());
+            uc.setDescuento(indu.getIndcTotDesc());
+            uc.setvNetas(indu.getIndcVentaNeta());
+            uc.setCosto(indu.getIndcCostoVenta());
+            uc.setCostoPorc(uc.getCosto() / uc.getvNetas());
             uc.setGastos(indu.getIndcGastosInd().floatValue());
-            uc.setGastosPorc(uc.getGastos() / uc.getvNetas() * Float.valueOf(100));
-            uc.setUtilidad(uc.getUtilidad().floatValue());
-            uc.setUtilidadPorc(uc.getUtilidad() / uc.getvNetas() * Float.valueOf(100));
+            uc.setGastosPorc(uc.getGastos() / uc.getvNetas());
+            uc.setUtilidad(indu.getIndcUtilidad());
+            uc.setUtilidadPorc(uc.getUtilidad() / uc.getvNetas());
             dtos.add(uc);
         }
         return dtos;
@@ -260,9 +260,9 @@ public class IndClasificacionService {
         for (CekIndClasificacion ind : records) {
             VPPTOCategoria cne = new VPPTOCategoria();
             cne.setCategoria(ind.getCekClasificacion().getClasNombre());
-            cne.setVentas(ind.getIndcVentaNeta().floatValue());
-            cne.setPresupuesto(ind.getIndcPpto().floatValue());
-            cne.setVariacion(ind.getIndcVarPpto().floatValue());
+            cne.setVentas(ind.getIndcVentaNeta());
+            cne.setPresupuesto(ind.getIndcPpto());
+            cne.setVariacion(ind.getIndcVarPpto());
             dtos.add(cne);
         }
         return dtos;
@@ -276,9 +276,9 @@ public class IndClasificacionService {
         for (CekIndClasificacion ind : records) {
             VPPTOCategoria cne = new VPPTOCategoria();
             cne.setCategoria(ind.getCekClasificacion().getClasNombre());
-            cne.setVentas(ind.getIndcVentaNeta().floatValue());
-            cne.setPresupuesto(ind.getIndcPpto().floatValue());
-            cne.setVariacion(ind.getIndcVarPpto().floatValue());
+            cne.setVentas(ind.getIndcVentaNeta());
+            cne.setPresupuesto(ind.getIndcPpto());
+            cne.setVariacion(ind.getIndcVarPpto());
             dtos.add(cne);
         }
         return dtos;
@@ -298,14 +298,17 @@ public class IndClasificacionService {
          * cek.sig.ventas.sv.entidades.reportes con los campos q tendra el
          * reporte y que implemente la interfaz Serializable
          */
+        Float totKg = Float.valueOf(0);
         for (CekIndClasificacion indc : records) {
             VKCategoria kvc = new VKCategoria();
             kvc.setCategoria(indc.getCekClasificacion().getClasNombre());
-            kvc.setKilogramos(indc.getIndcKg().floatValue());
-            kvc.setPorcentaje(indc.getIndcVarPpto().floatValue());
-            
-            
+            kvc.setKilogramos(indc.getIndcKg());
+            totKg = totKg + kvc.getKilogramos();
             dtos.add(kvc);
+        }
+        
+        for(VKCategoria vkc: dtos){
+            vkc.setPorcentaje(vkc.getKilogramos() / totKg);
         }
 
         return dtos;
@@ -325,14 +328,18 @@ public class IndClasificacionService {
          * cek.sig.ventas.sv.entidades.reportes con los campos q tendra el
          * reporte y que implemente la interfaz Serializable
          */
+         Float totKg = Float.valueOf(0);
         for (CekIndClasificacion indc : records) {
             VKCategoria kvc = new VKCategoria();
             kvc.setCategoria(indc.getCekClasificacion().getClasNombre());
-            kvc.setKilogramos(indc.getIndcKg().floatValue());
-            kvc.setPorcentaje(indc.getIndcVarPpto().floatValue());
-            
-            
+            kvc.setKilogramos(indc.getIndcKg());
+             totKg = totKg + kvc.getKilogramos();
+            //kvc.setPorcentaje(indc.getIndcVarPpto().floatValue());
             dtos.add(kvc);
+        }
+        
+         for(VKCategoria vkc: dtos){
+            vkc.setPorcentaje(vkc.getKilogramos() / totKg);
         }
 
         return dtos;

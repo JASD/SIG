@@ -40,27 +40,27 @@ public class CekIndVendedor implements Serializable {
     protected CekIndVendedorPK cekIndVendedorPK;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "INDIV_VENTA_NETA")
-    private Double indivVentaNeta;
+    private Float indivVentaNeta;
     @Column(name = "INDIV_PROY_VENTA")
-    private Double indivProyVenta;
+    private Float indivProyVenta;
     @Column(name = "INDIV_CUMP_VENTA")
-    private Long indivCumpVenta;
+    private Float indivCumpVenta;
     @Column(name = "INDIV_PENETRACION")
-    private Long indivPenetracion;
+    private Float indivPenetracion;
     @Column(name = "INDIV_COBERTURA")
-    private Long indivCobertura;
+    private Float indivCobertura;
     @Column(name = "INDIV_CLI_NUEVOS")
     private Short indivCliNuevos;
     @Column(name = "INDIV_PROY_CNUEVOS")
     private Short indivProyCnuevos;
     @Column(name = "INDIV_CUMP_CNUEVOS")
-    private Long indivCumpCnuevos;
+    private Float indivCumpCnuevos;
     @Column(name = "INDIV_CLI_RECU")
     private Short indivCliRecu;
     @Column(name = "INDIV_PROY_CRECUP")
     private Short indivProyCrecup;
     @Column(name = "INDIV_CUMPL_CRECUP")
-    private Long indivCumplCrecup;
+    private Float indivCumplCrecup;
     @Column(name = "INDIV_CLI_PERD")
     private Short indivCliPerd;
     @Column(name = "INDIV_TOT_CARTERA")
@@ -95,43 +95,43 @@ public class CekIndVendedor implements Serializable {
         this.cekIndVendedorPK = cekIndVendedorPK;
     }
 
-    public Double getIndivVentaNeta() {
+    public Float getIndivVentaNeta() {
         return indivVentaNeta;
     }
 
-    public void setIndivVentaNeta(Double indivVentaNeta) {
+    public void setIndivVentaNeta(Float indivVentaNeta) {
         this.indivVentaNeta = indivVentaNeta;
     }
 
-    public Double getIndivProyVenta() {
+    public Float getIndivProyVenta() {
         return indivProyVenta;
     }
 
-    public void setIndivProyVenta(Double indivProyVenta) {
+    public void setIndivProyVenta(Float indivProyVenta) {
         this.indivProyVenta = indivProyVenta;
     }
 
-    public Long getIndivCumpVenta() {
+    public Float getIndivCumpVenta() {
         return indivCumpVenta;
     }
 
-    public void setIndivCumpVenta(Long indivCumpVenta) {
+    public void setIndivCumpVenta(Float indivCumpVenta) {
         this.indivCumpVenta = indivCumpVenta;
     }
 
-    public Long getIndivPenetracion() {
+    public Float getIndivPenetracion() {
         return indivPenetracion;
     }
 
-    public void setIndivPenetracion(Long indivPenetracion) {
+    public void setIndivPenetracion(Float indivPenetracion) {
         this.indivPenetracion = indivPenetracion;
     }
 
-    public Long getIndivCobertura() {
+    public Float getIndivCobertura() {
         return indivCobertura;
     }
 
-    public void setIndivCobertura(Long indivCobertura) {
+    public void setIndivCobertura(Float indivCobertura) {
         this.indivCobertura = indivCobertura;
     }
 
@@ -151,11 +151,11 @@ public class CekIndVendedor implements Serializable {
         this.indivProyCnuevos = indivProyCnuevos;
     }
 
-    public Long getIndivCumpCnuevos() {
+    public Float getIndivCumpCnuevos() {
         return indivCumpCnuevos;
     }
 
-    public void setIndivCumpCnuevos(Long indivCumpCnuevos) {
+    public void setIndivCumpCnuevos(Float indivCumpCnuevos) {
         this.indivCumpCnuevos = indivCumpCnuevos;
     }
 
@@ -175,11 +175,11 @@ public class CekIndVendedor implements Serializable {
         this.indivProyCrecup = indivProyCrecup;
     }
 
-    public Long getIndivCumplCrecup() {
+    public Float getIndivCumplCrecup() {
         return indivCumplCrecup;
     }
 
-    public void setIndivCumplCrecup(Long indivCumplCrecup) {
+    public void setIndivCumplCrecup(Float indivCumplCrecup) {
         this.indivCumplCrecup = indivCumplCrecup;
     }
 
