@@ -10,7 +10,9 @@ import cek.sig.ventas.sv.entidades.CekPeriodo;
 import cek.sig.ventas.sv.entidades.reportes.CNVendedor;
 import cek.sig.ventas.sv.controladores.util.Mes;
 import cek.sig.ventas.sv.entidades.CekVendedor;
+import cek.sig.ventas.sv.entidades.reportes.CPVendedor;
 import cek.sig.ventas.sv.entidades.reportes.CVVendedor;
+import cek.sig.ventas.sv.entidades.reportes.ICVendedor;
 import cek.sig.ventas.sv.entidades.reportes.IPVendedor;
 import cek.sig.ventas.sv.entidades.reportes.VVendedor;
 import cek.sig.ventas.sv.repositorios.VendedorDAO;
@@ -91,6 +93,110 @@ public class IndVendedorService {
 
     }
 
+    @Transactional(readOnly = true)
+      public List<CPVendedor> getCuentasPerdidas() {
+      List<CekIndVendedor>  records = indVendedorDAO.executeNamedQuery("CekIndVendedor.ultimo");
+        List<CPVendedor> dtos = new ArrayList<CPVendedor>();
+
+        // Map records
+        for (CekIndVendedor ind : records) {
+            CPVendedor cpe = new CPVendedor();
+            cpe.setNombreVendedor(ind.getCekVendedor().getVendNombre());
+            cpe.setPerdidoVendedor(ind.getIndivCliPerd().floatValue());
+            cpe.setTotalCartera(ind.getIndivTotCartera().floatValue());
+            cpe.setPorcentajeCartera(ind.getIndivCliPerd()/ind.getIndivTotCartera().floatValue());
+            dtos.add(cpe);
+        }
+
+        return dtos;
+    }
+
+    @Transactional(readOnly = true)
+    public List<CPVendedor> getCuentasPerdidas(String anio, int mes) {
+
+        List<CekIndVendedor> records = indVendedorDAO.findByPeriodo(anio, mes);
+        List<CPVendedor> dtos = new ArrayList<CPVendedor>();
+        for (CekIndVendedor ind : records) {
+            CPVendedor cpe = new CPVendedor();
+            cpe.setNombreVendedor(ind.getCekVendedor().getVendNombre());
+            cpe.setPerdidoVendedor(ind.getIndivCliPerd().floatValue());
+            cpe.setTotalCartera(ind.getIndivTotCartera().floatValue());
+            cpe.setPorcentajeCartera(ind.getIndivCliPerd()/ind.getIndivTotCartera().floatValue());
+            dtos.add(cpe);
+            
+        }
+        return dtos;
+
+    }
+ @Transactional(readOnly = true)
+    public List<ICVendedor> getIndiceCobertura() {
+
+        //Buscar todos los vendedores
+        List<CekVendedor> vendedores = vendedorDAO
+                .executeNamedQuery("CekVendedor.findAll");
+
+        //Instancerar la nueva lista
+        List<ICVendedor> indicesCobertura = new ArrayList<ICVendedor>();
+
+        // Y Por cada vendedor
+        for (CekVendedor v : vendedores) {
+
+            ICVendedor icv = null;
+            int contador = 1;
+            boolean entro = false;
+
+            //Para los ultimos 6 meses
+            for (CekPeriodo p : ultimos6) {
+                //consultar si tiene indices para ese periodo
+                CekIndVendedor indv = indVendedorDAO.obtenerPorPeriodoVendedor(p, v);
+                if (indv != null) {
+                    //si tiene
+                    if (!entro) {
+                        //si ya entro antes no se vuelve a crear instancia
+                        //ni se pone de nuevo el nombre
+                        icv = new ICVendedor();
+                        icv.setVendedor(indv.getCekVendedor().getVendNombre());
+                        entro = true;
+                    }
+
+                    if (contador == 1 && entro) {
+                        //Es el primer mes
+                        icv.setMes1(indv.getIndivCobertura().floatValue());
+                    }
+                    if (contador == 2 && entro) {
+                        //Es el segundo mes
+                        icv.setMes2(indv.getIndivCobertura().floatValue());
+                    }
+                    if (contador == 3 && entro) {
+                        //Es el tercer mes
+                        icv.setMes3(indv.getIndivCobertura().floatValue());
+                    }
+                    if (contador == 4 && entro) {
+                        //Es el cuarto mes
+                        icv.setMes4(indv.getIndivCobertura().floatValue());
+                    }
+                    if (contador == 5 && entro) {
+                        //Es el quinto mes mes
+                        icv.setMes5(indv.getIndivCobertura().floatValue());
+                    }
+                    if (contador == 6 && entro) {
+                        //Es el sexto mes
+                        icv.setMes6(indv.getIndivCobertura().floatValue());
+                    }
+                }
+                contador++;
+            }
+            if (entro) {
+                //agregar a la lista
+                indicesCobertura.add(icv);
+            }
+        }
+        return indicesCobertura;
+
+    }
+
+    
+    
     /**
      * Obtengo las cuentas nuevas por cada vendedor para el ultimo mes
      *
