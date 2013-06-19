@@ -22,7 +22,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CEK_IND_ARTICULO")
 @NamedQueries({
-    @NamedQuery(name = "CekIndArticulo.findAll", query = "SELECT c FROM CekIndArticulo c")})
+    @NamedQuery(name = "CekIndArticulo.findAll", query = "SELECT c FROM CekIndArticulo c"),
+    @NamedQuery(name = "CekIndArticulo.findByPeriodoCategoria", query = "SELECT c FROM CekIndArticulo c WHERE c.cekPeriodo.periAnio = :anio AND c.cekPeriodo.periMes = :mes")})
 public class CekIndArticulo implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
