@@ -149,14 +149,14 @@ public class IndClasificacionService {
         for (CekIndClasificacion indu : records) {
             UCategoria uc = new UCategoria();
             uc.setCategoria(indu.getCekClasificacion().getClasNombre());
-            uc.setvBrutas(indu.getIndcVentaBruta().floatValue());
-            uc.setDescuento(indu.getIndcTotDesc().floatValue());
-            uc.setvNetas(indu.getIndcVentaNeta().floatValue());
-            uc.setCosto(indu.getIndcCostoVenta().floatValue());
+            uc.setvBrutas(indu.getIndcVentaBruta());
+            uc.setDescuento(indu.getIndcTotDesc());
+            uc.setvNetas(indu.getIndcVentaNeta());
+            uc.setCosto(indu.getIndcCostoVenta());
             uc.setCostoPorc(uc.getCosto() / uc.getvNetas());
-            uc.setGastos(indu.getIndcGastosInd().floatValue());
+            uc.setGastos(indu.getIndcGastosInd());
             uc.setGastosPorc(uc.getGastos() / uc.getvNetas());
-            uc.setUtilidad(uc.getUtilidad().floatValue());
+            uc.setUtilidad(indu.getIndcUtilidad());
             uc.setUtilidadPorc(uc.getUtilidad() / uc.getvNetas());
             dtos.add(uc);
         }

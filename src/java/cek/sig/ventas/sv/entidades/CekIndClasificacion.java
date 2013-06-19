@@ -40,23 +40,23 @@ public class CekIndClasificacion implements Serializable {
     protected CekIndClasificacionPK cekIndClasificacionPK;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "INDC_VENTA_BRUTA")
-    private Double indcVentaBruta;
+    private Float indcVentaBruta;
     @Column(name = "INDC_TOT_DESC")
-    private Double indcTotDesc;
+    private Float indcTotDesc;
     @Column(name = "INDC_VENTA_NETA")
-    private Double indcVentaNeta;
+    private Float indcVentaNeta;
     @Column(name = "INDC_COSTO_VENTA")
-    private Double indcCostoVenta;
+    private Float indcCostoVenta;
     @Column(name = "INDC_GASTOS_IND")
-    private Double indcGastosInd;
+    private Float indcGastosInd;
     @Column(name = "INDC_UTILIDAD")
-    private Double indcUtilidad;
+    private Float indcUtilidad;
     @Column(name = "INDC_KG")
-    private Double indcKg;
+    private Float indcKg;
     @Column(name = "INDC_VAR_PPTO")
-    private Long indcVarPpto;
+    private Float indcVarPpto;
     @Column(name = "INDC_PPTO")
-    private Double indcPpto;
+    private Float indcPpto;
     @JoinColumn(name = "ID_PERIODO", referencedColumnName = "ID_PERIODO", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private CekPeriodo cekPeriodo;
@@ -86,75 +86,75 @@ public class CekIndClasificacion implements Serializable {
         this.cekIndClasificacionPK = cekIndClasificacionPK;
     }
 
-    public Double getIndcVentaBruta() {
+    public Float getIndcVentaBruta() {
         return indcVentaBruta;
     }
 
-    public void setIndcVentaBruta(Double indcVentaBruta) {
+    public void setIndcVentaBruta(Float indcVentaBruta) {
         this.indcVentaBruta = indcVentaBruta;
     }
 
-    public Double getIndcTotDesc() {
+    public Float getIndcTotDesc() {
         return indcTotDesc;
     }
 
-    public void setIndcTotDesc(Double indcTotDesc) {
+    public void setIndcTotDesc(Float indcTotDesc) {
         this.indcTotDesc = indcTotDesc;
     }
 
-    public Double getIndcVentaNeta() {
+    public Float getIndcVentaNeta() {
         return indcVentaNeta;
     }
 
-    public void setIndcVentaNeta(Double indcVentaNeta) {
+    public void setIndcVentaNeta(Float indcVentaNeta) {
         this.indcVentaNeta = indcVentaNeta;
     }
 
-    public Double getIndcCostoVenta() {
+    public Float getIndcCostoVenta() {
         return indcCostoVenta;
     }
 
-    public void setIndcCostoVenta(Double indcCostoVenta) {
+    public void setIndcCostoVenta(Float indcCostoVenta) {
         this.indcCostoVenta = indcCostoVenta;
     }
 
-    public Double getIndcGastosInd() {
+    public Float getIndcGastosInd() {
         return indcGastosInd;
     }
 
-    public void setIndcGastosInd(Double indcGastosInd) {
+    public void setIndcGastosInd(Float indcGastosInd) {
         this.indcGastosInd = indcGastosInd;
     }
 
-    public Double getIndcUtilidad() {
+    public Float getIndcUtilidad() {
         return indcUtilidad;
     }
 
-    public void setIndcUtilidad(Double indcUtilidad) {
+    public void setIndcUtilidad(Float indcUtilidad) {
         this.indcUtilidad = indcUtilidad;
     }
 
-    public Double getIndcKg() {
+    public Float getIndcKg() {
         return indcKg;
     }
 
-    public void setIndcKg(Double indcKg) {
+    public void setIndcKg(Float indcKg) {
         this.indcKg = indcKg;
     }
 
-    public Long getIndcVarPpto() {
+    public Float getIndcVarPpto() {
         return indcVarPpto;
     }
 
-    public void setIndcVarPpto(Long indcVarPpto) {
+    public void setIndcVarPpto(Float indcVarPpto) {
         this.indcVarPpto = indcVarPpto;
     }
 
-    public Double getIndcPpto() {
+    public Float getIndcPpto() {
         return indcPpto;
     }
 
-    public void setIndcPpto(Double indcPpto) {
+    public void setIndcPpto(Float indcPpto) {
         this.indcPpto = indcPpto;
     }
 
