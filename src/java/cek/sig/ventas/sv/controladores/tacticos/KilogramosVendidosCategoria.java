@@ -4,15 +4,6 @@
  */
 package cek.sig.ventas.sv.controladores.tacticos;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.select.SelectorComposer;
 import cek.sig.ventas.sv.entidades.reportes.VKCategoria;
 import cek.sig.ventas.sv.servicios.IndClasificacionService;
 import cek.sig.ventas.sv.controladores.util.JasperExporter;
@@ -37,6 +28,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Grid;
@@ -61,6 +53,8 @@ public class KilogramosVendidosCategoria extends SelectorComposer<Component>{
     private Grid vkcGrid;
     @Wire
     private Label periodoSeleccionado;
+    @Wire
+    private Button downloadButton;
     @WireVariable
     private IndClasificacionService indClasificacionService;
     private List<VKCategoria> catList;
@@ -88,6 +82,9 @@ public class KilogramosVendidosCategoria extends SelectorComposer<Component>{
         anios.setModel(new ListModelList<String>(
                 indClasificacionService.obtenerAnios()));
         periodoSeleccionado.setValue("PerÃ­odo mostrado: ".concat(periodo));
+        if(catList.isEmpty()){
+            downloadButton.setDisabled(true);
+        }
     }
 
     /**
@@ -160,5 +157,9 @@ public class KilogramosVendidosCategoria extends SelectorComposer<Component>{
         vkcGrid.setModel(new ListModelList<VKCategoria>(catList));
         periodo = mes.getMes() + " " + String.valueOf(anio);
         periodoSeleccionado.setValue("PerÃ­odo mostrado: ".concat(periodo));
+        downloadButton.setDisabled(false);
+        if(catList.isEmpty()){
+            downloadButton.setDisabled(true);
+        }
     }
 }

@@ -4,14 +4,14 @@
 <window self="@{define(left)}" title='Kilogramos Vendidos por Categoria'
         apply="cek.sig.ventas.sv.controladores.tacticos.KilogramosVendidosCategoria">
     <label style="margin:20px 20px 10px 10px" 
-           value="PerÃƒÂ­odo a analizar: "/>
-     <combobox id="anios" constraint="no empty: Elija un AÃ±o"
+           value="Período a analizar: "/>
+     <combobox id="anios" readonly="true" constraint="no empty: Elija un AÃ±o"
         style="margin:20px 20px 10px 10px" >
         <template name="model">
             <comboitem label="${each}" />
         </template>
     </combobox> 
-    <combobox id="meses" constraint="no empty: Elija un Mes"
+    <combobox id="meses" readonly="true" constraint="no empty: Elija un Mes"
         style="margin:20px 20px 10px 10px" >
         <template name="model">
             <comboitem label="${each}" />

@@ -10,9 +10,6 @@ import cek.sig.ventas.sv.controladores.util.JasperExporter;
 import cek.sig.ventas.sv.controladores.util.Mes;
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -31,6 +28,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Grid;
@@ -55,6 +53,8 @@ public class CuentasPerdidasVendedor extends SelectorComposer<Component> {
     private Grid cpvGrid;
     @Wire
     private Label periodoSeleccionado;
+    @Wire
+    private Button downloadButton;
     @WireVariable
     private IndVendedorService indVendedorService;
     private List<CPVendedor> cpvList;
@@ -78,6 +78,9 @@ public class CuentasPerdidasVendedor extends SelectorComposer<Component> {
         anios.setModel(new ListModelList<String>(
                 indVendedorService.obtenerAnios()));
             periodoSeleccionado.setValue("PerÃ­odo mostrado: ".concat(periodo));
+        if(cpvList.isEmpty()){
+            downloadButton.setDisabled(true);
+        }
     }
 
     @Listen("onClick = #downloadButton")
@@ -141,5 +144,9 @@ public class CuentasPerdidasVendedor extends SelectorComposer<Component> {
         cpvGrid.setModel(new ListModelList<CPVendedor>(cpvList));
         periodo = mes.getMes() + " " + String.valueOf(anio);
         periodoSeleccionado.setValue("PerÃ­odo mostrado: ".concat(periodo));
+        downloadButton.setDisabled(false);
+        if(cpvList.isEmpty()){
+            downloadButton.setDisabled(true);
+        }
     }
 }

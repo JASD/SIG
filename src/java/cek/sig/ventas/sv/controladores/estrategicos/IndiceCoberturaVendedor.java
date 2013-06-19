@@ -5,7 +5,6 @@
 package cek.sig.ventas.sv.controladores.estrategicos;
 
 import cek.sig.ventas.sv.controladores.util.JasperExporter;
-import cek.sig.ventas.sv.entidades.reportes.IPVendedor;
 import cek.sig.ventas.sv.entidades.reportes.ICVendedor;
 import cek.sig.ventas.sv.servicios.IndVendedorService;
 import java.io.File;
@@ -28,6 +27,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Grid;
@@ -58,6 +58,8 @@ public class IndiceCoberturaVendedor extends SelectorComposer<Component> {
     private Label mes5;
     @Wire
     private Label mes6;
+    @Wire
+    private Button downloadButton;
     @WireVariable
     private IndVendedorService indVendedorService;
     private List<ICVendedor> ipvList;
@@ -107,6 +109,10 @@ public class IndiceCoberturaVendedor extends SelectorComposer<Component> {
         //Se llena la tabla
         ipvList = indVendedorService.getIndiceCobertura();
         indCob.setModel(new ListModelList<ICVendedor>(ipvList));
+        
+        if(ipvList.isEmpty()){
+            downloadButton.setDisabled(true);
+        }
 
     }
 
