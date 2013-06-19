@@ -11,6 +11,7 @@ import cek.sig.ventas.sv.entidades.CekPeriodo;
 import cek.sig.ventas.sv.entidades.reportes.CRVendedor;
 import cek.sig.ventas.sv.entidades.reportes.UCategoria;
 import cek.sig.ventas.sv.entidades.reportes.VCategoria;
+import cek.sig.ventas.sv.entidades.reportes.VKCategoria;
 import cek.sig.ventas.sv.entidades.reportes.VPPTOCategoria;
 import cek.sig.ventas.sv.repositorios.ClasificacionDAO;
 import cek.sig.ventas.sv.repositorios.IndClasificacionDAO;
@@ -283,4 +284,72 @@ public class IndClasificacionService {
         return dtos;
 
     }
+    
+    @Transactional(readOnly = true)
+    public List<VKCategoria> getKg() {
+
+        //Hago la consulta a la base
+        List<CekIndClasificacion> records = indClasificacionDAO.executeNamedQuery("CekIndClasificacion.ultimo");
+        List<VKCategoria> dtos = new ArrayList<VKCategoria>();
+
+        /**
+         * Mapeo los datos obtenidos para solo obtener los que se muestran en el
+         * reporte especifico, para ello se debe crear una nueva entidad en
+         * cek.sig.ventas.sv.entidades.reportes con los campos q tendra el
+         * reporte y que implemente la interfaz Serializable
+         */
+        for (CekIndClasificacion indc : records) {
+            VKCategoria kvc = new VKCategoria();
+            kvc.setCategoria(indc.getCekClasificacion().getClasNombre());
+            kvc.setKilogramos(indc.getIndcKg().floatValue());
+            kvc.setPorcentaje(indc.getIndcVarPpto().floatValue());
+            
+            
+            dtos.add(kvc);
+        }
+
+        return dtos;
+    }
+     
+     @Transactional(readOnly = true)
+    public List<VKCategoria> getKg(String anio, int mes) {
+
+        //Hago la consulta a la base
+             
+        List<CekIndClasificacion> records = indClasificacionDAO.findByPeriodo(anio, mes);
+        List<VKCategoria> dtos = new ArrayList<VKCategoria>();
+
+        /**
+         * Mapeo los datos obtenidos para solo obtener los que se muestran en el
+         * reporte especifico, para ello se debe crear una nueva entidad en
+         * cek.sig.ventas.sv.entidades.reportes con los campos q tendra el
+         * reporte y que implemente la interfaz Serializable
+         */
+        for (CekIndClasificacion indc : records) {
+            VKCategoria kvc = new VKCategoria();
+            kvc.setCategoria(indc.getCekClasificacion().getClasNombre());
+            kvc.setKilogramos(indc.getIndcKg().floatValue());
+            kvc.setPorcentaje(indc.getIndcVarPpto().floatValue());
+            
+            
+            dtos.add(kvc);
+        }
+
+        return dtos;
+    } 
+     
+     @Transactional(readOnly = true)
+    public List<String> obtenerCatgorias() {
+
+        List<String> cat =
+                clasificacionDAO.obtenerCategorias();
+        List<String> categorias = new ArrayList<String>();
+        for (String a : cat) {
+            categorias.add(a);
+        }
+        return categorias;
+
+    }
+
+
 }
