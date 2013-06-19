@@ -31,7 +31,8 @@ import javax.persistence.Table;
         + "FROM CekIndClasificacion c "
         + "WHERE c.cekPeriodo = :periodo AND c.cekClasificacion = :categoria"),
 @NamedQuery(name = "CekIndClasificacion.findByPeriodo", query = "SELECT c "
-        + "FROM CekIndClasificacion c WHERE c.cekPeriodo.periAnio = :anio AND c.cekPeriodo.periMes = :mes")})
+        + "FROM CekIndClasificacion c WHERE c.cekPeriodo.periAnio = :anio AND c.cekPeriodo.periMes = :mes"),
+@NamedQuery(name = "CekClasificacion.findByCategoria", query = "SELECT DISTINCT c.cekClasificacion.clasNombre FROM CekIndClasificacion c")})
 public class CekIndClasificacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
