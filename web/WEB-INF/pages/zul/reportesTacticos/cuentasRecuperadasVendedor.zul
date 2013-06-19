@@ -1,17 +1,18 @@
 <?page id="crv" title="Cuentas Recuperadas Vendedor" contentType="text/html" pageEncoding="UTF-8"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
 <window self="@{define(left)}" title='Cuentas Recuperadas por Vendedor'
         apply="cek.sig.ventas.sv.controladores.tacticos.CuentasRecuperadasVendedor">
     <label style="margin:20px 20px 10px 10px" 
            value="Período a analizar: "/>
     <combobox id="anios" readonly="true" constraint="no empty: Elija un Año"
-        style="margin:20px 20px 10px 10px" >
+              style="margin:20px 20px 10px 10px" >
         <template name="model">
             <comboitem label="${each}" />
         </template>
     </combobox> 
     <combobox id="meses" readonly="true" constraint="no empty: Elija un Mes"
-        style="margin:20px 20px 10px 10px" >
+              style="margin:20px 20px 10px 10px" >
         <template name="model">
             <comboitem label="${each}" />
         </template>
@@ -31,11 +32,11 @@
         <panelchildren>
             <grid id="crvGrid"  mold="paging" pageSize="10" 
                   emptyMessage="Información no disponible"
-                style="clear:right;float:left; margin:10px">
+                  style="clear:right;float:left; margin:10px">
                 
                 <auxhead>
                     <auxheader style="text-align:center"
-                       colspan="4" label="Reporte de cuentas recuperadas por vendedor"/>
+                               colspan="4" label="Reporte de cuentas recuperadas por vendedor"/>
                 </auxhead>
                 <columns sizable="true">
                     <column hflex="20" label="Nombre" sort="auto(nombreVendedor)" />
@@ -48,7 +49,7 @@
                         <label value="${each.nombreVendedor}"/>
                         <label value="${each.proyectadoVendedor}"/>
                         <label value="${each.recuperadoVendedor}"/>
-                        <label value="${each.cumplimientoVendedor}"/>
+                        <label value="${c:formatNumber(each.cumplimientoVendedor, '##.00%')}"/>
                     </row>
                 </template>
             </grid>

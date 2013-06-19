@@ -27,9 +27,9 @@
                             <menuitem label="Ventas por vendedor" href="/ventasVendedor.htm"/>
                             <menuitem label="Kilogramos vendidos por categoría" href="/kilogramosVendidosCategoria.htm" />
                             <menuitem label="Kilogramos de productos vendidos por categoría" href="/kilogramoProductoVendido.htm" />
-                            <menuitem label="Cuentas nuevas mensuales por vendedor" href="/cuentasNuevasVendedor.htm" />
-                            <menuitem label="Cuentas mensuales recuperadas por vendedor" href="/cuentasRecuperadasVendedor.htm" />
-                            <menuitem label="Cuentas mensuales perdidas por vendedor" href="/cuentasPerdidasVendedor.htm" />
+                            <menuitem label="Cuentas nuevas por vendedor" href="/cuentasNuevasVendedor.htm" />
+                            <menuitem label="Cuentas recuperadas por vendedor" href="/cuentasRecuperadasVendedor.htm" />
+                            <menuitem label="Cuentas perdidas por vendedor" href="/cuentasPerdidasVendedor.htm" />
                             <menuseparator></menuseparator>
                         </menupopup>
                     </menu>
@@ -37,8 +37,8 @@
                 <zk if="${sec:isAllGranted('ROLE_ESTRAT')}">
                     <menu label="Reportes Estratégicos">
                         <menupopup>
-                            <menuitem label="Cumplimiento de ventas vs presupuesto por categoría" href="/ventasVsPresupuestoCategoria.htm"/>
-                            <menuitem label="Cumplimiento de ventas por vendedor" href="/cumplimientoVentasVendedor.htm"/>
+                            <menuitem label="Ventas contra presupuesto" href="/ventasVsPresupuestoCategoria.htm"/>
+                            <menuitem label="Proyección contra venta" href="/cumplimientoVentasVendedor.htm"/>
                             <menuitem label="Índice de penetración por vendedor" href="/indicePenetracionVendedor.htm"/>
                             <menuitem label="Índice de cobertura por vendedor" href="/indiceCoberturaVendedor.htm"/>
                             <menuitem label="Utilidad por categoría" href="/utilidadCategoria.htm"/>

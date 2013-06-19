@@ -1,4 +1,5 @@
 <?page id="cnv" title="Cuentas Nuevas por Vendedor"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
 <window self="@{define(left)}" title="Cuentas nuevas por vendedor"
         apply="cek.sig.ventas.sv.controladores.tacticos.CuentasNuevasVendedor">
@@ -47,7 +48,7 @@
                 <label value="${each.vendedor}" />
                 <label value="${each.proyectado}" />
                 <label value="${each.cuentasNuevas}" />
-                <label value="${each.cumplimiento}" />
+                <label value="${c:formatNumber(each.cumplimiento,'##.00%')}" />
             </row>
         </template>
     </grid>

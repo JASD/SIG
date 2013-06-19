@@ -1,6 +1,7 @@
 <?page contentType="text/html" pageEncoding="UTF-8"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
-<window self="@{define(left)}" title="Ventas por vendedor"
+<window self="@{define(left)}" title="Ventas contra presupuesto"
         apply="cek.sig.ventas.sv.controladores.estrategicos.VentasVsPresupuestoCategoria">
     <label style="margin:20px 20px 10px 10px" 
            value="Período a analizar: "/>
@@ -35,7 +36,7 @@
 
         <auxhead>
             <auxheader style="text-align:center" 
-                       colspan="10"  label="VENTAS CONTRA PRESUPUESTO "/>
+                       colspan="10"  label="Reporte de ventas contra presupuesto "/>
         </auxhead>                     
 
         <columns>
@@ -47,9 +48,9 @@
         <template name="model">
             <row>
                 <label value="${each.categoria}" />
-                <label value="${each.ventas}" />
-                <label value="${each.presupuesto}" />
-                <label value="${each.variacion}" />                                       
+                <label value="${c:formatNumber(each.ventas,'$ ##.00')}" />
+                <label value="${c:formatNumber(each.presupuesto,'$ ##.00')}" />
+                <label value="${c:formatNumber(each.variacion,'##.00%')}" />                                       
             </row>
         </template>
     </grid>

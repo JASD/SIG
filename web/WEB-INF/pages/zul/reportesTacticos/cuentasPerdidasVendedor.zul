@@ -4,7 +4,7 @@
 <window self="@{define(left)}" title='Cuentas Perdidas por Vendedor'
         apply="cek.sig.ventas.sv.controladores.tacticos.CuentasPerdidasVendedor">
     <label style="margin:20px 20px 10px 10px" 
-           value="PerÃ­odo a analizar: "/>
+           value="Período a analizar: "/>
      <combobox id="anios" readonly="true" constraint="no empty: Elija un AÃ±o"
         style="margin:20px 20px 10px 10px" >
         <template name="model">
@@ -30,7 +30,7 @@
            value="Tipo de reporte: "/>
     <panel>
         <panelchildren>
-            <grid id="cpvGrid"  mold="paging" pageSize="10" emptyMessage="InformaciÃ³n no disponible">
+            <grid id="cpvGrid"  mold="paging" pageSize="10" emptyMessage="Información no disponible">
                 
                 <auxhead>
                     <auxheader style="text-align:center"
