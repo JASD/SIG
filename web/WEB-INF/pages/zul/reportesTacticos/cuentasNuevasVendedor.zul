@@ -46,8 +46,8 @@
         <template name="model">
             <row>
                 <label value="${each.vendedor}" />
-                <label value="${each.proyectado}" />
-                <label value="${each.cuentasNuevas}" />
+                <label value="${c:formatNumber(each.proyectado,'###0')}" />
+                <label value="${c:formatNumber(each.cuentasNuevas,'###0')}" />
                 <label value="${c:formatNumber(each.cumplimiento,'##.00%')}" />
             </row>
         </template>

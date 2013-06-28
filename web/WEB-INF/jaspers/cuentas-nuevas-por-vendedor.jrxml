@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cuentas Nuevas Vendedor" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="158721d0-b68c-4fc2-b720-bb5989ebcf24">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.0000000000000004"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="periodo" class="java.lang.String" isForPrompting="false"/>
@@ -16,7 +16,7 @@
 		<variableExpression><![CDATA[$F{cuentasNuevas}]]></variableExpression>
 	</variable>
 	<variable name="cumplimientoTotal" class="java.lang.Float">
-		<variableExpression><![CDATA[$V{proyectado_1}/$V{cuentasNuevas_1}]]></variableExpression>
+		<variableExpression><![CDATA[$V{cuentasNuevas_1} / $V{proyectado_1}]]></variableExpression>
 	</variable>
 	<title>
 		<band height="46" splitType="Stretch">
@@ -54,28 +54,28 @@
 			<staticText>
 				<reportElement uuid="ce065e95-ca10-4622-97ae-7b7d208bca3a" x="11" y="0" width="267" height="20"/>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[VENDEDOR]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="4063bb0a-c825-491a-8a18-5628dad20a1d" x="326" y="0" width="100" height="20"/>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[PROYECTADO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="b3b37ccd-ce1c-4a4c-b082-d6c26a6eded4" x="491" y="0" width="100" height="20"/>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[CUENTAS NUEVAS]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="d2dd88cb-4597-4ec9-94d0-dbf706169926" x="650" y="0" width="100" height="20"/>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[CUMPLIMIENTO]]></text>
 			</staticText>
@@ -88,20 +88,20 @@
 				<textElement verticalAlignment="Bottom"/>
 				<textFieldExpression><![CDATA[$F{vendedor}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0">
 				<reportElement uuid="0d49966f-80e4-4baf-afc6-5e18fb2fc098" x="326" y="2" width="100" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("0").format($F{proyectado})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{proyectado}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0">
 				<reportElement uuid="3f9fc64e-3692-4eda-b0eb-a665ceb72494" x="491" y="2" width="100" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("0").format($F{cuentasNuevas})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cuentasNuevas}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00 %">
 				<reportElement uuid="1e23008b-6c46-45dc-a553-e960de2e5211" x="650" y="2" width="100" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("0.00").format($F{cumplimiento})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cumplimiento}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -118,13 +118,14 @@
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement uuid="08d1d9e1-729d-4ec6-9459-bcb36d32e9a1" x="0" y="19" width="750" height="1"/>
-			</line>
 		</band>
 	</pageFooter>
 	<summary>
 		<band height="20" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{mostrar}]]></printWhenExpression>
+			<line>
+				<reportElement uuid="08d1d9e1-729d-4ec6-9459-bcb36d32e9a1" x="0" y="0" width="750" height="1"/>
+			</line>
 			<staticText>
 				<reportElement uuid="aa806e8c-e1d5-419a-be10-c8a6dffc5d2c" x="178" y="0" width="100" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
@@ -132,20 +133,20 @@
 				</textElement>
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="###0">
 				<reportElement uuid="b592c067-8b62-4d39-bcfe-71dd306a711d" x="326" y="0" width="100" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("0").format($V{proyectado_1})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{proyectado_1}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0">
 				<reportElement uuid="0d3e35f4-576d-4dde-adc0-665803e7a79d" x="491" y="0" width="100" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("0").format($V{cuentasNuevas_1})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{cuentasNuevas_1}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00 %">
 				<reportElement uuid="5420ffde-29de-412e-a963-e4211878deaa" x="650" y="0" width="100" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("0.00").format($V{cumplimientoTotal})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{cumplimientoTotal}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
