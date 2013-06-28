@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ventas Categoria" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="158721d0-b68c-4fc2-b720-bb5989ebcf24">
-	<property name="ireport.zoom" value="0.9090909090909097"/>
+	<property name="ireport.zoom" value="1.1000000000000014"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="mostrar" class="java.lang.Boolean" isForPrompting="false"/>
@@ -20,6 +20,24 @@
 	<field name="mes4" class="java.lang.Float"/>
 	<field name="mes5" class="java.lang.Float"/>
 	<field name="mes6" class="java.lang.Float"/>
+	<variable name="mes1_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{mes1}]]></variableExpression>
+	</variable>
+	<variable name="mes2_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{mes2}]]></variableExpression>
+	</variable>
+	<variable name="mes3_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{mes3}]]></variableExpression>
+	</variable>
+	<variable name="mes4_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{mes4}]]></variableExpression>
+	</variable>
+	<variable name="mes5_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{mes5}]]></variableExpression>
+	</variable>
+	<variable name="mes6_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{mes6}]]></variableExpression>
+	</variable>
 	<title>
 		<band height="46" splitType="Stretch">
 			<printWhenExpression><![CDATA[$P{mostrar}]]></printWhenExpression>
@@ -37,7 +55,7 @@
 			<staticText>
 				<reportElement uuid="d8d77cd4-e232-4a8d-83b4-86d88931d5fe" x="199" y="26" width="337" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font size="12"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE VENTAS POR CATEGORIA]]></text>
 			</staticText>
@@ -104,35 +122,35 @@
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="$ #,##0.00">
 				<reportElement uuid="71abe924-2c5f-496c-a8e1-e076008d07e5" x="239" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("0.00").format($F{mes1})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{mes1}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="$ #,##0.00">
 				<reportElement uuid="4bb476bb-7ee2-4695-8126-8e0448878341" x="326" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("0.00").format($F{mes2})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{mes2}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="$ #,##0.00">
 				<reportElement uuid="49684f18-aded-40c2-a9cd-6ac66997f9d5" x="416" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("0.00").format($F{mes3})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{mes3}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="$ #,##0.00">
 				<reportElement uuid="a6a93382-243d-45ae-88c0-a5b4b78221bf" x="504" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("0.00").format($F{mes4})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{mes4}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="$ #,##0.00">
 				<reportElement uuid="78ea9f0c-d279-46fe-9b7d-98d4f58eb509" x="590" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("0.00").format($F{mes5})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{mes5}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="$ #,##0.00">
 				<reportElement uuid="7228dbc4-3060-429e-a904-19ad98172880" x="675" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("0.00").format($F{mes6})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{mes6}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -151,4 +169,48 @@
 			</textField>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="20">
+			<staticText>
+				<reportElement uuid="beb53f60-73e0-48b8-b6e7-1851c2362d8b" x="125" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="ff70424a-71b1-480e-a7a2-2b2a7f29fef3" x="239" y="0" width="75" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{mes1_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="5db4b9f3-f65b-4b33-aaee-6368c3af8fbd" x="326" y="0" width="75" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{mes2_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="7a841a30-b1a8-43b4-a3c3-147359c02817" x="416" y="0" width="75" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{mes3_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="134f1673-f6a1-4d3f-b4eb-f0b46a69638e" x="504" y="0" width="75" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{mes4_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="2addb338-b055-41bb-9f1c-d7801649dc2c" x="590" y="0" width="75" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{mes5_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="37658cef-b19a-4f95-a994-77fe60049f5d" x="675" y="0" width="75" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{mes6_1}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="5b39444e-a043-4139-9402-760e88c19743" x="0" y="0" width="752" height="1"/>
+			</line>
+		</band>
+	</summary>
 </jasperReport>

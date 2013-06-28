@@ -46,12 +46,12 @@
         <template name="model">
             <row>
                 <label value="${each.categoria}"/>
-                <label value="${c:formatNumber(each.mes1,'$ ##.00')}" />
-                <label value="${c:formatNumber(each.mes2,'$ ##.00')}" />
-                <label value="${c:formatNumber(each.mes3,'$ ##.00')}" />
-                <label value="${c:formatNumber(each.mes4,'$ ##.00')}" />
-                <label value="${c:formatNumber(each.mes5,'$ ##.00')}" />
-                <label value="${c:formatNumber(each.mes6,'$ ##.00')}" />
+                <label value="${c:formatNumber(each.mes1,'$ #,##0.00')}" />
+                <label value="${c:formatNumber(each.mes2,'$ #,##0.00')}" />
+                <label value="${c:formatNumber(each.mes3,'$ #,##0.00')}" />
+                <label value="${c:formatNumber(each.mes4,'$ #,##0.00')}" />
+                <label value="${c:formatNumber(each.mes5,'$ #,##0.00')}" />
+                <label value="${c:formatNumber(each.mes6,'$ #,##0.00')}" />
             </row>
         </template>
     </grid>
