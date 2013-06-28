@@ -20,7 +20,7 @@
           style="clear:right;float:left; margin:10px">
         <auxhead>
             <auxheader style="text-align:center"
-                       colspan="7" label="Reporte de ventas por vendedor"/>
+                       colspan="7" label="Reporte de Ventas por Vendedor"/>
         </auxhead>
         <columns>
             <column hflex="40" label="Nombre Vendedor" sort="auto(nombreVendedor)" />

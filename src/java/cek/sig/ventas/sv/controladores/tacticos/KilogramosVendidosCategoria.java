@@ -156,7 +156,7 @@ public class KilogramosVendidosCategoria extends SelectorComposer<Component>{
                 mes.getNumero());
         vkcGrid.setModel(new ListModelList<VKCategoria>(catList));
         periodo = mes.getMes() + " " + String.valueOf(anio);
-        periodoSeleccionado.setValue("PerÃ­odo mostrado: ".concat(periodo));
+        periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
         downloadButton.setDisabled(false);
         if(catList.isEmpty()){
             downloadButton.setDisabled(true);
