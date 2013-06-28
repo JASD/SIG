@@ -3,21 +3,21 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
 <window self="@{define(left)}" title='Ventas de Kilogramos de Producto por Categoria'
         apply="cek.sig.ventas.sv.controladores.tacticos.KilogramoProductoVendido">
-    <label style="margin:20px 20px 10px 10px" 
+    <label style="margin:10px 10px 10px 10px" 
            value="Periodo a analizar: "/>
      <combobox id="anios" readonly="true" constraint="no empty: Elija un Año"
-        style="margin:20px 20px 10px 10px" >
+        style="margin:10px 10px 10px 10px" >
         <template name="model">
             <comboitem label="${each}" />
         </template>
     </combobox> 
     <combobox id="meses" readonly="true" constraint="no empty: Elija un Mes"
-        style="margin:20px 20px 10px 10px" >
+        style="margin:10px 10px 10px 10px" >
         <template name="model">
             <comboitem label="${each}" />
         </template>
     </combobox>
-    <label style="margin:20px 20px 10px 10px" 
+    <label style="margin:10px 10px 10px 10px" 
            value=" Categoria:"/>
     <combobox id="categ" readonly="true" constraint="no empty: Elija una Categoria"
         style="margin:20px 20px 10px 10px"  disabled="true">
@@ -27,16 +27,16 @@
     </combobox>
     
     <label id="periodoSeleccionado"/>
-    <button style="margin:20px 20px 10px 10px;float:right" id="downloadButton"
+    <button style="margin:10px 10px 10px 10px;float:right" id="downloadButton"
             disabled="true"
             label="Generar Reporte"/>
     <combobox id="formatos" readonly="true" autodrop="true"
-              style="margin:20px 20px 10px 10px;float:right">
+              style="margin:10px 10px 10px 10px;float:right">
         <comboitem label="Archivo de Excel"/>
         <comboitem label="Archivo de Word"/>
         <comboitem label="Archivo PDF"/>
     </combobox>
-    <label style="margin:20px 20px 10px 10px;clear:left;float:right"
+    <label style="margin:10px 10px 10px 10px;clear:left;float:right"
            value="Tipo de reporte: "/>
     <panel>
         <panelchildren>
@@ -47,16 +47,16 @@
                 </auxhead>
                 <columns sizable="true">
                     <column hflex="6" label="Producto" sort="auto(producto)" />
-                    <column hflex="6" label="Proyeccion en Kilogramos" sort="auto(proyKg)" align="right"/>
+                    <column hflex="6" label="Proyeccion (Kg)" sort="auto(proyKg)" align="right"/>
                     <column hflex="6" label="Kilogramos Vendidos" sort="auto(kgVproductos)" align="right"/>
                     <column hflex="6" label="Cumplimiento" sort="auto(cumplimiento)" align="right"/>
                 </columns>
                 <template name="model">
                     <row>
                         <label value="${each.producto}"/>
-                        <label value="${c:formatNumber(each.proyKg, '$ #,##0.00')}"/>
-                        <label value="${c:formatNumber(each.kgVproductos, '$ #,##0.00')}"/>
-                        <label value="${c:formatNumber(each.cumplimiento/100, '##.00%')}"/>
+                        <label value="${c:formatNumber(each.proyKg, ' #,##0.00')}"/>
+                        <label value="${c:formatNumber(each.kgVproductos, ' #,##0.00')}"/>
+                        <label value="${c:formatNumber(each.cumplimiento, '##.00%')}"/>
                     </row>
                 </template>
             </grid>

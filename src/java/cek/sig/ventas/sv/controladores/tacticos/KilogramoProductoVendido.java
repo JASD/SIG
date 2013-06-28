@@ -7,7 +7,6 @@ package cek.sig.ventas.sv.controladores.tacticos;
 import cek.sig.ventas.sv.entidades.reportes.KPCategoria;
 import cek.sig.ventas.sv.servicios.IndClasificacionService;
 import cek.sig.ventas.sv.servicios.IndArticuloService;
-//import cek.sig.ventas.sv.servicios.ClasificacionService;
 import cek.sig.ventas.sv.controladores.util.JasperExporter;
 import cek.sig.ventas.sv.controladores.util.Mes;
 import cek.sig.ventas.sv.entidades.CekClasificacion;
@@ -87,7 +86,7 @@ public class KilogramoProductoVendido extends SelectorComposer<Component> {
         //Cargar los aÃ±os distintos que hay en la base (solo obtiene maximo 10)
         anios.setModel(new ListModelList<String>(
                 indClasificacionService.obtenerAnios()));
-        periodoSeleccionado.setValue("Periodo mostrado: ".concat(periodo));
+        periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
 
 
 
@@ -134,7 +133,7 @@ public class KilogramoProductoVendido extends SelectorComposer<Component> {
                     params.put("mostrar", Boolean.valueOf(true));
                     break;
             }
-            File report = File.createTempFile("KilogramoCategoria", format);
+            File report = File.createTempFile("KilogramoProducto", format);
             JasperExporter.export(realPath, params, new JRBeanCollectionDataSource(catList),
                     format, report);
             Filedownload.save(report, type);
@@ -172,7 +171,7 @@ public class KilogramoProductoVendido extends SelectorComposer<Component> {
         //catList = indArticuloService.getCategorias(anio, mes.getNumero(), cat));
         kvpGrid.setModel(new ListModelList<KPCategoria>(catList));
         periodo = mes.getMes() + " " + String.valueOf(anio);
-        periodoSeleccionado.setValue("Periodo mostrado: ".concat(periodo));
+        periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
         
         downloadButton.setDisabled(false);
         if(catList.isEmpty()){

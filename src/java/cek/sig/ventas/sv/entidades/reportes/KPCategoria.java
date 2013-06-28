@@ -9,8 +9,11 @@ package cek.sig.ventas.sv.entidades.reportes;
  * @author Ever
  */
 public class KPCategoria {
-    
+
     private String producto;
+    private Float proyKg;
+    private Float kgVproductos;
+    private Float cumplimiento;
 
     public String getProducto() {
         return producto;
@@ -43,8 +46,4 @@ public class KPCategoria {
     public void setCumplimiento(Float cumplimiento) {
         this.cumplimiento = cumplimiento;
     }
-    private Float proyKg;
-    private Float kgVproductos;
-    private Float cumplimiento;
-    
 }
