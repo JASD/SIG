@@ -30,7 +30,8 @@
                 position="center" mode="overlapped">
                 <html style="color:red" if="${not empty param.login_error}">
       <![CDATA[
-        Credenciales Incorrectas
+        Error al intentar acceder, intente de nuevo.<br/><br/>
+        Error: ${SPRING_SECURITY_LAST_EXCEPTION.message}
        ]]>
                 </html>
                 <groupbox closable="false">
