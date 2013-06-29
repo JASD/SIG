@@ -4,11 +4,13 @@
  */
 package cek.sig.ventas.sv.controladores;
 
+import cek.sig.ventas.sv.servicios.UsuarioService;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.zkoss.zk.ui.Component;
@@ -26,8 +28,8 @@ import org.zkoss.zul.Textbox;
  * @author Antonio
  */
 @Controller
-public class InsertarUsuarioController extends SelectorComposer<Component>{
-    
+public class InsertarUsuarioController extends SelectorComposer<Component> {
+
     @Wire
     private Combobox tipoUsuario;
     @Wire
@@ -38,9 +40,8 @@ public class InsertarUsuarioController extends SelectorComposer<Component>{
     private Textbox pass;
     @Wire
     private Textbox pass2;
-    
-    //@WireVariable
-    //private IndVendedorService indVendedorService;
+    @WireVariable
+    private UsuarioService usuarioService;
     //private List<CVVendedor> cvvList;
     //private String periodo;
 
@@ -58,18 +59,32 @@ public class InsertarUsuarioController extends SelectorComposer<Component>{
 
     @Listen("onClick = #registrarUsuario")
     public void guardarUsuario() {
+
+        int minUsuario = 6;
+        int minPass = 6;
         if (tipoUsuario.getSelectedIndex() == -1) {
             Clients.showNotification("Debe Seleccionar un tipo de usuario", Clients.NOTIFICATION_TYPE_INFO,
                     tipoUsuario, "top_center", 2000);
+        } else {
+
+            if (usuario.getText().length() < minUsuario) {
+                Clients.showNotification("El usuario debe tener almenos " + minUsuario + " caracteres", Clients.NOTIFICATION_TYPE_INFO,
+                        usuario, "top_center", 2000);
+            } else {
+                if (pass.getText().length() < minPass) {
+                    Clients.showNotification("El la contraseña debe tener almenos " + minUsuario + " caracteres", Clients.NOTIFICATION_TYPE_INFO,
+                            pass, "top_center", 2000);
+                } else {
+                    if (!pass.getText().equals(pass2.getText())) {
+                        Clients.showNotification("El la contraseñas no coinciden", Clients.NOTIFICATION_TYPE_INFO,
+                                pass, "top_center", 2000);
+                    } else {
+
+                        short tipo = (short) (tipoUsuario.getSelectedIndex() + 1);
+                        usuarioService.registrarUsuario(usuario.getText(), DigestUtils.sha256Hex(pass.getText()).toLowerCase(), tipo);
+                    }
+                }
+            }
         }
     }
-
-    @Listen("onSelect = #tipoUsuario")
-    public void seleccionarTipoUsuario() {
-
-        Clients.showNotification("Debe Seleccionar un tipo de usuario" + tipoUsuario.getSelectedIndex(), Clients.NOTIFICATION_TYPE_INFO,
-                tipoUsuario, "top_center", 2000);
-
-    }
-    
 }
