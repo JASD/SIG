@@ -6,6 +6,7 @@ package cek.sig.ventas.sv.repositorios;
 
 import cek.sig.ventas.sv.entidades.CekUsuario;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -54,5 +55,16 @@ public class UsuarioDAO extends AbstractDAO<CekUsuario> {
     @Override
     public List<CekUsuario> executeNamedQuery(String NamedQuery) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+     public boolean existeUsuario(String usuario) {
+        Query q = sessionFactory.getCurrentSession()
+                .getNamedQuery("CekUsuario.usuario");
+        q.setString("usuario", usuario);
+        if (q.list().size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

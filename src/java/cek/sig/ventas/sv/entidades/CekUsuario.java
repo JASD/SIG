@@ -28,7 +28,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @Table(name = "CEK_USUARIO")
 @NamedQueries({
-    @NamedQuery(name = "CekUsuario.findAll", query = "SELECT c FROM CekUsuario c")})
+    @NamedQuery(name = "CekUsuario.findAll", query = "SELECT c FROM CekUsuario c"),
+    @NamedQuery(name = "CekUsuario.usuario", query = "SELECT count(c.nombreUsuario) FROM CekUsuario c WHERE c.nombreUsuario=:usuario")})
 public class CekUsuario implements Serializable, UserDetails {
 
     private static final long serialVersionUID = 1L;
