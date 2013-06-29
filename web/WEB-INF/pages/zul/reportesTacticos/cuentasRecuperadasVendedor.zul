@@ -36,7 +36,7 @@
                 
                 <auxhead>
                     <auxheader style="text-align:center"
-                               colspan="4" label="Reporte de cuentas recuperadas por vendedor"/>
+                               colspan="4" label="Reporte de Cuentas Recuperadas por Vendedor"/>
                 </auxhead>
                 <columns sizable="true">
                     <column hflex="20" label="Nombre" sort="auto(nombreVendedor)" />

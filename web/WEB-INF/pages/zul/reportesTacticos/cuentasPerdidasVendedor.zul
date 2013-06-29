@@ -45,8 +45,8 @@
                 <template name="model">
                     <row>
                         <label value="${each.nombreVendedor}"/>
-                        <label value="${c:formatNumber(each.perdidoVendedor, ' #,##0.00')}"/>
-                        <label value="${c:formatNumber(each.totalCartera, ' #,##0.00')}"/>
+                        <label value="${c:formatNumber(each.perdidoVendedor, '###0')}"/>
+                        <label value="${c:formatNumber(each.totalCartera, '###0')}"/>
                         <label value="${c:formatNumber(each.porcentajeCartera, '##.00%')}"/>
                     </row>
                 </template>

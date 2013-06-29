@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cuentas perdidas vendedor" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c6576d18-e5b8-4147-b541-0b548fc93f98">
-	<property name="ireport.zoom" value="1.0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cuentas perdidas vendedor" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c6576d18-e5b8-4147-b541-0b548fc93f98">
+	<property name="ireport.zoom" value="1.1000000000000005"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="periodo" class="java.lang.String"/>
+	<parameter name="mostrar" class="java.lang.Boolean" isForPrompting="false"/>
 	<field name="nombreVendedor" class="java.lang.String"/>
 	<field name="perdidoVendedor" class="java.lang.Float"/>
 	<field name="porcentajeCartera" class="java.lang.Float"/>
@@ -11,8 +12,8 @@
 	<variable name="perdidoVendedor_1" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{perdidoVendedor}]]></variableExpression>
 	</variable>
-	<variable name="porcentajeCartera_1" class="java.lang.Float" calculation="Average">
-		<variableExpression><![CDATA[$F{porcentajeCartera}]]></variableExpression>
+	<variable name="porcentajeCartera_1" class="java.lang.Float">
+		<variableExpression><![CDATA[$V{perdidoVendedor_1}/$V{totalCartera_1}]]></variableExpression>
 	</variable>
 	<variable name="totalCartera_1" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{totalCartera}]]></variableExpression>
@@ -21,128 +22,125 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="46" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{mostrar}]]></printWhenExpression>
 			<image>
-				<reportElement uuid="e9207c09-3341-45cc-9178-e99f29ec8ef5" x="10" y="10" width="91" height="46"/>
+				<reportElement uuid="e9207c09-3341-45cc-9178-e99f29ec8ef5" x="0" y="0" width="91" height="46"/>
 				<imageExpression><![CDATA["..\\..\\images\\LOGO_CEK.gif"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement uuid="bcbd64ad-4438-4225-b6ed-c06b71f7038a" x="440" y="0" width="129" height="20"/>
+				<reportElement uuid="bcbd64ad-4438-4225-b6ed-c06b71f7038a" x="623" y="0" width="129" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["PERIODO: " + $P{periodo}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="49cc8611-6111-4d36-a1fd-9b08ac068809" x="96" y="10" width="370" height="26"/>
+				<reportElement uuid="49cc8611-6111-4d36-a1fd-9b08ac068809" x="202" y="0" width="370" height="26"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CEK DE CENTROAMERICA EL SALVADOR]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="e7ca4d9e-2e18-49d3-86de-b5001e8d7ea1" x="107" y="36" width="337" height="20"/>
+				<reportElement uuid="e7ca4d9e-2e18-49d3-86de-b5001e8d7ea1" x="202" y="26" width="370" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font size="12"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE CUENTAS PERDIDAS POR VENDEDOR]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="23" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="24" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="8e4a7ea3-b371-477f-81ae-9a97108d20d0" x="27" y="2" width="100" height="20"/>
-				<textElement/>
+				<reportElement uuid="8e4a7ea3-b371-477f-81ae-9a97108d20d0" x="0" y="0" width="296" height="20"/>
+				<textElement textAlignment="Center"/>
 				<text><![CDATA[NOMBRE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="551f84e1-0167-4271-81a5-380b3224fb65" x="185" y="2" width="122" height="20"/>
-				<textElement/>
+				<reportElement uuid="551f84e1-0167-4271-81a5-380b3224fb65" x="344" y="0" width="122" height="20"/>
+				<textElement textAlignment="Right"/>
 				<text><![CDATA[CLIENTES PERDIDOS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="48787835-4d5f-4a80-8940-620c3edb3e7d" x="441" y="2" width="128" height="20"/>
-				<textElement/>
-				<text><![CDATA[PORCENTAJE CARTEA]]></text>
+				<reportElement uuid="48787835-4d5f-4a80-8940-620c3edb3e7d" x="623" y="0" width="128" height="20"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[PORCENTAJE CARTERA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="939f77ad-7eb4-41db-9f47-9d11b4fedcb4" x="326" y="2" width="100" height="20"/>
-				<textElement/>
+				<reportElement uuid="939f77ad-7eb4-41db-9f47-9d11b4fedcb4" x="500" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
 				<text><![CDATA[TOTAL CARTERA]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="25" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement uuid="4a0a619d-1b31-4730-9968-932593853a62" x="27" y="5" width="100" height="20"/>
+				<reportElement uuid="4a0a619d-1b31-4730-9968-932593853a62" x="0" y="0" width="297" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{nombreVendedor}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
-				<reportElement uuid="c196a8bc-f7fd-44ef-bbc4-039c382413f8" x="185" y="5" width="100" height="20"/>
-				<textElement/>
+			<textField pattern="#,##0">
+				<reportElement uuid="c196a8bc-f7fd-44ef-bbc4-039c382413f8" x="366" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{perdidoVendedor}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement uuid="bf152cc5-2809-44da-bf76-a90be8702df9" x="441" y="5" width="100" height="20"/>
-				<textElement/>
+				<reportElement uuid="bf152cc5-2809-44da-bf76-a90be8702df9" x="652" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{porcentajeCartera}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement uuid="86a4a110-24bf-49f9-9124-78b51bf855b8" x="326" y="5" width="100" height="20"/>
-				<textElement/>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement uuid="86a4a110-24bf-49f9-9124-78b51bf855b8" x="500" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{totalCartera}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="25" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
-		<band height="23" splitType="Stretch">
+		<band height="21" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{mostrar}]]></printWhenExpression>
 			<textField>
-				<reportElement uuid="bd22b21e-5642-43b2-bc2d-d7232953d261" x="398" y="1" width="125" height="20"/>
+				<reportElement uuid="bd22b21e-5642-43b2-bc2d-d7232953d261" x="581" y="1" width="125" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement uuid="b18b6aa7-7486-4b62-97d9-f04a09d9dcbf" x="523" y="1" width="46" height="20"/>
+				<reportElement uuid="b18b6aa7-7486-4b62-97d9-f04a09d9dcbf" x="706" y="1" width="46" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement uuid="36133cb6-23d8-48d6-8992-4f07118c3c8c" x="0" y="21" width="572" height="2"/>
-			</line>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch">
-			<textField pattern="#,##0.00">
-				<reportElement uuid="a1df7255-7dd8-42ae-9423-019cba99afff" x="196" y="10" width="100" height="20"/>
-				<textElement/>
+		<band height="22" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{mostrar}]]></printWhenExpression>
+			<line>
+				<reportElement uuid="36133cb6-23d8-48d6-8992-4f07118c3c8c" x="0" y="0" width="751" height="2"/>
+			</line>
+			<textField pattern="#,##0">
+				<reportElement uuid="a1df7255-7dd8-42ae-9423-019cba99afff" x="366" y="2" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
 				<textFieldExpression><![CDATA[$V{perdidoVendedor_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement uuid="5ed55a70-0e66-4142-a951-0bcbe93b07b9" x="444" y="10" width="100" height="20"/>
-				<textElement/>
+				<reportElement uuid="5ed55a70-0e66-4142-a951-0bcbe93b07b9" x="652" y="2" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
 				<textFieldExpression><![CDATA[$V{porcentajeCartera_1}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="ee87a91e-8d34-4d28-9343-84537ccbcb93" x="27" y="10" width="132" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Bottom">
+				<reportElement uuid="ee87a91e-8d34-4d28-9343-84537ccbcb93" x="165" y="2" width="132" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[TOTAL:]]></text>
 			</staticText>
-			<line>
-				<reportElement uuid="b72a8c7b-6874-4512-9d98-16e622a7e2a4" x="10" y="0" width="559" height="1"/>
-			</line>
-			<textField pattern="#,##0.00">
-				<reportElement uuid="07c4c14e-c5ea-468f-8252-bc9847e0e8eb" x="326" y="10" width="100" height="20"/>
-				<textElement/>
+			<textField pattern="#,##0">
+				<reportElement uuid="07c4c14e-c5ea-468f-8252-bc9847e0e8eb" x="500" y="2" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
 				<textFieldExpression><![CDATA[$V{totalCartera_1}]]></textFieldExpression>
 			</textField>
 		</band>

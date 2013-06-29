@@ -46,7 +46,7 @@ public class CuentasPerdidasVendedor extends SelectorComposer<Component> {
     @Wire
     private Combobox anios;
     @Wire
-    private Combobox meses;    
+    private Combobox meses;
     @Wire
     private Combobox formatos;
     @Wire
@@ -63,7 +63,7 @@ public class CuentasPerdidasVendedor extends SelectorComposer<Component> {
     @RequestMapping(value = "/cuentasPerdidasVendedor")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
-        
+
         return new ModelAndView("reportesTacticos/cuentasPerdidasVendedor");
     }
 
@@ -74,11 +74,11 @@ public class CuentasPerdidasVendedor extends SelectorComposer<Component> {
         cpvList = indVendedorService.getCuentasPerdidas();
         cpvGrid.setModel(new ListModelList<CPVendedor>(cpvList));
         periodo = indVendedorService.getPeriodo().toUpperCase();
-         //Cargar los aÃ±os distintos que hay en la base (solo obtiene maximo 5)
+        //Cargar los aÃ±os distintos que hay en la base (solo obtiene maximo 5)
         anios.setModel(new ListModelList<String>(
                 indVendedorService.obtenerAnios()));
-            periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
-        if(cpvList.isEmpty()){
+        periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
+        if (cpvList.isEmpty()) {
             downloadButton.setDisabled(true);
         }
     }
@@ -100,18 +100,22 @@ public class CuentasPerdidasVendedor extends SelectorComposer<Component> {
                 case 0:
                     format = JasperExporter.EXTENSION_TYPE_EXCEL;
                     type = JasperExporter.MEDIA_TYPE_EXCEL;
+                    params.put("mostrar", Boolean.valueOf(false));
                     break;
                 case 1:
                     format = JasperExporter.EXTENSION_TYPE_WORD;
                     type = JasperExporter.MEDIA_TYPE_WORD;
+                    params.put("mostrar", Boolean.valueOf(true));
                     break;
                 case 2:
                     format = JasperExporter.EXTENSION_TYPE_PDF;
                     type = JasperExporter.MEDIA_TYPE_PDF;
+                    params.put("mostrar", Boolean.valueOf(true));
                     break;
                 default:
                     format = JasperExporter.EXTENSION_TYPE_PDF;
                     type = JasperExporter.MEDIA_TYPE_PDF;
+                    params.put("mostrar", Boolean.valueOf(true));
                     break;
             }
             File report = File.createTempFile("CuentasPerdidasVendedores", format);
@@ -120,20 +124,19 @@ public class CuentasPerdidasVendedor extends SelectorComposer<Component> {
             Filedownload.save(report, type);
         }
     }
-    
+
     /**
      * Carga los meses despues de que el usuario seleccioo un aÃ±o
      */
     @Listen("onSelect = #anios")
-    public void cargarMeses(){
+    public void cargarMeses() {
         String anioSeleccionado = anios.getSelectedItem().getValue();
         meses.setModel(new ListModelList<Mes>(
                 indVendedorService.obtenerMeses(anioSeleccionado)));
     }
-    
+
     /**
-     * Recargar los datos automaticamente
-     * despues de seleccionar el mes
+     * Recargar los datos automaticamente despues de seleccionar el mes
      */
     @Listen("onSelect = #meses")
     public void recargarModelo() {
@@ -143,9 +146,9 @@ public class CuentasPerdidasVendedor extends SelectorComposer<Component> {
                 mes.getNumero());
         cpvGrid.setModel(new ListModelList<CPVendedor>(cpvList));
         periodo = mes.getMes() + " " + String.valueOf(anio);
-        periodoSeleccionado.setValue("PerÃ­odo mostrado: ".concat(periodo));
+        periodoSeleccionado.setValue("Período mostrado: ".concat(periodo));
         downloadButton.setDisabled(false);
-        if(cpvList.isEmpty()){
+        if (cpvList.isEmpty()) {
             downloadButton.setDisabled(true);
         }
     }
