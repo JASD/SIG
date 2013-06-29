@@ -20,6 +20,7 @@
 	</variable>
 	<title>
 		<band height="46" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{mostrar}]]></printWhenExpression>
 			<staticText>
 				<reportElement uuid="9fdea9f1-6abc-41de-98fd-1284058b42c9" x="178" y="0" width="370" height="26"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -109,6 +110,7 @@
 	</columnFooter>
 	<pageFooter>
 		<band height="20" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{mostrar}]]></printWhenExpression>
 			<textField evaluationTime="Report">
 				<reportElement uuid="8f72116a-3c10-4498-9aa4-06cec330549e" x="704" y="0" width="46" height="20"/>
 				<textElement/>
@@ -123,6 +125,7 @@
 	</pageFooter>
 	<summary>
 		<band height="20" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{mostrar}]]></printWhenExpression>
 			<staticText>
 				<reportElement uuid="4f9ccd2e-2752-4128-b750-d329db307e95" x="125" y="0" width="100" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">

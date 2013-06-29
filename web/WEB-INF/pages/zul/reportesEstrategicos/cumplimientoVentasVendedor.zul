@@ -1,4 +1,4 @@
-<?page id="ipv" title="Indice de Penetración por Vendedor" contentType="text/html" pageEncoding="UTF-8"?>
+<?page id="ipv" title="Proyección contra Ventas" contentType="text/html" pageEncoding="UTF-8"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
 <window self="@{define(left)}" title='Proyección contra venta'
@@ -37,7 +37,7 @@
 
         <auxhead>
             <auxheader style="text-align:center" 
-                       colspan="10"  label="Reporte de proyección contra venta"/>
+                       colspan="10"  label="Reporte de Proyección Contra Ventas"/>
         </auxhead> 
 
         <columns>
@@ -49,8 +49,8 @@
         <template name="model">
             <row>
                 <label value="${each.vendedor}" />
-                <label value="${c:formatNumber(each.proyectado,'$ ##.00')}" />
-                <label value="${c:formatNumber(each.ventas,'$ ##.00')}" />
+                <label value="${c:formatNumber(each.proyectado,'$ #,##0.00')}" />
+                <label value="${c:formatNumber(each.ventas,'$ #,##0.00')}" />
                 <label value="${c:formatNumber(each.cumplimiento,'##.00%')}" />
             </row>
         </template>
