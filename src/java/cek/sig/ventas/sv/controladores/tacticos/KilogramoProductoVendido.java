@@ -44,7 +44,7 @@ import org.zkoss.zul.ListModelList;
 @Controller
 public class KilogramoProductoVendido extends SelectorComposer<Component> {
 
-    private static final String JASPER_PATH = "/WEB-INF/jaspers/ventas_kg_categorias.jasper";
+    private static final String JASPER_PATH = "/WEB-INF/jaspers/producto_kg_categorias.jasper";
     @Wire
     private Combobox anios;
     @Wire
