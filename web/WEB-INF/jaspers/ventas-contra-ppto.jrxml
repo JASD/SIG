@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plantilla" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="158721d0-b68c-4fc2-b720-bb5989ebcf24">
-	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="526"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Venta contra ppto" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="158721d0-b68c-4fc2-b720-bb5989ebcf24">
+	<property name="ireport.zoom" value="1.5000000000000009"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="periodo" class="java.lang.String"/>
+	<parameter name="mostrar" class="java.lang.Boolean" isForPrompting="false"/>
 	<field name="categoria" class="java.lang.String"/>
 	<field name="ventas" class="java.lang.Float"/>
 	<field name="presupuesto" class="java.lang.Float"/>
@@ -14,91 +15,90 @@
 	<variable name="presupuesto_1" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{presupuesto}]]></variableExpression>
 	</variable>
-	<variable name="variacion_1" class="java.lang.Float" calculation="Sum">
-		<variableExpression><![CDATA[$F{variacion}]]></variableExpression>
+	<variable name="variacion_1" class="java.lang.Float">
+		<variableExpression><![CDATA[$V{ventas_1}/$V{presupuesto_1}]]></variableExpression>
 	</variable>
 	<title>
-		<band height="56" splitType="Stretch">
+		<band height="46" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="9fdea9f1-6abc-41de-98fd-1284058b42c9" x="178" y="20" width="370" height="26"/>
+				<reportElement uuid="9fdea9f1-6abc-41de-98fd-1284058b42c9" x="178" y="0" width="370" height="26"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CEK DE CENTROAMERICA EL SALVADOR]]></text>
 			</staticText>
 			<image>
-				<reportElement uuid="86e1688b-5094-4aed-9cdd-b1b33645b726" x="11" y="10" width="91" height="46"/>
+				<reportElement uuid="86e1688b-5094-4aed-9cdd-b1b33645b726" x="0" y="0" width="91" height="46"/>
 				<imageExpression><![CDATA["..\\..\\images\\LOGO_CEK.gif"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement uuid="780fb7ed-5e3c-4728-93b0-666fe7dab54b" x="566" y="0" width="184" height="20"/>
+				<reportElement uuid="780fb7ed-5e3c-4728-93b0-666fe7dab54b" x="568" y="0" width="184" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["PERIODO: " + $P{periodo}]]></textFieldExpression>
 			</textField>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="d8d77cd4-e232-4a8d-83b4-86d88931d5fe" x="198" y="0" width="316" height="20"/>
+				<reportElement uuid="d8d77cd4-e232-4a8d-83b4-86d88931d5fe" x="178" y="26" width="370" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font size="12"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE VENTAS CONTRA PRESUPUESTO]]></text>
 			</staticText>
 		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="45" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="7632e6ee-048e-42f4-ac34-839be3642a36" x="2" y="4" width="174" height="41"/>
+				<reportElement uuid="7632e6ee-048e-42f4-ac34-839be3642a36" x="0" y="0" width="225" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[CATEGORÍA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="90798cc2-3cee-4583-8b60-c13c13dbb378" x="220" y="4" width="90" height="41"/>
+				<reportElement uuid="90798cc2-3cee-4583-8b60-c13c13dbb378" x="352" y="0" width="100" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[VENTAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="6375d34d-ff2e-4dac-9f3b-8a5502a941df" x="417" y="2" width="96" height="41"/>
+				<reportElement uuid="6375d34d-ff2e-4dac-9f3b-8a5502a941df" x="480" y="0" width="100" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[PRESUPUESTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="4290a9f4-4328-4eb3-b5da-9827fa312fa3" x="579" y="4" width="99" height="41"/>
+				<reportElement uuid="4290a9f4-4328-4eb3-b5da-9827fa312fa3" x="650" y="0" width="100" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font isBold="false"/>
 				</textElement>
 				<text><![CDATA[VARIACIÓN %]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="23" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement uuid="6b00757b-3e4e-4554-b6e8-e491505197f1" x="3" y="2" width="174" height="20"/>
+				<reportElement uuid="6b00757b-3e4e-4554-b6e8-e491505197f1" x="0" y="0" width="225" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement uuid="1292528b-084d-46ea-8a66-410f28cabeae" x="221" y="2" width="90" height="20"/>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="1292528b-084d-46ea-8a66-410f28cabeae" x="352" y="0" width="100" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{ventas}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement uuid="27d679bf-1892-416a-b5f5-9680a56a96d0" x="418" y="2" width="96" height="20"/>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="27d679bf-1892-416a-b5f5-9680a56a96d0" x="480" y="0" width="100" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{presupuesto}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement uuid="fa375dd1-e673-4150-8767-126c09198b98" x="580" y="2" width="99" height="20"/>
+			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
+				<reportElement uuid="fa375dd1-e673-4150-8767-126c09198b98" x="650" y="0" width="100" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{variacion}]]></textFieldExpression>
 			</textField>
@@ -122,29 +122,32 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="23" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="4f9ccd2e-2752-4128-b750-d329db307e95" x="78" y="0" width="100" height="20"/>
+				<reportElement uuid="4f9ccd2e-2752-4128-b750-d329db307e95" x="125" y="0" width="100" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
-			<textField pattern="#,##0.00">
-				<reportElement uuid="048d68af-bc23-4473-be3c-3fb18aab7c12" x="221" y="3" width="100" height="20"/>
-				<textElement textAlignment="Right"/>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="048d68af-bc23-4473-be3c-3fb18aab7c12" x="352" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
 				<textFieldExpression><![CDATA[$V{ventas_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
-				<reportElement uuid="6b160e02-ba2f-4927-ad70-4a2599ca2fd4" x="418" y="3" width="100" height="20"/>
-				<textElement textAlignment="Right"/>
+			<textField pattern="$ #,##0.00">
+				<reportElement uuid="6b160e02-ba2f-4927-ad70-4a2599ca2fd4" x="480" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
 				<textFieldExpression><![CDATA[$V{presupuesto_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
-				<reportElement uuid="be5e81b0-0115-4eb9-85f4-123dc53e8506" x="580" y="3" width="100" height="20"/>
-				<textElement textAlignment="Right"/>
+			<textField pattern="#,##0.00 %">
+				<reportElement uuid="be5e81b0-0115-4eb9-85f4-123dc53e8506" x="650" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
 				<textFieldExpression><![CDATA[$V{variacion_1}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement uuid="aa7f6003-982a-4539-8cef-dcd538dea125" x="0" y="0" width="752" height="2"/>
+			</line>
 		</band>
 	</summary>
 </jasperReport>

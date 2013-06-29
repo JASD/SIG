@@ -36,20 +36,20 @@
 
         <auxhead>
             <auxheader style="text-align:center" 
-                       colspan="10"  label="Reporte de ventas contra presupuesto "/>
+                       colspan="10"  label="Reporte de Ventas Contra Presupuesto "/>
         </auxhead>                     
 
         <columns>
             <column hflex="20" label="Categoria" sort="auto(categoria)" />
-            <column hflex="6" label="ventas" sort="auto(ventas)"/>
-            <column hflex="6" label="Presupuesto" sort="auto(presupuesto)"/>
-            <column hflex="4" label="Variacion %" sort="auto(variacion)"/>
+            <column hflex="6" label="Ventas" sort="auto(ventas)" align="right"/>
+            <column hflex="6" label="Presupuesto" sort="auto(presupuesto)" align="right"/>
+            <column hflex="4" label="Variacion %" sort="auto(variacion)" align="right"/>
         </columns>
         <template name="model">
             <row>
                 <label value="${each.categoria}" />
-                <label value="${c:formatNumber(each.ventas,'$ ##.00')}" />
-                <label value="${c:formatNumber(each.presupuesto,'$ ##.00')}" />
+                <label value="${c:formatNumber(each.ventas,'$ #,##0.00')}" />
+                <label value="${c:formatNumber(each.presupuesto,'$ #,##0.00')}" />
                 <label value="${c:formatNumber(each.variacion,'##.00%')}" />                                       
             </row>
         </template>

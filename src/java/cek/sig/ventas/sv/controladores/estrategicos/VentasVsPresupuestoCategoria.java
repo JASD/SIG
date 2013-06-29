@@ -124,7 +124,7 @@ public class VentasVsPresupuestoCategoria extends SelectorComposer<Component> {
                     params.put("mostrar", Boolean.valueOf(true));
                     break;
             }
-            File report = File.createTempFile("CuentasNuevasVendedores", format);
+            File report = File.createTempFile("VentasVsPpto", format);
             JasperExporter.export(realPath, params, new JRBeanCollectionDataSource(vpcList),
                     format, report);
             Filedownload.save(report, type);
