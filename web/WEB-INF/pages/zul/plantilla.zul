@@ -20,6 +20,15 @@
             </div>
             <menubar style="width:100%;margin-bottom:10px" id="menubar">
                 <menuitem label="HOME" href="/home.htm" />
+                 <zk if="${sec:isAllGranted('ROLE_ADMIN')}">
+                    <menu label="Administración">
+                        <menupopup>
+                            <menuitem label="Crear Usuario" href="/registrarUsuario.htm" />
+                            <menuitem label="Ver Usuarios" href="/usuarios.htm" />
+                            <menuseparator></menuseparator>
+                        </menupopup>
+                    </menu>
+                </zk>
                 <zk if="${sec:isAllGranted('ROLE_TACTIC')}">
                     <menu label="Reportes Tácticos">
                         <menupopup>

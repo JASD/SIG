@@ -1,0 +1,6 @@
+<?page contentType="text/html" pageEncoding="UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
+<window self="@{define(left)}" title="Usuarios"
+        apply="cek.sig.ventas.sv.controladores.VerUsuariosController">
+
+</window>
