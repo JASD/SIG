@@ -3,32 +3,48 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
 <window self="@{define(left)}" title="Ventas por vendedor"
         apply="cek.sig.ventas.sv.controladores.InsertarUsuarioController">
-    
-    <label style="margin:20px 20px 10px 10px"
-           value="Tipo de usuario: "/>
-    <combobox id="tipoUsuario" readonly="true" autodrop="true"
-              style="margin:20px 20px 10px 10px">
-        <comboitem label="Usuario estrategico"/>
-        <comboitem label="Usuario táctico"/>
-        <comboitem label="Administrador"/>
-    </combobox>
-    <label style="margin:20px 20px 10px 10px"
-           value="Nombre de usuario: "/>
-    <textbox style="margin:20px 20px 10px 10px"
-             id="usuario"
-             value=""/>
-    <label style="margin:20px 20px 10px 10px"
-           value="Contraseña: "/>
-    <textbox style="margin:20px 20px 10px 10px;"
-             type="password"
-             id="pass"
-             value="" />
-    <label style="margin:20px 20px 10px 10px"
-           value="Confirmar contraseña: "/>
-    <textbox style="margin:20px 20px 10px 10px;"
-             type="password"
-             id="pass2"
-             value="" />
+    <grid style="width:500px">
+        <columns>
+            <column label=""/>
+            <column label="" />
+        </columns>
+        <rows>
+            <row>
+                <label style="margin:20px 20px 10px 10px"
+                       value="Tipo de usuario: "/>
+                <combobox id="tipoUsuario" readonly="true" autodrop="true"
+                          style="margin:20px 20px 10px 10px">
+                    <comboitem label="Administrador"/>
+                    <comboitem label="Usuario estrategico"/>
+                    <comboitem label="Usuario táctico"/>
+        
+                </combobox>
+            </row>
+            <row>
+                <label style="margin:20px 20px 10px 10px"
+                       value="Nombre de usuario: "/>
+                <textbox style="margin:20px 20px 10px 10px"
+                         id="usuario"
+                         value=""/>
+            </row>
+            <row>
+                <label style="margin:20px 20px 10px 10px"
+                       value="Contraseña: "/>
+                <textbox style="margin:20px 20px 10px 10px;"
+                         type="password"
+                         id="pass"
+                         value="" />
+            </row>
+            <row>
+                <label style="margin:20px 20px 10px 10px"
+                   value="Confirmar contraseña: "/>
+                <textbox style="margin:20px 20px 10px 10px;"
+                     type="password"
+                     id="pass2"
+                     value="" />
+            </row>
+        </rows>
+    </grid>
     <button style="margin:20px 20px 10px 10pxt" 
             id="registrarUsuario"
             label="Registrar usuario"/>
