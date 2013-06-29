@@ -54,8 +54,8 @@
         <location>/forbidden.htm</location>
     </error-page>
     <error-page>
-        <error-code>500</error-code>
-        <location>/forbidden.htm</location>
+        <exception-type>org.springframework.transaction.CannotCreateTransactionException</exception-type>
+        <location>/connection-error.htm</location>
     </error-page>
     
     <!-- Configuracion ZK -->

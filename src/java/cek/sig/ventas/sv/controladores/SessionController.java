@@ -40,4 +40,13 @@ public class SessionController {
 
         return new ModelAndView("forbidden");
     }
+    
+    @RequestMapping(value = "/connection-error")
+    public ModelAndView connection(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        logger.info("Returning home view");
+
+        return new ModelAndView("noconnection");
+    }
 }
