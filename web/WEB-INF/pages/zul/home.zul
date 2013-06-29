@@ -3,10 +3,8 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
 <window self="@{define(left)}" >
     <vlayout>
-        <zscript><![CDATA[
-    String selectedPosition = "end_before";
-]]>
-        </zscript>
+ 
+        
         <grid>
             <columns>
                 <column align="left" hflex="100"/>
