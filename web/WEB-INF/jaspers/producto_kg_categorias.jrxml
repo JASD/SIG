@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cuentas perdidas vendedor" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c6576d18-e5b8-4147-b541-0b548fc93f98">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="periodo" class="java.lang.String"/>
+	<field name="producto" class="java.lang.String"/>
+	<field name="proyKg" class="java.lang.Float"/>
+	<field name="kgVproductos" class="java.lang.Float"/>
+	<field name="cumplimiento" class="java.lang.Float"/>
+	<variable name="proyKg_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{proyKg}]]></variableExpression>
+	</variable>
+	<variable name="kgVproductos_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{kgVproductos}]]></variableExpression>
+	</variable>
+	<variable name="cumplimiento_1" class="java.lang.Float" calculation="Average">
+		<variableExpression><![CDATA[$F{cumplimiento}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement uuid="e9207c09-3341-45cc-9178-e99f29ec8ef5" x="10" y="10" width="91" height="46"/>
+				<imageExpression><![CDATA["..\\..\\images\\LOGO_CEK.gif"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement uuid="bcbd64ad-4438-4225-b6ed-c06b71f7038a" x="440" y="0" width="129" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["PERIODO: " + $P{periodo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="49cc8611-6111-4d36-a1fd-9b08ac068809" x="96" y="10" width="370" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CEK DE CENTROAMERICA EL SALVADOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e7ca4d9e-2e18-49d3-86de-b5001e8d7ea1" x="107" y="36" width="337" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE VENTAS EN KILOGRAMOS POR CATEGORIA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="26" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="9af1f981-6c49-41ed-b365-b2e7a86e4d23" x="184" y="2" width="100" height="36"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROYECCION EN KILOGRAMOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="daa87e83-9e47-4625-be4b-10543cd53241" x="423" y="2" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUMPLIMIENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="030124bd-e314-43fd-b5b2-2250772bd17c" x="305" y="2" width="100" height="36"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[KILOGRAMOS VENDIDOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b0372a3b-5371-493d-a605-cdc217211167" x="63" y="2" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRODUCTO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement uuid="35cff85a-92bd-4630-87a0-6bd4dbb3ef47" x="203" y="3" width="64" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{proyKg}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement uuid="4622b92e-e464-481d-9af5-6c55c2e1c022" x="455" y="3" width="43" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cumplimiento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="180319e6-166a-41c1-b68c-3bbe67eadf27" x="332" y="3" width="55" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{kgVproductos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bbe8ad5b-8b45-46ef-896f-1614662926b4" x="63" y="3" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="25" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement uuid="bd22b21e-5642-43b2-bc2d-d7232953d261" x="398" y="1" width="125" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="b18b6aa7-7486-4b62-97d9-f04a09d9dcbf" x="523" y="1" width="46" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="36133cb6-23d8-48d6-8992-4f07118c3c8c" x="0" y="21" width="572" height="2"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="ee87a91e-8d34-4d28-9343-84537ccbcb93" x="19" y="1" width="132" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="b72a8c7b-6874-4512-9d98-16e622a7e2a4" x="10" y="0" width="559" height="1"/>
+			</line>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="bf43914e-ca67-41f9-87b3-f48ca66fa95a" x="203" y="1" width="64" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{proyKg_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="431dc3af-63bc-4f8a-90b7-a87ccf5656b8" x="332" y="1" width="43" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{kgVproductos_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement uuid="55684e64-8c48-404b-8307-45def825302e" x="455" y="1" width="43" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{cumplimiento_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
