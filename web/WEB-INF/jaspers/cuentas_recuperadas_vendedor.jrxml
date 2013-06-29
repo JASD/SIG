@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cuentas Recuperadas por Vendedor" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="158721d0-b68c-4fc2-b720-bb5989ebcf24">
-	<property name="ireport.zoom" value="0.9090909090909097"/>
+	<property name="ireport.zoom" value="1.0000000000000009"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="periodo" class="java.lang.String" isForPrompting="false"/>
@@ -83,20 +83,20 @@
 				<textElement verticalAlignment="Bottom"/>
 				<textFieldExpression><![CDATA[$F{nombreVendedor}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00 %">
 				<reportElement uuid="fd0a11c8-7b56-4860-b578-64e1ca41ab99" x="650" y="0" width="100" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("0.00").format($F{cumplimientoVendedor})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cumplimientoVendedor}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0">
 				<reportElement uuid="1968b0b6-5e4f-4ddc-be4c-16c0485ceb32" x="502" y="0" width="100" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("0").format($F{recuperadoVendedor})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{recuperadoVendedor}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0">
 				<reportElement uuid="f2807896-99aa-4f10-b0da-d60bc4ae536d" x="336" y="0" width="100" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
-				<textFieldExpression><![CDATA[new DecimalFormat("0").format($F{proyectadoVendedor})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{proyectadoVendedor}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -117,26 +117,27 @@
 	</pageFooter>
 	<summary>
 		<band height="21" splitType="Stretch">
-			<textField>
+			<printWhenExpression><![CDATA[$P{mostrar}]]></printWhenExpression>
+			<textField pattern="###0">
 				<reportElement uuid="011ea88d-c133-4df0-be0d-9227e967c804" x="336" y="1" width="100" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new DecimalFormat("0").format($V{proyectadoVendedor_1})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{proyectadoVendedor_1}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0">
 				<reportElement uuid="2fc89851-9a09-4ec9-88c2-c575674c890a" x="502" y="1" width="100" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new DecimalFormat("0").format($V{recuperadoVendedor_1})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{recuperadoVendedor_1}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00 %">
 				<reportElement uuid="93fefd53-75fa-494e-ad75-a6a2dbb7f94f" x="650" y="1" width="100" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new DecimalFormat("0.00").format($V{cumplimientoTotal})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{cumplimientoTotal}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement uuid="5e3224be-a804-4ddb-894a-f45349b307e2" x="199" y="1" width="100" height="20"/>
