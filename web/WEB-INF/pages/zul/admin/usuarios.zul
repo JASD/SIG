@@ -2,5 +2,29 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/pages/zul/plantilla.zul" ?>
 <window self="@{define(left)}" title="Usuarios"
         apply="cek.sig.ventas.sv.controladores.VerUsuariosController">
+    <grid id="userGrid"  
+          mold="paging" 
+          pageSize="10" 
+          emptyMessage="Información no disponible" 
+          style="clear:right;float:left; margin:10px">
+        <auxhead>
+            <auxheader style="text-align:center"
+                       colspan="4" label="Usuarios"/>
+        </auxhead>
+        <columns>
+            <column hflex="10" label="Nombre Usuario" />
+            <column hflex="20" label="Primer Nombre" align="right"/>
+            <column hflex="20" label="Primer Apellido"  align="right"/>
+            <column hflex="20" label="Habilitado"  align="right"/>
+        </columns>
+        <template name="model">
+            <row>
+                <label value="${each.nombreUsuario}" />
+                <label value="${each.primerNombreUsuario}" />
+                <label value="${each.primerApellidoUsuario}" />
+                <checkbox checked="${each.estaHabilitadoUsuario}"/>
+            </row>
+        </template>
+    </grid>
 
 </window>
